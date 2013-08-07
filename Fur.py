@@ -4,7 +4,7 @@ raise EOFError('Game is broken at the moment.')
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
 #Last edited July 24, 2013 at 19:02
-version=300
+version=301
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
@@ -226,8 +226,8 @@ def saveload(save):
 		if choice == 'c': return False
 		choice = str_to_int(choice)
 		if choice > 0 and choice <= len(saves):
-			if pc == 'computer': response = 'saves/save'+str(choice)
-			else: response = 'save'+str(choice)
+			if pc == 'computer': response = 'saves/save'+str(choice)+".save"
+			else: response = 'save'+str(choice)+".save"
 			try:
 				with open(response, 'rb') as handle:
 					if handle:
