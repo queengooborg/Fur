@@ -1,0 +1,23 @@
+[Level is {Name} sized {Height}x{Width}]
+
+[Dialogue is:
+	<Player talking> %Player% Hi there.
+	<Other character talking> %Friend1% Hi yourself!
+	<Action> %Action% %Player% and %Friend1% high-five.
+	<Choice> %Choice% Do you want to high-five %Friend2%?
+		$Yes$ %Action% %Player% high-fived %Friend2% $
+		$No$ %Player% Hi %Friend2%
+		%Friend2% Hi. $
+	%End Choice%
+Finish Dialogue]
+
+[Room called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
+    <To make a Door or Trapdoor> {Door/Trapdoor} {Direction} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
+    <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
+Finish Room]
+
+Level is Part 1: Prologue sized 768x1024
+
+Dialogue is:
+Finish Dialogue
+

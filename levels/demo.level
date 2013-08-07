@@ -1,0 +1,41 @@
+Level is "Format Demo" sized 640x1280
+[Level is "{Name}" sized {Height}x{Width}]
+
+[To make starting Dialogue:
+
+Dialogue is:
+	<Player talking> %Player% {Player's Dialogue}
+	<Other character talking> %Friend1% {Friend1's Dialogue}
+	<Action> %Action% {The Action, remember you can put %Player% and %Friend1% in the action}
+	<Choice> %Choice% {Question}
+		${Choice 1}$ {Action or Dialogue} $
+		${Choice 2}$ {Action or Dialogue} $
+	%End Choice%
+Finish Dialogue
+]
+
+Dialogue is:
+	%Player% Hi there.
+	%Friend1% Hi yourself!
+	%Action% %Player% and %Friend1% high-five.
+	%Choice% Do you want to high-five %Friend2%?
+		$Yes$ %Action% %Player% and %Friend2% high-five. $
+		$No$ %Player% Hi %Friend2%.
+		%Friend2% Hi %Player%. $
+	%End Choice%
+Finish Dialogue
+
+[To make a Room:
+ 
+Room called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
+    <To make a Door or Trapdoor> {Door/Trapdoor} {Direction} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
+    <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
+Finish Room
+]
+
+[The room at the very top is the spawn room]
+Room called Main Room sized 160x160 placed 320x640:
+    Door northwest to Bedroom on Top 10 from Left
+    Trapdoor northeast to Cellar locked with Gold Key (Hidden)
+    Door southwest to Hallway locked with Bronze Key
+Finish Room

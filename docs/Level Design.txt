@@ -1,0 +1,89 @@
+﻿Project Fur Level Design
+
+Created by Dark Tailed, Kenny Smith, and Torrin Rich
+
+
+Part 1: Prologue
+Part Information
+
+Goal: Unlock the golden gates while avoiding the guards in the hallway, garden, play room, and bedroom
+Starting Items: None yet
+
+
+Main Room
+Items: Sandwich
+Doors: North-West to Balcony, North-East to Hallway, South-East to Play Room, Locked Trapdoor South-West to floor B
+Events: 
+        If holding B-room key then Floor B trapdoor will be unlocked and storyline 2 will activate
+        If holding silver key then storyline 3 will activate
+Storyline 2:
+{
+%Friend%: Hey, look over there.
+%He/she% points to a trapdoor that appeared in the ground.
+%Friend%: That wasn’t there before.
+You and %Friend% walk closer to the trapdoor and examine it.  You notice that the keyhole is bronze, just like the key you picked up.
+You: %Friend%, you still have that key we found, right?
+%Friend%: Yeah, it’s right here.
+%Friend% takes the bronze key out of %his/her% pocket.
+You: I think that it goes to this door.
+%Friend%: Maybe...
+%Friend% inserts the key into the keyhole.  The trapdoor disappears along with the key.
+%Friend%: Should we see what’s down there?
+$Player chooses between:
+$Yes = Yeah, let’s check it out!
+$No = Maybe we should wait.
+$If:
+        $Yes then:
+                %Friend%: All right, let’s go!
+$player and friend enter the chest room
+        $No then:
+                %Friend%: Okay then, whatever you say.
+}
+
+
+Balcony
+Items: 
+Doors: 
+Events: 
+
+
+Play Room
+Items: 
+Doors: 
+Events: 
+
+
+Bedroom
+Items: 
+Doors: 
+Events: 
+
+
+Bathroom
+Items: 
+Doors: 
+Events: 
+
+
+Small Storage Room
+Items: 
+Doors: 
+Events: 
+
+
+Hallway
+Items: 
+Doors: 
+Events: 
+
+
+Garden
+Items: 
+Doors: 
+Events: 
+
+
+Chest Room
+Items: 
+Doors: 
+Events:
