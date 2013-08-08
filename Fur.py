@@ -1,4 +1,4 @@
-raise EOFError('Game is broken at the moment.')
+#raise EOFError('Game is broken at the moment.')
 
 #Fur
 #Text-based RPG by Dark Tailed
@@ -21,8 +21,8 @@ try:
 	pc = 'iphone'
 	ios = True
 except ImportError:
-	import colorama, easygui, pygame
-	import menu
+	import pygame
+	from modules import *
 	colorama.init()
 	pygame.init()
 	pc = 'computer'
