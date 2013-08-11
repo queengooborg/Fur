@@ -1,5 +1,5 @@
 #Save and load functions
-def saveload(save):
+def saveload(save, overwarning, overaddon):
 	waiting = True
 	while waiting:
 		saves = range(10)
@@ -33,7 +33,9 @@ def saveload(save):
 						handle = pickle.load(handle)
 						if save:
 							while overwait:
-								overwrite = getInput.choice(output('savewarning', addon=[file[2], file[3], file[4]], r=1),[output('yes', r=1),output('no', r=1)])
+								addon = [file[0], file[1]]
+								for o in overaddon: addon.append(o)
+								overwrite = getInput.choice(output(overwarning, addon=addon, r=1),[output('yes', r=1),output('no', r=1)])
 								if overwrite == 1: return response
 								elif overwrite == 2: overwait = False
 								else: output('inputerror')

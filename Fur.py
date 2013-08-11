@@ -71,8 +71,6 @@ except: pass
 	#os.console('cls')
 	#os.console('clear')
 
-getInput = getinput()
-
 sandwich = Food('sandwich', 'A ham and cheese on rye bread.', False)
 p1MainRoom = Room('Main Room', items = [sandwich],doors = [Door('northwest', 'Balcony'), Door('northeast', 'Hallway'), Door('southeast', 'Play Room'), Door('southwest', 'Chest Room', key="Bronze")])
 p1Balcony = Room('Balcony', items = [], doors=[Door('south', 'Main Room')])
@@ -86,6 +84,37 @@ def quit(msg, nosave=False):
 	if ios and not devplayer: notification.schedule(output('mailto2', r=1), 15, 'Beep', output('mailto1', r=1))
 	if msg: sys.exit(msg)
 	else: sys.exit(0)
+
+def save():
+	global loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer
+	#with open(reply+'-'+player_name, 'wb') as handle:
+	reply = saveload(True)
+	if reply:
+		with open(reply, 'wb') as handle: pickle.dump([loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer], handle)
+
+def load():
+	global loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer
+	try:
+		reply = saveload(False)
+		if reply:
+			with open(reply, 'rb') as handle:
+				file = pickle.load(handle)
+				player_name = file[0]
+				player_last = file[1]
+				loc = file[2]
+				gender = file[3]
+				player_species = file[4]
+				frnd_gender = file[5]
+				frnd_gndrpn = file[6]
+				frnd_nane = file[7]
+				scrollspeed = file[8]
+				scroll = file[9]
+				devplayer = file[10]
+			return True
+		else: return False
+	except IOError:
+		output('saveerror')
+		return False
 
 #When starting the game, program must ask if the player is a boy or girl.
 def start():
@@ -227,21 +256,77 @@ def part1():
 	loc = 'p1MainRoom'
 	gameplay()
 
-if pc == 'iphone':
-	choice = getInput.choice(output('iosask', r=1), ['iPhone','iPad'])
-	if choice == 1: pc = 'iPhone'
-	elif choice == 2: pc = 'iPad'
-	else: quit(output('iosquit', r=1), nosave=True)
+def gameplay():
+	global loc, p1MainRoom, p1RoomTwo, devplayer, player, gender, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane
+	player = Character(loc, player_name, player_last, species, gender, 1)
+	friend = Character(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
+	playing=True
+	if not devplayer: quit(output(103, r=1))
+	output(104)
+	if loc == 'p1MainRoom':
+		location = p1MainRoom
+		location.describe()
+	playing=True
+	while playing:
+		output("")
+		cmnd = getCommand(getInput.text(output(105, r=1)))
+		if not cmnd:
+			output(106)
+			continue
+		if cmnd['verb'] == output(107, r=1): quit(output(109))
+		elif cmnd['verb'] == output(110, r=1):
+			save()
+			continue
+		elif cmnd['verb'] == output(112, r=1):
+			load()
+			continue
+		elif cmnd['verb'] == output(113, r=1):
+			output(108)
+			output(111)
+			output(114)
+			output(116)
+			output(118)
+			output(120)
+			output(123)
+			continue
+		noun = cmnd.get('noun')
+		if not noun: continue
+		else:
+			item = location.findItem(noun)
+			if cmnd['verb'] == output(115, r=1) and hasattr(item, 'examine'): item.examine()
+			elif cmnd['verb'] == output(117, r=1) and hasattr(item, 'eat'): item.eat()
+			elif cmnd['verb'] == output(119, r=1) and hasattr(item, 'drink'): item.drink()
+			elif cmnd['verb'] == output(121, r=1) and hasattr(player, 'take'): player.take(item)
+			elif not item:
+				if cmnd['verb'] == output(122, r=1):
+					roomname = location.go(noun)
+					if not roomname: output(124)
+					elif roomname == "locked": output(125)
+					elif roomname == "invalid": output(126)
+					else:
+						location = rooms[roomname]
+						location.describe()
+				else: output(127, addon=noun)
+			else: output(128)
 
-mainmenu()
+def init():
+	if pc == 'iphone':
+		choice = getInput.choice(output('iosask', r=1), ['iPhone','iPad'])
+		if choice == 1: pc = 'iPhone'
+		elif choice == 2: pc = 'iPad'
+		else: quit(output('iosquit', r=1), nosave=True)
 
-if len(sys.argv) > 1:
-	arg = sys.argv[1:]
-	if "nostory" in arg:
-		loc = 'p1MainRoom'
-		gameplay()
-	elif "betatester" in arg: devplayer = True
-	elif "annoy" in arg: annoy = True
+	mainmenu()
 
-start()
-part1()
+	if len(sys.argv) > 1:
+		arg = sys.argv[1:]
+		if "nostory" in arg:
+			loc = 'p1MainRoom'
+			gameplay()
+		elif "betatester" in arg: devplayer = True
+		elif "annoy" in arg: annoy = True
+
+	start()
+	part1()
+
+init()
