@@ -1,3 +1,2 @@
-from downloaded import *
-from codermade import *
-from playermade import *
+import colorama, easygui, menu
+import quit, start

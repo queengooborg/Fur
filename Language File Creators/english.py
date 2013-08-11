@@ -141,6 +141,8 @@ msgs = {'title':'Fur',
 'attack1desc':'A simple punch',
 'type1':'Normal',
 'lang':'Language',
+'iosask':'Are you on an iPhone or iPad?  This is important for gameplay.',
+'iosquit':'User did not choose iPhone or iPad.'
 }
 
 import pickle

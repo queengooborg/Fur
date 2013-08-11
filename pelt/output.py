@@ -31,9 +31,3 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 		sys.stdout.write(styles)
 		sys.stdout.flush()
 	elif r == 1: return msg
-
-if dolang: language()
-
-for i in range(len(species)):
-	temp = species[i].lower()
-	species[i] = output(temp, r=1)
