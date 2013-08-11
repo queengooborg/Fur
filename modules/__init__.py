@@ -1,3 +1,3 @@
 from downloaded import *
-from selfmade import *
+from codermade import *
 from playermade import *

@@ -1,5 +1,7 @@
 Version Sheet:
 
+303-305: Tuned the game to it's new language file (in progress)
+301-302: Fixed the output function 
 297-300: Fixed the language files (game broken until output function is changed)
 294-296: Improved the menu
 284-293: Added the language files (causing the game to crash)

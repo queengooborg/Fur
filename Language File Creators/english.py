@@ -24,8 +24,8 @@ msgs = {'title':'Fur',
 'slow':'Slow',
 'boy':'Boy',
 'girl':'Girl',
-'he':'He',
-'she':'She',
+'he':'he',
+'she':'she',
 'meyou':"me and you",
 'you':"you",
 'wolf':"Wolf",
@@ -141,8 +141,6 @@ msgs = {'title':'Fur',
 'attack1desc':'A simple punch',
 'type1':'Normal',
 'lang':'Language',
-'iosask':'Are you on an iPhone or iPad?  This is important for gameplay.',
-'iosaskmsg':'User did not choose iPhone or iPad.'
 }
 
 import pickle
