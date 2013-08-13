@@ -1,11 +1,6 @@
 import sys, re
-from time import sleep
-def output(msg, newline=True):
-	if msg[-3:-1] == '...': newline=False
-	sys.stdout.write(msg)
-	if newline: sys.stdout.write('\n')
-	sys.stdout.flush()
-
+from time import sleep
+from pelt import *
 def getblocks(start, end, data, max):
 	i = 0
 	blocks = []
@@ -70,7 +65,7 @@ def preprocess(data):
 	return data
 	
 def parselevel(level):
-	output('Fur Level Parser, starting...')
+	output('PELT Level Parser, starting...')
 	
 	#preprocess level
 	data = preprocess(level.read())
