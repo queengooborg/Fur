@@ -19,13 +19,14 @@ try:
 	pc = 'iphone'
 	ios = True
 except ImportError:
-	import pygame
+	import pygame, colorama, easygui, menu
+	colorama.init()
 	pygame.init()
 	pc = 'computer'
 	ios = False
 
 #from pelt import *
-import time, os, pickle, sys, random, locale
+import time, os, pickle, sys, random, locale, re
 
 #initialize variables
 scrollspeed='Medium'
@@ -68,6 +69,19 @@ class Door(object):
 
 	def __str__(self):
 		return output('doordesc', r=1, addon=[self.direction,self.room])
+
+#define the attributes of an item
+class Item(object):
+	name = None
+	description = None
+
+	def __init__(self, name, description=None):
+		self.name = name
+		self.description = description
+
+	def examine(self):
+		if self.description: output(self.description, dict=False)
+		else: output('itemnormal', addon=self.name)
 
 #define drink item
 class Drink(Item):
@@ -193,19 +207,6 @@ class getinput():
 
 getInput = getinput()
 
-#define the attributes of an item
-class Item(object):
-	name = None
-	description = None
-
-	def __init__(self, name, description=None):
-		self.name = name
-		self.description = description
-
-	def examine(self):
-		if self.description: output(self.description, dict=False)
-		else: output('itemnormal', addon=self.name)
-
 def language():
 	global lang, msgs
 	wait=True
@@ -227,8 +228,11 @@ def language():
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0):
 	global scroll, styles, annoy, msgs
 	#modifier = caps, title, lower, normal (when modifier isn't present)
-	if msg == '': dict=False
-	if dict: msg = msgs[msg]
+	try:
+		if dict: msg = msgs[msg]
+	except KeyError:
+		if msg == '': pass
+		else: msg = "WARNING: "+msg+" is not a valid keyword."
 	if addon:
 		if type(addon) == type([]):
 			i = 1
@@ -748,7 +752,8 @@ def gameplay():
 			else: output(128)
 
 def init():
-	if pc == 'iphone':
+	global ios, pc
+	if ios:
 		choice = getInput.choice(output('iosask', r=1), ['iPhone','iPad'])
 		if choice == 1: pc = 'iPhone'
 		elif choice == 2: pc = 'iPad'
