@@ -1,23 +1,45 @@
-[Level is {Name} sized {Height}x{Width}]
+[Level is "{Name}" sized {Height}x{Width}]
 
 [Dialogue is:
-	<Player talking> %Player% Hi there.
-	<Other character talking> %Friend1% Hi yourself!
-	<Action> %Action% %Player% and %Friend1% high-five.
-	<Choice> %Choice% Do you want to high-five %Friend2%?
-		$Yes$ %Action% %Player% high-fived %Friend2% $
-		$No$ %Player% Hi %Friend2%
-		%Friend2% Hi. $
+	<Player talking> %Player% {Player's Dialogue}
+	<Other character talking> %Friend1% {Friend1's Dialogue}
+	<Action> %Action% {The Action, remember you can put %Player% and %Friend1% in the action}
+	<Choice> %Choice% {Question}
+		${Choice 1}$ {Action or Dialogue} $
+		${Choice 2}$ {Action or Dialogue} $
 	%End Choice%
 Finish Dialogue]
 
 [Room called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
-    <To make a Door or Trapdoor> {Door/Trapdoor} {Direction} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
+    <To make a Door or Trapdoor> {Door/Trapdoor} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
     <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
 Finish Room]
 
-Level is Part 1: Prologue sized 768x1024
+Level is "Part 1: Prologue" sized 768x1024
 
 Dialogue is:
 Finish Dialogue
 
+Room called "Main Room" sized 532x289 placed 520x357:
+	Door to "Balcony" on Top 10 from Left
+	Door to "Hallway" on Top 60 from Right
+	Door to "Play Room" on Bottom 20 from Right
+	Trapdoor to "Chest Room" 15 from Left 20 from Bottom locked with Key (Hidden)
+Finish Room
+
+Room called "Balcony" sized 171x43 placed 448x313:
+	Door to "Main Room" on Bottom 40 from Right
+Finish Room
+
+Room called "Hallway" sized 54x198 placed 722x159:
+	Door to 
+Finish Room
+
+Room called "Garden" sized 532x289 placed 190x24:
+
+Room called "Play Room" sized 140x116 placed 660x505:
+Room called "Bedroom" sized 140x70 placed 520x551:
+Room called "Bathroom" sized 140x46 placed 520x505:
+Room called "Small Storage Room" sized 64x46 placed 456x505:
+
+Room called "Chest Room" sized 365x197 placed 43x375:

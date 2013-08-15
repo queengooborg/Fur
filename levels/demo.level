@@ -28,14 +28,14 @@ Finish Dialogue
 [To make a Room:
  
 Room called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
-    <To make a Door or Trapdoor> {Door/Trapdoor} {Direction} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
+    <To make a Door or Trapdoor> {Door/Trapdoor} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
     <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
 Finish Room
 ]
 
 [The room at the very top is the spawn room]
 Room called "Main Room" sized 160x160 placed 320x640:
-    Door northwest to Bedroom on Top 10 from Left
-    Trapdoor northeast to Cellar locked with Gold Key (Hidden)
-    Door southwest to Hallway locked with Bronze Key
+    Door to Bedroom on Top 10 from Left
+    Trapdoor to Cellar 10 from Left and 20 from Bottom locked with Gold Key (Hidden) 
+    Door to Hallway locked with Bronze Key
 Finish Room
