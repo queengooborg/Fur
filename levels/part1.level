@@ -16,31 +16,50 @@ Finish Dialogue]
 Finish Room]
 
 Level is "Part 1: Prologue" sized 768x1024
- 
+
 Dialogue is:
 Finish Dialogue
- 
+
 Room called "Main Room" sized 532x289 placed A520x357:
 	Door to "Balcony" on Top 10 from Left
 	Door to "Hallway" on Top 60 from Right
 	Door to "Play Room" on Bottom 20 from Right
 	Trapdoor to "Chest Room" 15 from Left 20 from Bottom locked with Key (Hidden)
 Finish Room
- 
+
 Room called "Balcony" sized 171x43 placed A448x313:
 	Door to "Main Room" on Bottom 40 from Right
 Finish Room
- 
+
 Room called "Hallway" sized 54x198 placed A722x159:
 	Door to "Main Room" on Bottom 10 from Left
 	Door to "Garden" on Left 45 from Top
 Finish Room
 
 Room called "Garden" sized 532x289 placed A190x24:
- 
+	Door to "Hallway" on Right 45 from Bottom
+	Door to Finish on Left 135 from Top
+Finish Room
+
 Room called "Play Room" sized 140x116 placed A660x505:
+	Door to "Main Room" on Top 20 from Right
+	Door to "Bathroom" on Left 10 from Bottom
+Finish Room
+
 Room called "Bedroom" sized 140x70 placed A520x551:
+	Door to "Play Room" on Right 10 from Bottom
+	Door to "Bathroom" on Top 60 from Left
+Finish Room
+
 Room called "Bathroom" sized 140x46 placed A520x505:
+	Door to "Bedroom" on Bottom 60 from Left
+	Door to "Small Storage Room" on Left 5 from Top
+Finish Room
+
 Room called "Small Storage Room" sized 64x46 placed A456x505:
- 
+	Door to "Bathroom" on Right 5 from Top
+Finish Room
+
 Room called "Chest Room" sized 365x197 placed B43x375:
+	Trapdoor to "Main Room" 0 from Top 20 from Right
+Finish Room

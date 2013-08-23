@@ -1,6 +1,7 @@
 import sys, re
 from time import sleep
-from pelt import *
+from pelt import *
+
 def getblocks(start, end, data, max):
 	i = 0
 	blocks = []
@@ -41,7 +42,6 @@ class Dialogue(object):
 
 def getdialogue(data):
 	response = getblocks('Dialogue is:', 'End Dialogue', data, 1)
-	
 	
 def preprocess(data):
 	#To begin, remove comments
