@@ -1,3 +1,22 @@
+import time, os, pickle, sys, random, locale, re
+
+try:
+	import console, notification
+	from scene import *
+	pc = 'iphone'
+	ios = True
+except ImportError:
+	import colorama, easygui #, menu, pygame
+	colorama.init()
+	#pygame.init()
+	pc = 'computer'
+	ios = False
+
+def givevers(vers, debugmode):
+	global version, debug
+	version = vers
+	debug = debugmode
+
 class Door(object):
 	def __init__(self, direction, room, key=None):
 		self.direction = direction
@@ -9,6 +28,19 @@ class Door(object):
 
 	def __str__(self):
 		return output('doordesc', r=1, addon=[self.direction,self.room])
+
+#define the attributes of an item
+class Item(object):
+	name = None
+	description = None
+
+	def __init__(self, name, description=None):
+		self.name = name
+		self.description = description
+
+	def examine(self):
+		if self.description: output(self.description, dict=False)
+		else: output('itemnormal', addon=self.name)
 
 #define drink item
 class Drink(Item):
@@ -134,19 +166,6 @@ class getinput():
 
 getInput = getinput()
 
-#define the attributes of an item
-class Item(object):
-	name = None
-	description = None
-
-	def __init__(self, name, description=None):
-		self.name = name
-		self.description = description
-
-	def examine(self):
-		if self.description: output(self.description, dict=False)
-		else: output('itemnormal', addon=self.name)
-
 def language():
 	global lang, msgs
 	wait=True
@@ -164,23 +183,22 @@ def language():
 			with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
 		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)
 
+def setlang(lang):
+	global msgs
+	with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
+
 #Function that prints the messages
-def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0):
+def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
 	global scroll, styles, annoy, msgs
 	#modifier = caps, title, lower, normal (when modifier isn't present)
-	if msg == '': dict=False
-	if dict: msg = msgs[msg]
-	if addon:
-		if type(addon) == type([]):
-			i = 1
-			for add in addon:
-				addfromdict = addonfromdict[i-1]
-				if addfromdict:
-					add = msgs[add]
-				re.sub('ADDON'+str(1),add,msg)
-				i += 1
-		else:
-			if addon: re.sub('ADDON',addon,msg)
+	try:
+		if dict: msg = msgs[msg]
+	except KeyError:
+		if msg == '': pass
+		else: msg = "WARNING: "+msg+" is not a valid keyword."
+	if addon: 
+		try: msg = msg % addon
+		except TypeError: msg = 'Hey, this message is broken.  Tried to print "%s" and add "%s".' %(msg, addon)
 	if modifier == 'caps': msg = msg.upper()
 	elif modifier == 'title': msg = msg.title()
 	elif modifier == 'lower': msg = msg.lower()
@@ -197,15 +215,33 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 		sys.stdout.write(styles)
 		sys.stdout.flush()
 	elif r == 1: return msg
+	time.sleep(s)
 
 #define what a room is
 class Room(object):
+	rooms={}
+	
 	def __init__(self, name, items, doors):
 		self.name = name
-		rooms[name] = self
+		self.rooms[name] = self
 		self.doors = doors
 		self.items = items
-
+	
+	@classmethod
+	def fromText(cls, text):
+		'''Room called "Main Room" sized 532x289 placed A520x357:
+			Door to "Balcony" on Top 10 from Left
+			Door to "Hallway" on Top 60 from Right
+			Door to "Play Room" on Bottom 20 from Right
+			Trapdoor to "Chest Room" 15 from Left 20 from Bottom locked with "Wooden Key" (Hidden)
+		Finish Room'''
+		
+		lines = text.split('\n')
+		assert(lines[0].startswith('Room'))
+		name = re.search('called "\([a-zA-Z ]*\)"')
+		
+		return cls(name, items, doors)
+	
 	def findItem(self, name):
 		for i in self.items:
 			if i.name == name: return i
@@ -356,3 +392,24 @@ def color(color):
 		try: console.set_font('Helvetica', 32.0)
 		except: pass
 	else: output('colorerror')
+
+try:
+	with open('options', 'rb') as handle:
+		handle = pickle.load(handle)
+		lang = handle[0]
+		scrollspeed = handle[1]
+		if scrollspeed == 'Fast': scroll = 0.01
+		elif scrollspeed == 'Medium': scroll = 0.03
+		elif scrollspeed == 'Slow': scroll = 0.05
+		annoy = handle[2]
+		devplayer = handle[3]
+	if lang == "English": setlang('en')
+except:
+	scrollspeed='Medium'
+	scroll=0.03
+	lang=None
+	annoy=False
+	devplayer=True
+	language()
+
+styles = ''

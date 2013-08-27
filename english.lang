@@ -1,558 +1,571 @@
 (dp0
 S'load'
 p1
-g1
-sS'helpexamine'
+S'Load Game (Broken ATM)'
 p2
-S'examine [item] - shows description of item'
+sS'helpexamine'
 p3
-sS'helpsave'
+S'examine [item] - shows description of item'
 p4
-S'save - Saves the game'
+sS'helpsave'
 p5
-sS'help'
+S'save - Saves the game'
 p6
-g6
-sS'p1m18'
+sS'helpcmd'
 p7
-S"They are in a similar state to those of the ADDON's.  ADDON"
+S'help'
 p8
-sS'helpeat'
+sS'examinecmd'
 p9
-S'eat [item] - If item is food, will eat item'
+S'examine'
 p10
-sS'inputerror'
+sS'p1m18'
 p11
-S'Invalid Input'
+S"They are in a similar state to those of the %s's.  %s"
 p12
-sS'doorhere'
+sS'helpeat'
 p13
-S'There is a door to the ADDON'
+S'eat [item] - If item is food, will eat item'
 p14
-sS'foodpoisoned'
+sS'inputerror'
 p15
-S'That ADDON was covered in fatal poison.  You are now dead.'
+S'Invalid Input'
 p16
-sS'cancel'
+sS'doorhere'
 p17
-S'Cancel'
+S'There is a door to the %s'
 p18
-sS'yes'
+sS'cancel'
 p19
-S'Yes'
+S'Cancel'
 p20
-sS'go'
+sS'yes'
 p21
-g21
-sS'helpgo'
+S'Yes'
 p22
-S'go [direction] - Go through the door in the defined direction'
+sS'helpgo'
 p23
-sS'quit'
+S'go [direction] - Go through the door in the defined direction'
 p24
-g24
-sS'slow'
+sS'quit'
 p25
-S'Slow'
+S'Quit'
 p26
-sS'title'
+sS'slow'
 p27
-S'Fur'
+S'Slow'
 p28
-sS'drinkpoisoned'
+sS'savecmd'
 p29
-S'That ADDON had a fatal poison inside.  You are now dead.'
+S'save'
 p30
-sS'helpdrink'
+sS'title'
 p31
-S'drink [item] - if item is a drink, will drink item'
+S'Fur'
 p32
-sS'fast'
+sS'drinkpoisoned'
 p33
-S'Fast'
+S'That %s had a fatal poison inside.  You are now dead.'
 p34
-sS'next'
+sS'helpdrink'
 p35
-S'Next Page'
+S'drink [item] - if item is a drink, will drink item'
 p36
-sS'start'
+sS'fast'
 p37
-S'Start Game'
+S'Fast'
 p38
-sS'setup9'
+sS'next'
 p39
-S'Enter the name of your friend, remember, ADDON is a ADDON.'
+S'Next Page'
 p40
-sS'setup8'
+sS'eatcmd'
 p41
-S'You have chosen a ADDON.  Excellent...This concludes the second part of your rebirth.  You will enter Quilar as a half-ADDON...'
+S'eat'
 p42
-sS'setup3'
+sS'start'
 p43
-S'ADDON...and your last?'
+S'Start Game'
 p44
-sS'setup2'
+sS'setup9'
 p45
-S'Your name is?'
+S'Enter the name of your friend, remember, %s is a %s.'
 p46
-sS'setup1'
+sS'setup8'
 p47
-S'Are you a boy or a girl?'
+S'You have chosen a %s.  Excellent...This concludes the second part of your rebirth.  You will enter Quilar as a half-%s...'
 p48
-sS'otter'
-p49
-S'Otter'
-p50
-sS'setup7'
-p51
-S'Choose an animal'
-p52
-sS'setup6'
-p53
-S"The final part of your rebirth is to know what animal you would be if you couldn't be human anymore."
-p54
-sS'setup5'
-p55
-S"You should've opened your eyes by now.  Good.  You have finished the first part of your rebirth."
-p56
-sS'quitmsg'
-p57
-S"Quit on user's demand."
-p58
-sS'doormissing'
-p59
-S'There is no door in that direction.'
-p60
-sS'save1'
-p61
-S'Save ADDON'
-p62
-sS'save2'
-p63
-S'Save ADDON: ADDON'
-p64
-sS'save3'
-p65
-S'Save to File'
-p66
-sS'save4'
-p67
-S'Load File'
-p68
-sS'bear'
-p69
-S'Bear'
-p70
-sS'drinkpoisonedmdg'
-p71
-S'User drank poison from a ADDON'
-p72
-sS'cmderror'
-p73
-S"I don't know how to do that."
-p74
-sS'helpload'
-p75
-S'load - Loads the game from a save file (dangerous)'
-p76
-sS'using'
-p77
-g77
-sS'type1'
-p78
-S'Normal'
-p79
-sS'with'
-p80
-g80
-sS'eat'
-p81
-g81
-sS'foodeaten'
-p82
-S'That ADDON was very tasty!'
-p83
-sS'he'
-p84
-S'He'
-p85
-sS'annoy'
-p86
-S'Annoyance Mode (ADDON)'
-p87
-sS'save'
-p88
-g88
-sS'meyou'
-p89
-S'me and you'
-p90
-sS'annoyon'
-p91
-S'Annoyance mode now active.'
-p92
-sS'scroll'
-p93
-S'Scroll Speed (ADDON)'
-p94
-sS'itemerror'
-p95
-S"I don't see any ADDON here."
-p96
-sS'usingerror'
-p97
-S'What do you want to ADDON the ADDON with?'
-p98
-sS'cat'
-p99
-S'Cat'
-p100
-sS'broken2'
-p101
-S'Broken ATM'
-p102
-sS'broken3'
-p103
-S"It's broken at the moment!"
-p104
-sS'broken1'
-p105
-S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "ADDON"'
-p106
-sS'she'
-p107
-S'She'
-p108
-sS'broken4'
-p109
-S'Next part is still in development.  Please load in a developer save to unlock the next part.'
-p110
-sS'foodpoisonedmsg'
-p111
-S'User ate a poisoned ADDON'
-p112
-sS'helphelp'
-p113
-S'help - Displays this message'
-p114
-sS'setup4'
-p115
-S'ADDON ADDON...Good.  Now you may enter the gates and find yourself in "Fur"...close your eyes and count to 3, then open your eyes...'
-p116
-sS'p1m4'
-p117
-S'???: ...Hey, you lazy ADDON!'
-p118
-sS'betaoff'
-p119
-S'Beta tester mode revoked.'
-p120
-sS'p1title'
-p121
-S'PART 1: Prologue'
-p122
-sS'savewarning'
-p123
-S'WARNING: File belongs to ADDON ADDON the ADDON.  Okay to overwrite?'
-p124
-sS'p1m9'
-p125
-S'Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
-p126
-sS'itemhere'
-p127
-S'There is a ADDON here'
-p128
-sS'back'
-p129
-S'Back'
-p130
-sS'attack1desc'
-p131
-S'A simple punch'
-p132
-sS'iosaskmsg'
-p133
-S'User did not choose iPhone or iPad.'
-p134
-sS'helptake'
-p135
-S'take [item] - if item is movable, will take item'
-p136
-sS'examine'
-p137
-g137
-sS'doordesc'
-p138
-S'A door to the ADDON that leads to the ADDON.'
-p139
-sS'p1m8'
-p140
-S"You're eyes focus and you figure out why the ADDON looked so strange.  ADDON was fox-like, with fur covering ADDON entire body, and a big tail sticking out behind ADDON."
-p141
-sS'colorerror'
-p142
-S'Color input was invalid.'
-p143
-sS'p1m6'
-p144
-S'You slowly open your eyes.  A young ADDON about your age is trying to shake you awake.  You notice something strange about the ADDON, but your eyes are still blurred from waking up.'
-p145
-sS'p1m7'
-p146
-S"???: You're awake!  I've been shaking you for over an hour or so!"
-p147
-sS'girl'
-p148
-S'Girl'
-p149
-sS'betaon'
-p150
-S'Beta tester mode now active.'
-p151
-sS'mouse'
-p152
-S'Mouse'
-p153
-sS'p1m3'
-p154
-S'???: ...Wake up...'
-p155
-sS'gameinputerror'
-p156
-S"I didn't understand what you typed."
-p157
-sS'p1m1'
-p158
-S'???: ...'
-p159
-sS'p1m14'
-p160
-S"You: ...I'm ADDON."
-p161
-sS'p1m15'
-p162
-S"ADDON: ADDON...it's a funny name for a ADDON like ADDON!"
-p163
-sS'p1m16'
-p164
-S'You: What?'
-p165
-sS'p1m5'
-p166
-S'???: Wake up!'
-p167
-sS'p1m10'
-p168
-S'You: Who are you?'
-p169
-sS'p1m11'
-p170
-S'???: Me?  My name is...'
-p171
-sS'p1m12'
-p172
-S"ADDON.  What's yours?"
-p173
-sS'author'
-p174
-S'Made by Dark Tailed'
-p175
-sS'doorlocked'
-p176
-S"You try to open the door but the handle won't budge."
-p177
-sS'p1m2'
-p178
-S'???: ...Hey...'
-p179
-sS'attack1'
-p180
-S'Punch'
-p181
-sS'fox'
-p182
-S'Fox'
-p183
-sS'p1m19'
-p184
-S"You start to panic inside.  You think 'what is going on?'"
-p185
-sS'beardesc'
-p186
-S'However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
-p187
-sS'gameaction'
-p188
-S'What will you do?'
-p189
-sS'version'
-p190
-S'Version ADDON'
-p191
 sS'p1m20'
+p49
+S'%s: ...What?'
+p50
+sS'setup3'
+p51
+S'%s...and your last?'
+p52
+sS'setup2'
+p53
+S'Your name is?'
+p54
+sS'setup1'
+p55
+S'Are you a boy or a girl?'
+p56
+sS'otter'
+p57
+S'Otter'
+p58
+sS'setup7'
+p59
+S'Choose an animal'
+p60
+sS'setup6'
+p61
+S"The final part of your rebirth is to know what animal you would be if you couldn't be human anymore."
+p62
+sS'setup5'
+p63
+S"You should've opened your eyes by now.  Good.  You have finished the first part of your rebirth."
+p64
+sS'quitmsg'
+p65
+S"Quit on user's demand."
+p66
+sS'iosquit'
+p67
+S'User did not choose iPhone or iPad.'
+p68
+sS'loadcmd'
+p69
+g1
+sS'save1'
+p70
+S'Save %s'
+p71
+sS'save2'
+p72
+S'Save %s: %s'
+p73
+sS'save3'
+p74
+S'Save to File'
+p75
+sS'save4'
+p76
+S'Load File'
+p77
+sS'bear'
+p78
+S'Bear'
+p79
+sS'drinkpoisonedmdg'
+p80
+S'User drank poison from a %s'
+p81
+sS'quitcmd'
+p82
+g25
+sS'doormissing'
+p83
+S'There is no door in that direction.'
+p84
+sS'takecmd'
+p85
+S'take'
+p86
+sS'helpload'
+p87
+S'load - Loads the game from a save file (dangerous)'
+p88
+sS'cmderror'
+p89
+S"I don't know how to do that."
+p90
+sS'using'
+p91
+g91
+sS'type1'
+p92
+S'Normal'
+p93
+sS'with'
+p94
+g94
+sS'foodeaten'
+p95
+S'That %s was very tasty!'
+p96
+sS'he'
+p97
+g97
+sS'annoy'
+p98
+S'Annoyance Mode (Broken ATM)'
+p99
+sS'foodpoisoned'
+p100
+S'That %s was covered in fatal poison.  You are now dead.'
+p101
+sS'meyou'
+p102
+S'me and you'
+p103
+sS'annoyon'
+p104
+S'Annoyance mode now active.'
+p105
+sS'scroll'
+p106
+S'Scroll Speed (%s)'
+p107
+sS'itemerror'
+p108
+S"I don't see any %s here."
+p109
+sS'usingerror'
+p110
+S'What do you want to %s the %s with?'
+p111
+sS'cat'
+p112
+S'Cat'
+p113
+sS'broken2'
+p114
+S'Broken ATM'
+p115
+sS'broken3'
+p116
+S"It's broken at the moment!"
+p117
+sS'broken1'
+p118
+S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "%s"'
+p119
+sS'she'
+p120
+g120
+sS'broken4'
+p121
+S'Next part is still in development.  Please load in a developer save to unlock the next part.'
+p122
+sS'foodpoisonedmsg'
+p123
+S'User ate a poisoned %s'
+p124
+sS'helphelp'
+p125
+S'help - Displays this message'
+p126
+sS'setup4'
+p127
+S'%s %s...Good.  Now you may enter the gates and find yourself in "Fur"...close your eyes and count to 3, then open your eyes...'
+p128
+sS'p1m4'
+p129
+S'???: ...Hey, you lazy %s!'
+p130
+sS'betaoff'
+p131
+S'Beta tester mode revoked.'
+p132
+sS'p1title'
+p133
+S'PART 1: Prologue'
+p134
+sS'savewarning'
+p135
+S'WARNING: File belongs to %s %s the %s.  Okay to overwrite?'
+p136
+sS'p1m9'
+p137
+S'Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
+p138
+sS'back'
+p139
+S'Back'
+p140
+sS'attack1desc'
+p141
+S'A simple punch'
+p142
+sS'helptake'
+p143
+S'take [item] - if item is movable, will take item'
+p144
+sS'itemhere'
+p145
+S'There is a %s here'
+p146
+sS'doordesc'
+p147
+S'A door to the %s that leads to the %s.'
+p148
+sS'p1m8'
+p149
+S"You're eyes focus and you figure out why the %s looked so strange.  %s was fox-like, with fur covering %s entire body, and a big tail sticking out behind %s."
+p150
+sS'colorerror'
+p151
+S'Color input was invalid.'
+p152
+sS'p1m6'
+p153
+S'You slowly open your eyes.  A young %s about your age is trying to shake you awake.  You notice something strange about the %s, but your eyes are still blurred from waking up.'
+p154
+sS'p1m7'
+p155
+S"???: You're awake!  I've been shaking you for over an hour or so!"
+p156
+sS'girl'
+p157
+S'Girl'
+p158
+sS'betaon'
+p159
+S'Beta tester mode now active.'
+p160
+sS'mouse'
+p161
+S'Mouse'
+p162
+sS'p1m3'
+p163
+S'???: ...Wake up...'
+p164
+sS'gameinputerror'
+p165
+S"I didn't understand what you typed."
+p166
+sS'p1m1'
+p167
+S'???: ...'
+p168
+sS'p1m14'
+p169
+S"You: ...I'm %s."
+p170
+sS'p1m15'
+p171
+S"%s: %s...it's a funny name for a %s like %s!"
+p172
+sS'p1m16'
+p173
+S'You: What?'
+p174
+sS'p1m5'
+p175
+S'???: Wake up!'
+p176
+sS'p1m10'
+p177
+S'You: Who are you?'
+p178
+sS'p1m11'
+p179
+S'???: Me?  My name is...'
+p180
+sS'p1m12'
+p181
+S"%s.  What's yours?"
+p182
+sS'author'
+p183
+S'Made by Dark Tailed'
+p184
+sS'doorlocked'
+p185
+S"You try to open the door but the handle won't budge."
+p186
+sS'p1m2'
+p187
+S'???: ...Hey...'
+p188
+sS'attack1'
+p189
+S'Punch'
+p190
+sS'fox'
+p191
+S'Fox'
 p192
-S'ADDON: ...What?'
+sS'p1m19'
 p193
-sS'take'
+S"You start to panic inside.  You think 'what is going on?'"
 p194
-g194
-sS'directionerror'
+sS'beardesc'
 p195
-S"That's not a proper direction."
+S'However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
 p196
-sS'you'
+sS'gameaction'
 p197
-g197
-sS'foxdesc'
+S'What will you do?'
 p198
-S'You also look just like a fox, with a tail and everything.'
+sS'version'
 p199
-sS'saveerror'
+S'Version %s'
 p200
-S'Not a valid save file.'
+sS'directionerror'
 p201
-sS'playerdesc'
+S"That's not a proper direction."
 p202
-S'ADDON ADDON the ADDON ADDON, carrying ADDON, at ADDON, Level ADDON.  Can use the attacks ADDON'
+sS'you'
 p203
-sS'med'
+g203
+sS'foxdesc'
 p204
-S'Medium'
+S'You also look just like a fox, with a tail and everything.'
 p205
-sS'drink'
+sS'saveerror'
 p206
-g206
-sS'mailto1'
+S'Not a valid save file.'
 p207
-S'mailto:dark.tailed.wolf@gmail.com?subject=I%20just%20played%20your%20game%20Fur!&body=I%20rate%20Fur%20(out%20of%205):%20'
+sS'playerdesc'
 p208
-sS'p1m13'
+S'%s %s the %s %s, carrying %s, at %s, Level %s.  Can use the attacks %s'
 p209
-S'You lower your fists.'
+sS'med'
 p210
-sS'mailto2'
+S'Medium'
 p211
-S'Thanks for playing fur!  Please send feedback by tapping on me.'
+sS'mailto1'
 p212
-sS'mousedesc'
+S'mailto:dark.tailed.wolf@gmail.com?subject=I%20just%20played%20your%20game%20Fur!&body=I%20rate%20Fur%20(out%20of%205):%20'
 p213
-S'However you have small hands, a skinny tail, and big ears, just like a mouse.'
+sS'p1m13'
 p214
-sS'gamestart'
+S'You lower your fists.'
 p215
-S'You are in a room.'
+sS'mailto2'
 p216
-sS'catdesc'
+S'Thanks for playing fur!  Please send feedback by tapping on me.'
 p217
-S'However your hands have very sharp claws and you look more like a cat.'
+sS'mousedesc'
 p218
-sS'p1m25'
+S'However you have small hands, a skinny tail, and big ears, just like a mouse.'
 p219
-S'You: Yeah, thanks.'
+sS'gamestart'
 p220
-sS'title2'
+S'You are in a room.'
 p221
-S'Fur - Version ADDON'
+sS'drinkcmd'
 p222
-sS'p1m17'
+S'drink'
 p223
-S'You then look down at yourself.  ADDON'
+sS'catdesc'
 p224
-sS'annoyoff'
+S'However your hands have very sharp claws and you look more like a cat.'
 p225
-S'Annoyance mode revoked.'
+sS'p1m25'
 p226
-sS'otterdesc'
+S'You: Yeah, thanks.'
 p227
-S"However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
+sS'title2'
 p228
-sS'lang'
+S'Fur - Version %s'
 p229
-S'Language'
+sS'p1m17'
 p230
-sS'boy'
+S'You then look down at yourself.  %s'
 p231
-S'Boy'
+sS'gocmd'
 p232
-sS'wolfdesc'
+S'go'
 p233
-S"However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
+sS'annoyoff'
 p234
-sS'ok'
+S'Annoyance mode revoked.'
 p235
-S'Ok'
+sS'otterdesc'
 p236
-sS'iosask'
+S"However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
 p237
-S'Are you on an iPhone or iPad?  This is important for gameplay.'
+sS'lang'
 p238
-sS'helpquit'
+S'Language'
 p239
-S'quit - Saves and quits the game.'
+sS'boy'
 p240
-sS'birddesc'
+S'Boy'
 p241
-S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
+sS'wolfdesc'
 p242
-sS'no'
+S"However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
 p243
-S'No'
+sS'ok'
 p244
-sS'beta'
+S'Ok'
 p245
-S'Beta Tester Mode'
+sS'iosask'
 p246
-sS'dragon'
+S'Are you on an iPhone or iPad?  This is important for gameplay.'
 p247
-S'Dragon'
+sS'helpquit'
 p248
-sS'bird'
+S'quit - Saves and quits the game.'
 p249
-S'Bird'
+sS'birddesc'
 p250
-sS'itemnormal'
+S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
 p251
-S"This ADDON doesn't seem to be unusual."
+sS'no'
 p252
-sS'wolf'
+S'No'
 p253
-S'Wolf'
+sS'beta'
 p254
-sS'attackerror'
+S'Beta Tester Mode'
 p255
-S'Not a valid attack.'
+sS'dragon'
 p256
-sS'dragondesc'
+S'Dragon'
 p257
-S'You have scales and the tail of a dragon instead of the fur like a fox.'
+sS'bird'
 p258
-sS'p1m24'
+S'Bird'
 p259
-S"ADDON: WHAT!  You can't be, you've got every aspect of a ADDON anthro...(ADDON comes close to you and sniffs you, then pulls back)...and you smell just like one too."
+sS'itemnormal'
 p260
-sS'p1m27'
+S"This %s doesn't seem to be unusual."
 p261
-S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
+sS'wolf'
 p262
-sS'p1m26'
+S'Wolf'
 p263
-S"ADDON: I didn't mean it like that!"
+sS'attackerror'
 p264
-sS'p1m21'
+S'Not a valid attack.'
 p265
-S"You tell yourself to calm down so you can figure out why you're half-ADDON."
+sS'dragondesc'
 p266
-sS'options'
+S'You have scales and the tail of a dragon instead of the fur like a fox.'
 p267
-S'Options'
+sS'p1m24'
 p268
-sS'p1m23'
+S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
 p269
-S'You accidentally said the last part out loud.  You meant only to think it.'
+sS'p1m27'
 p270
-sS'p1m22'
+S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
 p271
-S"You: I'm a human though..."
+sS'p1m26'
 p272
+S"%s: I didn't mean it like that!"
+p273
+sS'p1m21'
+p274
+S"You tell yourself to calm down so you can figure out why you're half-%s."
+p275
+sS'options'
+p276
+S'Options'
+p277
+sS'p1m23'
+p278
+S'You accidentally said the last part out loud.  You meant only to think it.'
+p279
+sS'p1m22'
+p280
+S"You: I'm a human though..."
+p281
 s.

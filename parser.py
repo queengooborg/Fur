@@ -63,7 +63,20 @@ def preprocess(data):
 	
 	# XXX Finally, collapse all whitespace
 	return data
-	
+
+def ideas():
+	lines = file.split('\n')
+	for l in lines:
+		if mode = None:
+			if l.startswith	('File'):
+				mode='file'	
+			elif l.startswith('Dialog'):
+				mode = 'dialog'
+		if mode = 'file':
+			Room.fromText(l)
+
+
+
 def parselevel(level):
 	output('PELT Level Parser, starting...')
 	
