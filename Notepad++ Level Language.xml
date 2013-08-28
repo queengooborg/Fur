@@ -9,10 +9,10 @@
             <Keywords name="Delimiters">&quot;%0&quot;%0</Keywords>
             <Keywords name="Folder+">Dialogue Room</Keywords>
             <Keywords name="Folder-">Finish Dialogue Room</Keywords>
-            <Keywords name="Operators">:</Keywords>
+            <Keywords name="Operators">( ) :</Keywords>
             <Keywords name="Comment">1[ 2] 0</Keywords>
-            <Keywords name="Words1">is sized called placed to on from with by locked</Keywords>
-            <Keywords name="Words2">Level Door Trapdoor</Keywords>
+            <Keywords name="Words1">is sized called placed to on from with by locked facing</Keywords>
+            <Keywords name="Words2">Level Door Trapdoor Chest Enemy</Keywords>
             <Keywords name="Words3"></Keywords>
             <Keywords name="Words4"></Keywords>
         </KeywordLists>
