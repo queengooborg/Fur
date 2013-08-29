@@ -262,9 +262,12 @@ def part1():
 	gameplay()
 
 def gameplay():
-	global loc, p1MainRoom, p1RoomTwo, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, map
+	global loc, p1MainRoom, p1RoomTwo, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, map, ios
 	playing=True
 	quit(output('broken4', r=1))
+	if ios: maploc = map+'.level'
+	else: maploc = 'levels/'+map+'.level'
+	with open(maploc, 'rb') as mapfile: mapdata = parselevel(mapfile)
 	output('gamestart')
 	playing=True
 	while playing:

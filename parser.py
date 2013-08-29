@@ -42,6 +42,15 @@ class Dialogue(object):
 
 def getdialogue(data):
 	response = getblocks('Dialogue is:', 'End Dialogue', data, 1)
+	'''
+		%Player% {Player's Dialogue}
+		%Friend1% {Friend1's Dialogue}
+		%Action% {The Action, remember you can put %Player% and %Friend1% in the action}
+		%Choice% {Question}
+			${Choice 1}$ {Action or Dialogue} $
+			${Choice 2}$ {Action or Dialogue} $
+		%End Choice%
+	'''
 	
 def preprocess(data):
 	#To begin, remove comments
@@ -64,18 +73,10 @@ def preprocess(data):
 	# XXX Finally, collapse all whitespace
 	return data
 
-def ideas():
-	lines = file.split('\n')
-	for l in lines:
-		if mode = None:
-			if l.startswith	('File'):
-				mode='file'	
-			elif l.startswith('Dialog'):
-				mode = 'dialog'
-		if mode = 'file':
-			Room.fromText(l)
-
-
+def parserooms(data):
+	rooms = getblocks('Room called "([\w\s]+)" sized (\d+)x(\d+) placed \w(\d+)x(\d+)', 'Finish Room', data, 0)
+	for room in rooms:
+		pass
 
 def parselevel(level):
 	output('PELT Level Parser, starting...')
@@ -89,15 +90,21 @@ def parselevel(level):
 	if not line1: raise SyntaxError('Level name and size not on first line.')
 	levelname = line1.group(1)
 	levelsize = line1.group(2,3)
-	output('Level data parsed.  Level is named %s, %s pixels high, and %s pixels wide' %(levelname, levelsize[0], levelsize[1]))
+	output('Level metadata parsed.  Level is named %s, %s pixels high, and %s pixels wide' %(levelname, levelsize[0], levelsize[1]))
 	
 	#Check and parse dialogue
 	output('Parsing dialogue...')
 	dialogue = getdialogue(data)
 	sleep(0.2)
 	output('Dialogue parsed (Note: Dialogue parsing is currently unmade)')
+	
+	#Parse rooms
+	output('Parsing rooms...')
+	parserooms(data)
+	sleep(0.2)
+	output('Rooms parsed (Note: Room parsing is currently unmade)')
 
 if __name__ == '__main__':
-	with open('Demo Fur Level.py','rb') as handle:
+	with open('demo.level','rb') as handle:
 		parselevel(handle)
 		raise EOFError('Parser incomplete')
