@@ -12,10 +12,11 @@ except ImportError:
 	pc = 'computer'
 	ios = False
 
-def sync(vers, debugmode):
-	global version, debug
+def sync(vers, debugmode, title):
+	global version, debug, gametitle
 	version = vers
 	debug = debugmode
+	gametitle = title
 
 class Door(object):
 	def __init__(self, direction, room, key=None):
@@ -111,7 +112,7 @@ class getinput():
 
 	def text(self, msg):
 		if ios and __name__ in '__main__': choice = console.input_alert(msg, '', '', 'Ok')
-		else: choice = easygui.enterbox(msg=msg, title=output('title2', r=1, addon=str(version)))
+		else: choice = easygui.enterbox(msg=msg, title='PELT Engine - '+gametitle+' V'+str(version))
 		return choice
 	
 	def choice(self, msg, choices, window=False):
@@ -147,7 +148,7 @@ class getinput():
 			except KeyboardInterrupt: return 0
 		else:
 			if not window:
-				choice = easygui.buttonbox(msg=msg, title="PELT Engine", choices=choices)
+				choice = easygui.buttonbox(msg=msg, title='PELT Engine - '+gametitle+' V'+str(version), choices=choices)
 				i = 1
 				for c in choices:
 					if choice == c: return i
@@ -162,7 +163,7 @@ class getinput():
 				try: console.alert('',msg)
 				except KeyboardInterrupt: pass
 			else:
-				easygui.msgbox(title="PELT Engine", msg=msg)
+				easygui.msgbox(title='PELT Engine - '+gametitle+' V'+str(version), msg=msg)
 
 getInput = getinput()
 
