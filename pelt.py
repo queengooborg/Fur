@@ -12,7 +12,7 @@ except ImportError:
 	pc = 'computer'
 	ios = False
 
-def givevers(vers, debugmode):
+def sync(vers, debugmode):
 	global version, debug
 	version = vers
 	debug = debugmode
@@ -147,7 +147,7 @@ class getinput():
 			except KeyboardInterrupt: return 0
 		else:
 			if not window:
-				choice = easygui.buttonbox(msg=msg, title="Fur - Version "+str(version), choices=choices)
+				choice = easygui.buttonbox(msg=msg, title="PELT Engine", choices=choices)
 				i = 1
 				for c in choices:
 					if choice == c: return i
@@ -162,7 +162,7 @@ class getinput():
 				try: console.alert('',msg)
 				except KeyboardInterrupt: pass
 			else:
-				easygui.msgbox(title="Fur - Version "+str(version), msg=msg)
+				easygui.msgbox(title="PELT Engine", msg=msg)
 
 getInput = getinput()
 

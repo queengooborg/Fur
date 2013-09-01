@@ -2,7 +2,7 @@
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
 #Last edited August 27, 2013 at 13:38
-version=311
+version=312
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
@@ -13,7 +13,7 @@ langversneeded=0.1
 	#	PyGame: http://www.pygame.org/
 
 from pelt import *
-givevers(version, True)
+sync(version, True)
 
 #initialize variables
 loc=None
