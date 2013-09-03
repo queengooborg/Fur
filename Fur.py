@@ -224,8 +224,8 @@ def part1():
 		i = False
 		if frnd_name: waiting = False
 		else: output('nofriendnameerror', r=1, addon=(frnd_gndrpn, frnd_gender))
-	player = Character(loc, player_name, player_last, species, gender, 1)
-	friend = Character(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
+	player = Ally(loc, player_name, player_last, species, gender, 1)
+	friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
 	output('p1m12', addon=frnd_name, s=2)
 	output('p1m13', s=1)
 	output('p1m14', addon=player_name, s=2)
