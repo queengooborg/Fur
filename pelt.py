@@ -207,7 +207,7 @@ def language():
 			choice = getInput.choice('Language/Idioma', ['English','Espanol (Archivo del Idioma no Esta Presente)','Francais (Fichier de Langue pas present', 'Quit'])
 			if choice == 1:
 				lang = "English"
-				with open('options', 'wb') as handle: pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
+				with open('options.pyp', 'wb') as handle: pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
 				wait2=False
 			elif choice == 0 or choice == 4: quit('', nosave=True)
 			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=True)
@@ -439,7 +439,7 @@ def color(color):
 	else: output('colorerror')
 
 try:
-	with open('options', 'rb') as handle:
+	with open('options.pyp', 'rb') as handle:
 		handle = pickle.load(handle)
 		lang = handle[0]
 		scrollspeed = handle[1]

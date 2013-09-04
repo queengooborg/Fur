@@ -96,7 +96,7 @@ def mainmenu():
 	wait_opt=True
 	while not_chosen:
 		output('')
-		choice = getInput.choice(output('title', r=1),[output('start', r=1),output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
+		choice = getInput.choice(output('title', r=1),[output('start', r=1),output('load', r=1),output('options.pyp', r=1),output('quit', r=1)])#, window=True)
 		output('')
 		if choice==1: not_chosen=False
 		elif choice==2:
@@ -138,7 +138,7 @@ def mainmenu():
 						devplayer = False
 				elif choice_opt == 4: language()
 				elif choice_opt == 0 or choice_opt == 5:
-					with open('options', 'wb') as handle:
+					with open('options.pyp', 'wb') as handle:
 						pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
 					wait_opt=False
 				else: output('invalidinput')
