@@ -187,6 +187,8 @@ class getinput():
 				choice = menu.main(strings)
 				time.sleep(0.1)
 				number = choice
+		temp = str(choice)
+		if temp == output('quit', r=1) or temp == output('back', r=1) or temp == output('cancel', r=1): return 0
 		return choices[number-1]
 
 	def alert(self, msg):

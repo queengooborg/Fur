@@ -5,5 +5,5 @@ title Project Fur
 cd %~dp0
 
 cls
-python Fur.py betatester
+C:\Python27\python.exe Fur.py betatester
 pause

@@ -1,8 +1,8 @@
 #Fur
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
-#Last edited September 1, 2013 at 19:38
-version=313
+#Last edited September 5, 2013 at 22:18
+version=317
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
@@ -96,10 +96,10 @@ def mainmenu():
 	wait_opt=True
 	while not_chosen:
 		output('')
-		choice = getInput.choice(output('title', r=1),[output('start', r=1),output('load', r=1),output('options.pyp', r=1),output('quit', r=1)])#, window=True)
+		choice = getInput.choice(output('title', r=1),[output('start', r=1),output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
 		output('')
-		if choice==1: not_chosen=False
-		elif choice==2:
+		if choice==output('start', r=1): not_chosen=False
+		elif choice==output('load', r=1):
 			getInput.alert(output('broken3', r=1))
 			continue
 			i = load()
@@ -110,7 +110,7 @@ def mainmenu():
 			wait_opt = True
 			while wait_opt:
 				choice_opt = getInput.choice(output('title', r=1),[output('scroll', r=1, addon=scrollspeed),output('annoy', r=1),output('beta', r=1),output('lang', r=1),output('back', r=1)])
-				if choice_opt == 1:
+				if choice_opt == output('scroll', r=1, addon=scrollspeed):
 					if scrollspeed==output('slow', r=1):
 						scrollspeed=output('med', r=1)
 						scroll=0.03
@@ -120,7 +120,7 @@ def mainmenu():
 					else:
 						scrollspeed=output('fast', r=1)
 						scroll=0.05
-				elif choice_opt==2:
+				elif choice_opt==output('annoy'):
 					getInput.alert(output('broken3', r=1))
 					continue
 					if not annoy:
@@ -129,21 +129,21 @@ def mainmenu():
 					else:
 						getInput.alert(output('annoyoff', r=1))
 						annoy = False
-				elif choice_opt==3:
+				elif choice_opt==output('beta', r=1):
 					if not devplayer:
 						getInput.alert(output('betaon', r=1))
 						devplayer = True
 					else:
 						getInput.alert(output('betaoff', r=1))
 						devplayer = False
-				elif choice_opt == 4: language()
-				elif choice_opt == 0 or choice_opt == 5:
+				elif choice_opt == output('lang', r=1): language()
+				elif choice_opt == 0:
 					with open('options.pyp', 'wb') as handle:
 						pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
 					wait_opt=False
-				else: output('invalidinput')
-		elif choice==0 or choice==4: quit(output('quitmsg', r=1), nosave=True)
-		else: output('invalidinput')
+				else: output('inputerror')
+		elif choice==0: quit(output('quitmsg', r=1), nosave=True)
+		else: output('inputerror')
 
 #When starting the game, program must ask if the player is a boy or girl.
 def start():
@@ -151,11 +151,11 @@ def start():
 	waiting=True
 	while waiting:
 		temp = getInput.choice(output('setup1', r=1), [output('boy', r=1), output('girl', r=1)])
-		if temp == 1:
+		if temp == output('boy', r=1):
 			gender=output('boy', r=1, modifier="lower")
 			frnd_gender=output('girl', r=1, modifier="lower")
 			frnd_gndrpn=output('she', r=1)
-		elif temp == 2:
+		elif temp == output('girl', r=1):
 			gender=output('girl', r=1, modifier="lower")
 			frnd_gender=output('boy', r=1, modifier="lower")
 			frnd_gndrpn=output('he', r=1)
@@ -186,11 +186,13 @@ def start():
 	time.sleep(2)
 	while i != 3:
 		i += 1
-		output(str(i), dict=False)
+		output(str(i)+"...", dict=False, newline=False)
 		time.sleep(1)
+	output('')
 	output('setup5')
 	time.sleep(2)
 	output('setup6')
+	time.sleep(3)
 	choice = getInput.choice(output('setup7', r=1), species)-1
 	if choice == -1: quit(output('quitmsg', r=1), nosave=True)
 	player_species = species[choice]
