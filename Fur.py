@@ -1,8 +1,8 @@
 #Fur
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
-#Last edited September 5, 2013 at 22:18
-version=317
+#Last edited September 6, 2013 at 19:18
+version=318
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
@@ -193,7 +193,7 @@ def start():
 	time.sleep(2)
 	output('setup6')
 	time.sleep(3)
-	choice = getInput.choice(output('setup7', r=1), species)-1
+	choice = getInput.choice(output('setup7', r=1), species)
 	if choice == -1: quit(output('quitmsg', r=1), nosave=True)
 	player_species = species[choice]
 	output('setup8', addon=(player_species,player_species))
