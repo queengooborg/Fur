@@ -1,8 +1,8 @@
 #Fur
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
-#Last edited September 6, 2013 at 19:31
-version=320
+#Last edited September 8, 2013 at 11:12
+version=321
 officialversion=0.1
 langversneeded=0.1
 #Dependencies:
@@ -235,7 +235,7 @@ def part1():
 	if player_species == output('fox', r=1): temp = output('foxdesc', r=1)
 	elif player_species == output('dragon', r=1): temp = output('dragondesc', r=1)
 	else:
-		temp = output('p1m18', r=1, addon=frnd_gender)
+		temp = output('p1m18', r=1, addon=frnd_gender)+'  '
 		if player_species == output('wolf', r=1): temp += output('wolfdesc', r=1)
 		elif player_species == output('cat', r=1): temp += output('catdesc', r=1)
 		elif player_species == output('bird', r=1): temp += output('birddesc', r=1)
@@ -260,11 +260,12 @@ def part1():
 	gameplay('part1')
 
 def gameplay(map):
-	global loc, p1MainRoom, p1RoomTwo, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
+	global loc, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
 	playing=True
 	#quit(output('broken4', r=1))
 	if ios: maploc = map+'.level'
 	else: maploc = 'levels/'+map+'.level'
+	quit("ERROR: Known Issue, Parselevel is broken")
 	with open(maploc, 'rb') as mapfile: mapdata = parselevel(mapfile)
 	output('gamestart')
 	playing=True

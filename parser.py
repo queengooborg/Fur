@@ -90,7 +90,7 @@ def parselevel(level):
 	if not line1: raise SyntaxError('Level name and size not on first line.')
 	levelname = line1.group(1)
 	levelsize = line1.group(2,3)
-	output('Level metadata parsed.  Level is named %s, %s pixels high, and %s pixels wide' %(levelname, levelsize[0], levelsize[1]))
+	output('Level metadata parsed.  Level is named %s, %s tiles high, and %s tiles wide' %(levelname, levelsize[0], levelsize[1]))
 	
 	#Check and parse dialogue
 	output('Parsing dialogue...')
