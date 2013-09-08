@@ -1,6 +1,6 @@
 #Fur
 #Text-based RPG by Dark Tailed
-#Created May 10, 2013 at 15:14 
+#Created May 10, 2013 at 15:14
 #Last edited September 7, 2013 at 22:48
 version=319
 langversneeded=0.1
@@ -193,7 +193,6 @@ def start():
 	output('setup8', addon=(player_species,player_species), s=4)
 	output('')
 	part1()
-	
 
 #part 1 init
 def part1():
