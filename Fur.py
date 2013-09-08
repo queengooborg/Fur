@@ -1,8 +1,8 @@
 #Fur
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
-#Last edited September 5, 2013 at 22:18
-version=317
+#Last edited September 7, 2013 at 22:48
+version=319
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
@@ -92,13 +92,11 @@ def mainmenu():
 	else: temp = output('ok', r=1)
 	getInput.alert(output('broken1', r=1, addon=temp))
 	#print available choices and wait for the user to pick a valid choice
-	not_chosen=True
-	wait_opt=True
-	while not_chosen:
+	while True:
 		output('')
 		choice = getInput.choice(output('title', r=1),[output('start', r=1),output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
 		output('')
-		if choice==output('start', r=1): not_chosen=False
+		if choice==output('start', r=1): start()
 		elif choice==output('load', r=1):
 			getInput.alert(output('broken3', r=1))
 			continue
@@ -181,27 +179,25 @@ def start():
 						waiting = False
 					else: output('inputerror')
 			else: output('inputerror')
-	output('setup4', addon=(player_name, player_last))
+	output('setup4', addon=(player_name, player_last), s=2)
 	i = 0
-	time.sleep(2)
 	while i != 3:
 		i += 1
 		output(str(i)+"...", dict=False, newline=False)
 		time.sleep(1)
 	output('')
-	output('setup5')
-	time.sleep(2)
-	output('setup6')
-	time.sleep(3)
-	choice = getInput.choice(output('setup7', r=1), species)-1
-	if choice == -1: quit(output('quitmsg', r=1), nosave=True)
-	player_species = species[choice]
-	output('setup8', addon=(player_species,player_species))
-	time.sleep(4)
+	output('setup5', s=2)
+	output('setup6', s=3)
+	player_species = getInput.choice(output('setup7', r=1), species)
+	if player_species == 1: quit(output('quitmsg', r=1), nosave=True)
+	output('setup8', addon=(player_species,player_species), s=4)
+	output('')
+	part1()
+	
 
 #part 1 init
 def part1():
-	global map,gender,player_name,player_last,frnd_gender,frnd_nane,frnd_last,devplayer,player,friend
+	global gender,player_name,player_last,frnd_gender,frnd_nane,frnd_last,devplayer,player,friend
 	playing = True
 	output('p1m1', s=2)
 	output('p1m2', s=2)
@@ -212,7 +208,7 @@ def part1():
 	output('p1m7', s=3)
 	if frnd_gndrpn == output('he', r=1): temp = output('he', r=1, modifier='title')
 	else: temp = output('she', r=1, modifier='title')
-	if frnd_gender == output('girl', r=1): temp2 = output('her', r=1)
+	if frnd_gender == output('girl', r=1, modifier='lower'): temp2 = output('her', r=1)
 	else: temp2 = output('his', r=1)
 	output('p1m8', addon=(frnd_gender, temp, temp2, temp2), s=0.5)
 	output('p1m9', s=0.5)
@@ -221,7 +217,8 @@ def part1():
 	waiting = True
 	title = output('setup9', r=1, addon=(frnd_gndrpn, frnd_gender))
 	while waiting:
-		frnd_name=getInput.text()
+		frnd_name=getInput.text(output('setup9', r=1, addon=(frnd_gndrpn,frnd_gender)))
+		if frnd_name == None or frnd_name == 0: quit(output('nofriendnameerror', r=1))
 		frnd_name = frnd_name.title()
 		i = False
 		if frnd_name: waiting = False
@@ -260,13 +257,12 @@ def part1():
 	output('p1title', s=2)
 	color('reset')
 	output('')
-	map = 'part1'
-	gameplay()
+	gameplay('part1')
 
-def gameplay():
-	global loc, p1MainRoom, p1RoomTwo, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, map, ios
+def gameplay(map):
+	global loc, p1MainRoom, p1RoomTwo, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
 	playing=True
-	quit(output('broken4', r=1))
+	#quit(output('broken4', r=1))
 	if ios: maploc = map+'.level'
 	else: maploc = 'levels/'+map+'.level'
 	with open(maploc, 'rb') as mapfile: mapdata = parselevel(mapfile)
@@ -324,8 +320,6 @@ def init():
 		elif choice == 2: pc = 'iPad'
 		else: quit(output('iosquit', r=1), nosave=True)
 
-	mainmenu()
-
 	if len(sys.argv) > 1:
 		arg = sys.argv[1:]
 		if "nostory" in arg:
@@ -334,8 +328,7 @@ def init():
 		elif "betatester" in arg: devplayer = True
 		elif "annoy" in arg: annoy = True
 
-	start()
-	part1()
+	mainmenu()
 
 try: init()
 except SystemExit: pass
