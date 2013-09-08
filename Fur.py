@@ -1,8 +1,9 @@
 #Fur
 #Text-based RPG by Dark Tailed
-#Created May 10, 2013 at 15:14
-#Last edited September 7, 2013 at 22:48
-version=319
+#Created May 10, 2013 at 15:14 
+#Last edited September 6, 2013 at 19:31
+version=320
+officialversion=0.1
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
