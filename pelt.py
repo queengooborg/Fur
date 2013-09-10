@@ -253,11 +253,8 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 
 #define what a room is
 class Room(object):
-	rooms={}
-	
 	def __init__(self, name, items, doors):
 		self.name = name
-		self.rooms[name] = self
 		self.doors = doors
 		self.items = items
 	
@@ -270,9 +267,14 @@ class Room(object):
 			Trapdoor to "Chest Room" 15 from Left 20 from Bottom locked with "Wooden Key" (Hidden)
 		Finish Room'''
 		
-		lines = text.split('\n')
+		if type(text) == str: lines = text.split('\n')
+		elif type(text) == list: lines = text
+		else: lines = []
+		print lines
 		assert(lines[0].startswith('Room'))
 		name = re.search('called "\([a-zA-Z ]*\)"')
+		items = None
+		doors = None
 		
 		return cls(name, items, doors)
 	

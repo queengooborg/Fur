@@ -10,7 +10,8 @@
 	%End Choice%
 Finish Dialogue]
 
-[Room called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
+[Room is:
+	Called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
     <To make a Door or Trapdoor> {Door/Trapdoor} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
     <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
 Finish Room]
@@ -20,53 +21,62 @@ Level is "Part 1: The Awakening" sized 40x50
 Dialogue is:
 Finish Dialogue
 
-Room called "Main Room" sized 17x10 placed A20x27:
+Room is:
+	Called "Main Room" sized 17x10 placed A20x27
 	Door to "Balcony" on Top 1 from Left
 	Door to "Hallway" on Top 2 from Right locked with "Rusty Key"
 	Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"
 	Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)
 Finish Room
 
-Room called "Balcony" sized 8x3 placed A13x23:
+Room is:
+	Called "Balcony" sized 8x3 placed A13x23
 	Door to "Main Room" on Bottom 2 from Right
 	Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)
 Finish Room
 
-Room called "Hallway" sized 4x14 placed A32x13:
+Room is:
+	Called "Hallway" sized 4x14 placed A32x13
 	Door to "Main Room" on Bottom 1 from Left
 	Door to "Garden" on Left 0 from Top locked with "Gold Key" (Hidden)
 	Chest placed 0 from Right 0 from Top facing Bottom with (Silver Key)
 Finish Room
 
-Room called "Garden" sized 26x20 placed A6x3:
+Room is:
+	Called "Garden" sized 26x20 placed A6x3
 	Door to "Hallway" on Right 6 from Bottom
 	Door to Finish on Left 8 from Top locked with "Grass Circle" (Hidden)
 	Chest placed 6 from Left 1 from Bottom with (Fire Circle, $500)
 Finish Room
 
-Room called "Play Room" sized 9x10 placed A28x38:
+Room is:
+	Called "Play Room" sized 9x10 placed A28x38
 	Door to "Main Room" on Top 4 from Right
 	Door to "Bedroom" on Left 3 from Bottom
 	Enemy 2 from Top 0 from Left
 Finish Room
 
-Room called "Bedroom" sized 8x6 placed A20x42:
+Room is:
+	Called "Bedroom" sized 8x6 placed A20x42
 	Door to "Play Room" on Right 0 from Top
 	Door to "Bathroom" on Top 3 from Left
 	Enemy 0 from Bottom 0 from Left (Asleep)
 Finish Room
 
-Room called "Bathroom" sized 8x5 placed A20x37:
+Room is:
+	Called "Bathroom" sized 8x5 placed A20x37
 	Door to "Bedroom" on Bottom 3 from Left
 	Door to "Small Storage Room" on Left 1 from Top
 Finish Room
 
-Room called "Small Storage Room" sized 5x5 placed A15x37:
+Room is:
+	Called "Small Storage Room" sized 5x5 placed A15x37
 	Door to "Bathroom" on Right 1 from Top
 	Chest placed 0 from Bottom 0 from Right facing Left with (Gold Key, $100)
 Finish Room
 
-Room called "Chest Room" sized 14x9 placed B1x1:
+Room is:
+	Called "Chest Room" sized 14x9 placed B1x1
 	Trapdoor to "Main Room" 0 from Top 0 from Right
 	Chest 0 from Left 0 from Bottom with (Grass Circle, $500)
 Finish Room
