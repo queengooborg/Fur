@@ -105,7 +105,7 @@ def mainmenu():
 			if i and devplayer: gameplay()
 			elif not i: continue
 			elif not devplayer: quit(output('broken4', r=1), nosave=True)
-		elif choice==3:
+		elif choice==output('options', r=1):
 			wait_opt = True
 			while wait_opt:
 				choice_opt = getInput.choice(output('title', r=1),[output('scroll', r=1, addon=scrollspeed),output('annoy', r=1),output('beta', r=1),output('lang', r=1),output('back', r=1)])
