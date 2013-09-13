@@ -260,19 +260,31 @@ class Room(object):
 	
 	@classmethod
 	def fromText(cls, text):
-		'''Room called "Main Room" sized 532x289 placed A520x357:
-			Door to "Balcony" on Top 10 from Left
-			Door to "Hallway" on Top 60 from Right
-			Door to "Play Room" on Bottom 20 from Right
-			Trapdoor to "Chest Room" 15 from Left 20 from Bottom locked with "Wooden Key" (Hidden)
+		'''Room is:
+			Called "Main Room" sized 17x10 placed A20x27
+			Door to "Balcony" on Top 1 from Left
+			Door to "Hallway" on Top 2 from Right locked with "Rusty Key"
+			Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"
+			Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)
 		Finish Room'''
 		
 		if type(text) == str: lines = text.split('\n')
 		elif type(text) == list: lines = text
 		else: lines = []
 		print lines
-		assert(lines[0].startswith('Room'))
-		name = re.search('called "\([a-zA-Z ]*\)"')
+		meta = lines[0]
+		
+		xlines = ['Called "Main Room" sized 17x10 placed A20x27',
+		'Door to "Balcony" on Top 1 from Left',
+		'Door to "Hallway" on Top 2 from Right locked with "Rusty Key"',
+		'Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"',
+		'Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)']
+		
+		metasplit = re.search('Called "([^"]+)" sized (\d+)x(\d+) placed ([A-Z])(\d+)x(\d+)')
+		name = metasplit.group(1)
+		size = metasplit.group(2,3)
+		place = metasplit.group(4,5,6)
+		print name, size, place
 		items = None
 		doors = None
 		
