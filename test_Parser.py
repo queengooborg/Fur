@@ -38,12 +38,25 @@ class ParserTest(unittest.TestCase):
 			Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"
 			Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)
 		Finish Room
+		
+		Room is:
+			Called "Balcony" sized 8x3 placed A13x23
+			Door to "Main Room" on Bottom 2 from Right
+			Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)
+		Finish Room
+
+		Room is:
+			Called "Hallway" sized 4x14 placed A32x13
+			Door to "Main Room" on Bottom 1 from Left
+			Door to "Garden" on Left 0 from Top locked with "Gold Key" (Hidden)
+			Chest placed 0 from Right 0 from Top facing Bottom with (Silver Key)
+		Finish Room
 		"""
 		
 		l = parser.Level.fromText(level)
 		self.assertEqual(l.name, "Whatever the Heck")
 		self.assertEqual(l.size, (2,3))
-		print rooms
+		print l.rooms
 	
 if __name__ == '__main__':
 	unittest.main()

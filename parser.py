@@ -92,7 +92,6 @@ class Level(object):
 
 def preprocess(data):
 	#To begin, remove comments
-	print('Removing comments...')
 	nocommentdata = ''
 	comment=False
 	for c in data:
@@ -102,23 +101,17 @@ def preprocess(data):
 			comment=False
 		elif not comment:
 			nocommentdata += c
-
-	print('Comments removed')
-	sleep(0.2)
 	
 	#Then, collapse all whitespace
 	clean1data = re.sub('\n[ \t]+','\n',nocommentdata)
 	cleandata = re.sub('\r','',clean1data)
 
 	#Finally, remove all blank lines
-	print('Removing blank lines...')
 	listdata = cleandata.split('\n')
 	temp = []
 	for line in listdata:
 		if line:
 			temp.append(line)
-	print('Blank lines removed')
-	sleep(0.2)
 	
 	return temp
 

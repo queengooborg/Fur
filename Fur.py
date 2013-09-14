@@ -149,7 +149,7 @@ def start():
 	global gender, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species
 	waiting=True
 	while waiting:
-		temp = getInput.choice(output('setup1', r=1), [output('boy', r=1), output('girl', r=1)])
+		temp = getInput.choice(output('setupgndr', r=1), [output('boy', r=1), output('girl', r=1)])
 		if temp == output('boy', r=1):
 			gender=output('boy', r=1, modifier="lower")
 			frnd_gender=output('girl', r=1, modifier="lower")
@@ -160,9 +160,11 @@ def start():
 			frnd_gndrpn=output('he', r=1)
 		else: quit(output('quitmsg', r=1), nosave=True)
 		waiting=False
+	player_species = getInput.choice(output('setuprace', r=1), species)
+	if player_species == 1: quit(output('quitmsg', r=1), nosave=True)
 	waiting = True
 	while waiting:
-		temp = getInput.text(output('setup2', r=1))
+		temp = getInput.text(output('setupname', r=1))
 		temp = temp.title().split(' ')
 		try:
 			player_name = temp[0]
@@ -172,7 +174,7 @@ def start():
 			if temp:
 				temp = temp[0]
 				while waiting:
-					temp2 = getInput.text(output('setup3', r=1, addon=temp))
+					temp2 = getInput.text(output('setuplast', r=1, addon=temp))
 					temp2 = temp2.title()
 					if temp2:
 						player_name = temp
@@ -180,18 +182,14 @@ def start():
 						waiting = False
 					else: output('inputerror')
 			else: output('inputerror')
-	output('setup4', addon=(player_name, player_last), s=2)
+	output('setupeyeclose', addon=(player_name, player_last), s=2)
 	i = 0
 	while i != 3:
 		i += 1
 		output(str(i)+"...", dict=False, newline=False)
 		time.sleep(1)
 	output('')
-	output('setup5', s=2)
-	output('setup6', s=3)
-	player_species = getInput.choice(output('setup7', r=1), species)
-	if player_species == 1: quit(output('quitmsg', r=1), nosave=True)
-	output('setup8', addon=(player_species,player_species), s=4)
+	output('setupeyeopen', addon=(player_species,player_species), s=4)
 	output('')
 	part1()
 

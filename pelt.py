@@ -18,18 +18,6 @@ def sync(vers, debugmode, title):
 	debug = debugmode
 	gametitle = title
 
-class Door(object):
-	def __init__(self, direction, room, key=None):
-		self.direction = direction
-		self.room = room
-		if key:
-			self.locked = True
-			self.key = key
-		else: self.locked = False
-
-	def __str__(self):
-		return output('doordesc', r=1, addon=[self.direction,self.room])
-
 #define the attributes of an item
 class Item(object):
 
@@ -251,12 +239,29 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 	elif r == 1: return msg
 	time.sleep(s)
 
+class Door(object):
+	def __init__(self, direction, room, key=None):
+		self.direction = direction
+		self.room = room
+		if key:
+			self.locked = True
+			self.key = key
+		else: self.locked = False
+
+	def __str__(self):
+		return output('doordesc', r=1, addon=[self.direction,self.room])
+
 #define what a room is
 class Room(object):
-	def __init__(self, name, items, doors):
+	def __init__(self, name, size, place, items, doors):
 		self.name = name
+		self.size = size
+		self.place = place
 		self.doors = doors
 		self.items = items
+	
+	def __str__(self):
+		return self.name
 	
 	@classmethod
 	def fromText(cls, text):
@@ -271,24 +276,40 @@ class Room(object):
 		if type(text) == str: lines = text.split('\n')
 		elif type(text) == list: lines = text
 		else: lines = []
-		print lines
 		meta = lines[0]
 		
-		xlines = ['Called "Main Room" sized 17x10 placed A20x27',
-		'Door to "Balcony" on Top 1 from Left',
+		xlines = ['Door to "Balcony" on Top 1 from Left',
 		'Door to "Hallway" on Top 2 from Right locked with "Rusty Key"',
 		'Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"',
 		'Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)']
 		
-		metasplit = re.search('Called "([^"]+)" sized (\d+)x(\d+) placed ([A-Z])(\d+)x(\d+)')
+		metasplit = re.search('Called "([^"]+)" sized (\d+)x(\d+) placed ([A-Z])(\d+)x(\d+)', meta)
 		name = metasplit.group(1)
 		size = metasplit.group(2,3)
 		place = metasplit.group(4,5,6)
-		print name, size, place
-		items = None
-		doors = None
+		size = (int(size[0]), int(size[1]))
+		place = (place[0], int(place[1]), int(place[2]))
+		lines = lines[1:]
 		
-		return cls(name, items, doors)
+		items = []
+		doors = []
+		
+		for element in lines:
+			if element[0:4] == "Door":
+				match = re.search('Door to "([^"]+)" on ([a-zA-Z]+) (\d+) from ([a-zA-Z])', element)
+				room = match.group(1)
+				
+				doors.append(element)
+			
+			elif element[0:8] == "Trapdoor":
+				doors.append(element)
+			
+			elif element[0:5] == "Chest":
+				items.append(element)
+			
+			print element
+		
+		return cls(name, size, place, items, doors)
 	
 	def findItem(self, name):
 		for i in self.items:
