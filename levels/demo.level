@@ -25,6 +25,23 @@ Dialogue is:
 	%End Choice%
 Finish Dialogue
 
+[To make an Enemy:
+
+Enemy type:
+	#Name {Enemy Name}
+	#Attack {Attack}
+	#Defense {Defense}
+	#Element {Element}
+Finish Enemy
+]
+
+Enemy type:
+	#Name Demo Enemy
+	#Attack 50
+	#Defense 10
+	#Element Normal
+Finish Enemy
+
 [To make a Room:
  
 Room is:

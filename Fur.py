@@ -95,9 +95,10 @@ def mainmenu():
 	#print available choices and wait for the user to pick a valid choice
 	while True:
 		output('')
-		choice = getInput.choice(output('title', r=1),[output('start', r=1),output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
+		choice = getInput.choice(output('title', r=1),[output('start', r=1), 'Developer: Skip Dialogue', output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
 		output('')
 		if choice==output('start', r=1): start()
+		elif choice=='Developer: Skip Dialogue': gameplay('part1')
 		elif choice==output('load', r=1):
 			getInput.alert(output('broken3', r=1))
 			continue
@@ -189,7 +190,7 @@ def start():
 		output(str(i)+"...", dict=False, newline=False)
 		time.sleep(1)
 	output('')
-	output('setupeyeopen', addon=(player_species,player_species), s=4)
+	output('setupeyeopen', addon=(player_species), s=4)
 	output('')
 	part1()
 
@@ -263,12 +264,13 @@ def gameplay(map):
 	#quit(output('broken4', r=1))
 	if ios: maploc = map+'.level'
 	else: maploc = 'levels/'+map+'.level'
-	quit("ERROR: Known Issue, Parselevel is broken")
-	with open(maploc, 'rb') as mapfile: mapdata = parselevel(mapfile)
+	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
 	output('gamestart')
 	playing=True
 	while playing:
 		output("")
+		location = level.rooms[0]
+		location.describe()
 		cmnd = getCommand(getInput.text(output('gameaction', r=1)))
 		if not cmnd:
 			output('gameinputerror')
@@ -331,4 +333,3 @@ def init():
 
 try: init()
 except SystemExit: pass
-except: easygui.exceptionbox()

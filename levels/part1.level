@@ -21,6 +21,13 @@ Level is "Part 1: The Awakening" sized 40x50
 Dialogue is:
 Finish Dialogue
 
+Enemy type:
+	#Name Slime
+	#Attack 10
+	#Defense 5
+	#Element Normal
+Finish Enemy
+
 Room is:
 	Called "Main Room" sized 17x10 placed A20x27
 	Door to "Balcony" on Top 1 from Left
@@ -53,7 +60,7 @@ Room is:
 	Called "Play Room" sized 9x10 placed A28x38
 	Door to "Main Room" on Top 4 from Right
 	Door to "Bedroom" on Left 3 from Bottom
-	Enemy 2 from Top 0 from Left
+	Enemy 2 from Top 0 from Left Type 1
 Finish Room
 
 Room is:

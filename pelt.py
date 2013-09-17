@@ -239,9 +239,127 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 	elif r == 1: return msg
 	time.sleep(s)
 
+#PARSER
+def getblocks(start, end, data, max):
+	i = 0
+	blocks = []
+	blockopen = False
+	for line in data:
+		if line == start:
+			istart = i
+			if blockopen: raise SyntaxError('New block started before previous block closed')
+			blockopen = True
+		if line == end:
+			iend = i
+			if not blockopen: raise SyntaxError('A block was closed before it began')
+			blockopen = False
+			blocks.append(data[istart+1:iend])
+			if max != 0 and len(blocks) >= max: return blocks
+		i += 1
+	return blocks
+
+def preprocess(data):
+	#To begin, remove comments
+	nocommentdata = ''
+	comment=False
+	for c in data:
+		if c == '[':
+			comment=True
+		elif c == ']':
+			comment=False
+		elif not comment:
+			nocommentdata += c
+	
+	#Then, collapse all whitespace
+	clean1data = re.sub('\n[ \t]+','\n',nocommentdata)
+	cleandata = re.sub('\r','',clean1data)
+
+	#Finally, remove all blank lines
+	listdata = cleandata.split('\n')
+	temp = []
+	for line in listdata:
+		if line:
+			temp.append(line)
+	
+	return temp
+
+def parselevel(leveldata):
+	level = leveldata.read()
+	l = Level.fromText(level)
+	return l
+
+class DialogueSpeech(object):
+	def __init__(self, speaker, text):
+		self.speaker = speaker
+		self.text = text
+	
+	def __str__(self):
+		return self.speaker+": "+self.text
+
+class Dialogue(object):
+	#response = getblocks('Dialogue is:', 'End Dialogue', data, 1)
+	'''
+		%Player% {Player's Dialogue}
+		%Friend1% {Friend1's Dialogue}
+		%Action% {The Action, remember you can put %Player% and %Friend1% in the action}
+		%Choice% {Question}
+			${Choice 1}$ {Action or Dialogue} $
+			${Choice 2}$ {Action or Dialogue} $
+		%End Choice%
+	'''
+
+	def __init__(self, dialogue):
+		self.raw = dialogue
+		for line in self.raw:
+			# XXX get what's between the % symbols
+			if thing == 'Choice':
+				"""this is complicated"""
+			elif thing == 'Action':
+				DialogueAction(other)
+			else:
+				DialogueSpeech(thing, other)
+
+class Level(object):
+	def __init__(self, name, size, dialogue=None, rooms=[]):
+		self.name = name
+		self.size = size
+		self.dialogue = dialogue
+		self.rooms = rooms
+	
+	@classmethod
+	def fromText(cls, text):
+		lines = preprocess(text)
+		
+		level = lines[0]
+		
+		#Check and parse level name and size
+		print('Parsing level metadata...')
+		levelmeta = re.match('Level is "([^"]+)" sized (\d+)x(\d+)', level)
+		if not levelmeta: raise SyntaxError('Level name and size not on first line.  It was found as {%s}.' %level)
+		name = levelmeta.group(1)
+		strsize = levelmeta.group(2,3)
+		size = (int(strsize[0]), int(strsize[1]))
+		print('Level metadata parsed.  Level is named %s, %s tiles high, and %s tiles wide' %(name, size[0], size[1]))
+		
+		blocks = lines[1:]
+		dialogue = getblocks('Dialogue is:', 'Finish Dialogue', blocks, 1)
+		d = None #Dialogue.fromLines(dialogue)
+		rooms = getblocks('Room is:', 'Finish Room', blocks, 0)
+		r = []
+		for room in rooms:
+			rm = Room.fromText(room)
+			r.append(rm)
+		
+		return cls(name, size, d, r)
+	
+	def addRoom(self, room):
+		self.rooms.append(room)
+
 class Door(object):
-	def __init__(self, direction, room, key=None):
-		self.direction = direction
+	def __init__(self, placed, room, key=None, trapdoor=False):
+		self.trapdoor = trapdoor
+		if self.trapdoor: self.placed = {'dist1': placed[0], 'fromwall1': placed[1], 'dist2': placed[2], 'fromwall2': placed[3]}
+		else: self.placed = {'onwall': placed[0], 'distance': placed[1], 'fromwall': placed[2]}
 		self.room = room
 		if key:
 			self.locked = True
@@ -295,17 +413,50 @@ class Room(object):
 		doors = []
 		
 		for element in lines:
+			#Door
 			if element[0:4] == "Door":
-				match = re.search('Door to "([^"]+)" on ([a-zA-Z]+) (\d+) from ([a-zA-Z])', element)
+				"""Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"""
+				match = re.search('Door to "([^"]+)" on ([a-zA-Z]+) (\d+) from ([a-zA-Z]+)', element)
 				room = match.group(1)
+				placed = match.group(2, 3, 4)
+				keymatch = re.search('locked with "([a-zA-Z]+)"', element)
+				if keymatch: key = keymatch.group(1)
+				else: key = None
+				door = Door(placed, room, key)
 				
-				doors.append(element)
+				doors.append(door)
 			
+			#Trapdoor (same mechanic as door)
 			elif element[0:8] == "Trapdoor":
-				doors.append(element)
+				"""Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)"""
+				match = re.search('Trapdoor to "([^"]+)" (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+)', element)
+				room = match.group(1)
+				placed = match.group(2, 3, 4, 5)
+				keymatch = re.search('locked with "([a-zA-Z]+)"', element)
+				if keymatch: key = keymatch.group(1)
+				else: key = None
+				door = Door(placed, room, key, trapdoor=True)
+				
+				doors.append(door)
 			
 			elif element[0:5] == "Chest":
-				items.append(element)
+				"""Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)"""
+				match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with \(([^)]+)\)', element)
+				placed = match.group(1, 2, 3, 4, 5)
+				itemsraw = match.group(6)
+				
+				itemsraw = itemsraw.split(', ')
+				for item in itemsraw:
+					items.append(item)
+				
+				items.append(items)
+			
+			elif element[0:5] == 'Enemy':
+				"""Enemy 2 from Top 0 from Left Type 1"""
+				match = re.search('Enemy (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) Type (\d+)', element)
+				placed = match.group(1, 2, 3, 4)
+				type = match.group(5)
+				pass
 			
 			print element
 		
@@ -331,6 +482,7 @@ class Room(object):
 				if not d.locked: return d.room
 				else: return "locked"
 		return None
+#PARSER
 
 #Save and load functions
 def saveload(save, overwarning, overaddon):
