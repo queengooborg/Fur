@@ -46,14 +46,14 @@ Room is:
 	Called "Hallway" sized 4x14 placed A32x13
 	Door to "Main Room" on Bottom 1 from Left
 	Door to "Garden" on Left 0 from Top locked with "Gold Key" (Hidden)
-	Chest placed 0 from Right 0 from Top facing Bottom with (Silver Key)
+	Chest placed 0 from Right 0 from Top facing Bottom with "Silver Key"
 Finish Room
 
 Room is:
 	Called "Garden" sized 26x20 placed A6x3
 	Door to "Hallway" on Right 6 from Bottom
-	Door to Finish on Left 8 from Top locked with "Grass Circle" (Hidden)
-	Chest placed 6 from Left 1 from Bottom with (Fire Circle, $500)
+	Door to "Finish" on Left 8 from Top locked with "Grass Circle" (Hidden)
+	Chest placed 6 from Left 1 from Bottom with "Fire Circle, $500"
 Finish Room
 
 Room is:
@@ -79,11 +79,11 @@ Finish Room
 Room is:
 	Called "Small Storage Room" sized 5x5 placed A15x37
 	Door to "Bathroom" on Right 1 from Top
-	Chest placed 0 from Bottom 0 from Right facing Left with (Gold Key, $100)
+	Chest placed 0 from Bottom 0 from Right facing Left with "Gold Key, $100"
 Finish Room
 
 Room is:
 	Called "Chest Room" sized 14x9 placed B1x1
 	Trapdoor to "Main Room" 0 from Top 0 from Right
-	Chest 0 from Left 0 from Bottom with (Grass Circle, $500)
+	Chest 0 from Left 0 from Bottom with "Grass Circle, $500"
 Finish Room

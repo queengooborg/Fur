@@ -358,13 +358,19 @@ class Level(object):
 class Door(object):
 	def __init__(self, placed, room, key=None, trapdoor=False):
 		self.trapdoor = trapdoor
-		if self.trapdoor: self.placed = {'dist1': placed[0], 'fromwall1': placed[1], 'dist2': placed[2], 'fromwall2': placed[3]}
+		if self.trapdoor: self.placed = {'dist1': placed[0], 'onwall': placed[1], 'distance': placed[2], 'fromwall': placed[3]}
 		else: self.placed = {'onwall': placed[0], 'distance': placed[1], 'fromwall': placed[2]}
 		self.room = room
 		if key:
 			self.locked = True
 			self.key = key
 		else: self.locked = False
+		for i in [self.placed['onwall'], self.placed['fromwall']]:
+			if i == 'Top': h1 = 'North'
+			elif i == 'Bottom': h1 = 'South'
+			elif i == 'Left': h2 = 'west'
+			elif i == 'Right': h3 = 'east'
+		self.direction = h1+h2
 
 	def __str__(self):
 		return output('doordesc', r=1, addon=[self.direction,self.room])
@@ -417,48 +423,49 @@ class Room(object):
 			if element[0:4] == "Door":
 				"""Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"""
 				match = re.search('Door to "([^"]+)" on ([a-zA-Z]+) (\d+) from ([a-zA-Z]+)', element)
-				room = match.group(1)
-				placed = match.group(2, 3, 4)
-				keymatch = re.search('locked with "([a-zA-Z]+)"', element)
-				if keymatch: key = keymatch.group(1)
-				else: key = None
-				door = Door(placed, room, key)
-				
-				doors.append(door)
+				if match != None:
+					room = match.group(1)
+					placed = match.group(2, 3, 4)
+					keymatch = re.search('locked with "([a-zA-Z]+)"', element)
+					if keymatch: key = keymatch.group(1)
+					else: key = None
+					door = Door(placed, room, key)
+					
+					doors.append(door)
 			
 			#Trapdoor (same mechanic as door)
 			elif element[0:8] == "Trapdoor":
 				"""Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)"""
 				match = re.search('Trapdoor to "([^"]+)" (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+)', element)
-				room = match.group(1)
-				placed = match.group(2, 3, 4, 5)
-				keymatch = re.search('locked with "([a-zA-Z]+)"', element)
-				if keymatch: key = keymatch.group(1)
-				else: key = None
-				door = Door(placed, room, key, trapdoor=True)
-				
-				doors.append(door)
+				if match != None:
+					room = match.group(1)
+					placed = match.group(2, 3, 4, 5)
+					keymatch = re.search('locked with "([a-zA-Z]+)"', element)
+					if keymatch: key = keymatch.group(1)
+					else: key = None
+					door = Door(placed, room, key, trapdoor=True)
+					
+					doors.append(door)
 			
 			elif element[0:5] == "Chest":
 				"""Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)"""
-				match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with \(([^)]+)\)', element)
-				placed = match.group(1, 2, 3, 4, 5)
-				itemsraw = match.group(6)
+				match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with "([^"]+)"', element)
+				if match != None:
+					placed = match.group(1, 2, 3, 4, 5)
+					itemsraw = match.group(6)
+					
+					itemsraw = itemsraw.split(', ')
+					for item in itemsraw: items.append(item)
 				
-				itemsraw = itemsraw.split(', ')
-				for item in itemsraw:
-					items.append(item)
-				
-				items.append(items)
+					items.append(items)
 			
-			elif element[0:5] == 'Enemy':
-				"""Enemy 2 from Top 0 from Left Type 1"""
-				match = re.search('Enemy (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) Type (\d+)', element)
-				placed = match.group(1, 2, 3, 4)
-				type = match.group(5)
-				pass
-			
-			print element
+			#elif element[0:5] == 'Enemy':
+			#	"""Enemy 2 from Top 0 from Left Type 1"""
+			#	match = re.search('Enemy (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) Type (\d+)', element)
+			#	if match != None:
+			#		placed = match.group(1, 2, 3, 4)
+			#		etype = match.group(5)
+			#		pass
 		
 		return cls(name, size, place, items, doors)
 	
@@ -468,12 +475,12 @@ class Room(object):
 		return None
 
 	def describe(self):
-		output(self.name)
+		output(self.name, dict=False)
 		for i in self.items:
 			output('itemhere', addon=i.name)
 			time.sleep(0.1)
 		for d in self.doors:
-			output('doorhere', addon=d.direction)
+			output('doorhere', addon=d.room)
 			time.sleep(0.1)
 
 	def go(self, direction):
