@@ -20,7 +20,6 @@ def sync(vers, debugmode, title):
 
 #define the attributes of an item
 class Item(object):
-
 	def __init__(self, name, description=None):
 		self.name = name
 		self.description = description
@@ -29,6 +28,37 @@ class Item(object):
 		if self.description: output(self.description, dict=False)
 		else: output('itemnormal', addon=self.name)
 
+class Chest(Item):
+	def __init__(self, contents=[], key=None):
+		self.contents = contents
+		self.open = False
+		if not key: self.locked = False
+		else:
+			self.locked = True
+			self.key = key
+		Item.__init__(self, "Chest")
+	
+	def __str__(self):
+		return 'chest'
+	
+	def examine(self):
+		if self.open: output('chestdescopen', addon=self.contents.join(', '))
+		else: output('chestdescclosed')
+	
+	def open(self, inventory):
+		if self.locked:
+			for item in inventory:
+				if item.name == self.key:
+					self.locked = False
+					output('chestunlocked', addon=self.key)
+				else:
+					output('chestlocked')
+					return
+		if self.open: output('chestopenerror')
+		else:
+			self.open = True
+			output('chestopen', addon=self.contents.join(', '))
+	
 #define drink item
 class Drink(Item):
 	def __init__(self, name, description, poison):
@@ -94,13 +124,14 @@ def getCommand(sentence):
 	command couldn't be parsed.
 	'''
 	cmnd = {}
+	if sentence == None: return None
 	words = sentence.lower().split()
 
 	if len(words) == 0: return None
 
 	cmnd['verb'] = words[0].lower()
 
-	if len(words) > 1: cmnd['noun'] = words[1].lower()
+	if len(words) > 1: cmnchesd['noun'] = words[1].lower()
 
 	if len(words) > 2:
 		if words[2] == output('with', r=1) or words[2] == output('using', r=1):
@@ -366,14 +397,14 @@ class Door(object):
 			self.key = key
 		else: self.locked = False
 		for i in [self.placed['onwall'], self.placed['fromwall']]:
-			if i == 'Top': h1 = 'North'
-			elif i == 'Bottom': h1 = 'South'
+			if i == 'Top': h1 = 'north'
+			elif i == 'Bottom': h1 = 'south'
 			elif i == 'Left': h2 = 'west'
-			elif i == 'Right': h3 = 'east'
+			elif i == 'Right': h2 = 'east'
 		self.direction = h1+h2
 
 	def __str__(self):
-		return output('doordesc', r=1, addon=[self.direction,self.room])
+		return output('doordesc', r=1, addon=[self.direction,self.room])	
 
 #define what a room is
 class Room(object):
@@ -441,7 +472,7 @@ class Room(object):
 					room = match.group(1)
 					placed = match.group(2, 3, 4, 5)
 					keymatch = re.search('locked with "([a-zA-Z]+)"', element)
-					if keymatch: key = keymatch.group(1)
+					if keymatch != None: key = keymatch.group(1)
 					else: key = None
 					door = Door(placed, room, key, trapdoor=True)
 					
@@ -449,15 +480,18 @@ class Room(object):
 			
 			elif element[0:5] == "Chest":
 				"""Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)"""
-				match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with "([^"]+)"', element)
+				match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with \(([^"]+)\)', element)
 				if match != None:
 					placed = match.group(1, 2, 3, 4, 5)
 					itemsraw = match.group(6)
 					
 					itemsraw = itemsraw.split(', ')
-					for item in itemsraw: items.append(item)
-				
-					items.append(items)
+					#for item in itemsraw: items.append(item)
+					keymatch = re.search('locked with "([a-zA-Z]+)"', element)
+					if keymatch != None: key = keymatch.group(1)
+					else: key = None
+					
+					items.append(Chest(itemsraw, key))
 			
 			#elif element[0:5] == 'Enemy':
 			#	"""Enemy 2 from Top 0 from Left Type 1"""
@@ -474,14 +508,20 @@ class Room(object):
 			if i.name == name: return i
 		return None
 
-	def describe(self):
-		output(self.name, dict=False)
+	def describe(self, r=False):
+		if r: x = output(self.name, dict=False, r=1) + '\n'
+		else: output(self.name, dict=False)
 		for i in self.items:
-			output('itemhere', addon=i.name)
+			if r: x += output('itemhere', addon=i, r=1)
+			else: output('itemhere', addon=i)
 			time.sleep(0.1)
+			if r: x += '\n'
 		for d in self.doors:
-			output('doorhere', addon=d.room)
+			if r: x += output('doorhere', addon=d.direction, r=1)
+			else: output('doorhere', addon=d.direction)
 			time.sleep(0.1)
+			if r: x += '\n'
+		if r == 1: return x
 
 	def go(self, direction):
 		for d in self.doors:

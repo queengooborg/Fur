@@ -267,15 +267,11 @@ def gameplay(map):
 	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
 	output('gamestart')
 	playing=True
+	location = level.rooms[0]
 	while playing:
 		output("")
-		location = level.rooms[0]
-		location.describe()
-		cmnd = getCommand(getInput.text(output('gameaction', r=1)))
-		if not cmnd:
-			output('gameinputerror')
-			continue
-		if cmnd['verb'] == output('quitcmd', r=1): quit(output('quitmsg', r=1))
+		cmnd = getCommand(getInput.text(location.describe(r=True)+'\n'+output('gameaction', r=1)))
+		if not cmnd or cmnd['verb'] == output('quitcmd', r=1): quit(output('quitmsg', r=1))
 		elif cmnd['verb'] == output('savecmd', r=1):
 			save()
 			continue
@@ -301,6 +297,7 @@ def gameplay(map):
 			elif cmnd['verb'] == output('eatcmd', r=1) and hasattr(item, 'eat'): item.eat()
 			elif cmnd['verb'] == output('drinkcmd', r=1) and hasattr(item, 'drink'): item.drink()
 			elif cmnd['verb'] == output('takecmd', r=1) and hasattr(player, 'take'): player.take(item)
+			elif cmnd['verb'] == output('opencmd', r=1) and hasattr(item, 'open'): item.open()
 			elif not item:
 				if cmnd['verb'] == output('gocmd', r=1):
 					roomname = location.go(noun)
@@ -308,8 +305,11 @@ def gameplay(map):
 					elif roomname == "locked": output('doorlocked')
 					elif roomname == "invalid": output('directionerror')
 					else:
-						location = rooms[roomname]
-						location.describe()
+						i = 0
+						for r in level.rooms:
+							if r.name == roomname: break
+							else: i += 1
+						location = level.rooms[i]
 				else: output('itemerror', addon=noun)
 			else: output('cmderror')
 
