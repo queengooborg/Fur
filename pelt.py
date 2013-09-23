@@ -364,13 +364,13 @@ class Level(object):
 		level = lines[0]
 		
 		#Check and parse level name and size
-		print('Parsing level metadata...')
+		#print('Parsing level metadata...')
 		levelmeta = re.match('Level is "([^"]+)" sized (\d+)x(\d+)', level)
 		if not levelmeta: raise SyntaxError('Level name and size not on first line.  It was found as {%s}.' %level)
 		name = levelmeta.group(1)
 		strsize = levelmeta.group(2,3)
 		size = (int(strsize[0]), int(strsize[1]))
-		print('Level metadata parsed.  Level is named %s, %s tiles high, and %s tiles wide' %(name, size[0], size[1]))
+		#print('Level metadata parsed.  Level is named %s, %s tiles high, and %s tiles wide' %(name, size[0], size[1]))
 		
 		blocks = lines[1:]
 		dialogue = getblocks('Dialogue is:', 'Finish Dialogue', blocks, 1)
@@ -532,11 +532,11 @@ class Room(object):
 #PARSER
 
 #Save and load functions
-def saveload(save, overwarning, overaddon):
+def saveload(save, overwarning=False, overaddon=False):
 	waiting = True
 	while waiting:
 		saves = range(10)
-		saveslist = list[saves]
+		saveslist = list(saves)
 		#path = os.path
 		#os.listdir(path)
 		for s in saves:
@@ -566,9 +566,8 @@ def saveload(save, overwarning, overaddon):
 						handle = pickle.load(handle)
 						if save:
 							while overwait:
-								addon = [file[0], file[1]]
-								for o in overaddon: addon.append(o)
-								overwrite = getInput.choice(output(overwarning, addon=addon, r=1),[output('yes', r=1),output('no', r=1)])
+								addon = [file[0], file[1], file[2]]
+								overwrite = getInput.choice(output('savewarning', addon=addon, r=1),[output('yes', r=1),output('no', r=1)])
 								if overwrite == 1: return response
 								elif overwrite == 2: overwait = False
 								else: output('inputerror')

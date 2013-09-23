@@ -2,8 +2,8 @@
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
 #Last edited September 8, 2013 at 11:12
-version=321
-officialversion=0.1
+version=325
+officialversion="0.2 Alpha"
 langversneeded=0.1
 #Dependencies:
 	#For iPad:
@@ -39,7 +39,7 @@ except: pass
 def quit(msg, nosave=False):
 	global ios, devplayer
 	if nosave: pass
-	else: save()
+	else: pass #save()
 	color('red')
 	if ios and not devplayer: notification.schedule(output('mailto2', r=1), 15, 'Beep', output('mailto1', r=1))
 	if msg: sys.exit(msg)
@@ -252,10 +252,6 @@ def part1():
 	output('p1m26', addon=frnd_name, s=1)
 	output('p1m27', s=5)
 	output('')
-	color('blue')
-	output('p1title', s=2)
-	color('reset')
-	output('')
 	gameplay('part1')
 
 def gameplay(map):
@@ -265,6 +261,9 @@ def gameplay(map):
 	if ios: maploc = map+'.level'
 	else: maploc = 'levels/'+map+'.level'
 	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
+	color('blue')
+	output(level.name, dict=False, s=2)
+	color('reset')
 	output('gamestart')
 	playing=True
 	location = level.rooms[0]
@@ -304,6 +303,7 @@ def gameplay(map):
 					if not roomname: output('doormissing')
 					elif roomname == "locked": output('doorlocked')
 					elif roomname == "invalid": output('directionerror')
+					elif roomname == "Finish": quit('broken4')
 					else:
 						i = 0
 						for r in level.rooms:
