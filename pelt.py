@@ -28,6 +28,14 @@ class Item(object):
 		if self.description: output(self.description, dict=False)
 		else: output('itemnormal', addon=self.name)
 
+#Errors
+class ParseError(ValueError):
+	pass
+	
+class NoFacingError(ParseError):
+	pass
+#/Errors
+
 class Chest(Item):
 	def __init__(self, contents=[], key=None):
 		self.contents = contents
@@ -41,6 +49,36 @@ class Chest(Item):
 	def __str__(self):
 		return 'chest'
 	
+	@classmethod
+	def fromText(cls, text):
+		phrases = {
+			'placed':  "placed (\d+) from (....",
+			'facing': 'facing ...',
+		}
+		for name, regex in phrases.items():
+			if ! match:
+				pass#raise ParseError('Missing %s phrase in "%s"' %(name, text))
+		
+		"""Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)"""
+		match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with \(([^\)]+)\)', text)
+		if match == None:
+			noFacingMatch = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) with \(([^\)]+)\)', text)
+			if match2 == None:
+				match
+				raise ParseError('Invalid syntax for "%s".  There is nothing else we know.' %text)
+			else: raise NoFacingError('Tried to parse "%s", however I don\'t know which way that chest is facing.')
+		
+		placed = match.group(1, 2, 3, 4, 5)
+		itemsraw = match.group(6)
+	
+		itemsraw = itemsraw.split(', ')
+		#for item in itemsraw: items.append(item)
+		keymatch = re.search('locked with "([a-zA-Z]+)"', text)
+		if keymatch != None: key = keymatch.group(1)
+		else: key = None
+		
+		return cls(itemsraw, key)
+
 	def examine(self):
 		if self.open: output('chestdescopen', addon=self.contents.join(', '))
 		else: output('chestdescclosed')
@@ -478,20 +516,7 @@ class Room(object):
 					
 					doors.append(door)
 			
-			elif element[0:5] == "Chest":
-				"""Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)"""
-				match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with \(([^"]+)\)', element)
-				if match != None:
-					placed = match.group(1, 2, 3, 4, 5)
-					itemsraw = match.group(6)
-					
-					itemsraw = itemsraw.split(', ')
-					#for item in itemsraw: items.append(item)
-					keymatch = re.search('locked with "([a-zA-Z]+)"', element)
-					if keymatch != None: key = keymatch.group(1)
-					else: key = None
-					
-					items.append(Chest(itemsraw, key))
+			elif element[0:5] == "Chest": items.append(Chest.fromText(element))
 			
 			#elif element[0:5] == 'Enemy':
 			#	"""Enemy 2 from Top 0 from Left Type 1"""

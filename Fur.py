@@ -2,7 +2,7 @@
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
 #Last edited September 8, 2013 at 11:12
-version=325
+version=328
 officialversion="0.2 Alpha"
 langversneeded=0.1
 #Dependencies:
