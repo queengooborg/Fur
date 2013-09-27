@@ -55,9 +55,9 @@ class Chest(Item):
 			'placed':  "placed (\d+) from (....",
 			'facing': 'facing ...',
 		}
-		for name, regex in phrases.items():
-			if ! match:
-				pass#raise ParseError('Missing %s phrase in "%s"' %(name, text))
+		#for name, regex in phrases.items():
+		#	if not match:
+		#		pass#raise ParseError('Missing %s phrase in "%s"' %(name, text))
 		
 		"""Chest placed 1 from Left 1 from Top facing Bottom with (Rusty Key, $50)"""
 		match = re.search('Chest placed (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) facing ([a-zA-Z]+) with \(([^\)]+)\)', text)

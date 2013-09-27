@@ -2,7 +2,7 @@
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
 #Last edited September 8, 2013 at 11:12
-version=328
+version=329
 officialversion="0.2 Alpha"
 langversneeded=0.1
 #Dependencies:
@@ -111,16 +111,16 @@ def mainmenu():
 			while wait_opt:
 				choice_opt = getInput.choice(output('title', r=1),[output('scroll', r=1, addon=scrollspeed),output('annoy', r=1),output('beta', r=1),output('lang', r=1),output('back', r=1)])
 				if choice_opt == output('scroll', r=1, addon=scrollspeed):
-					if scrollspeed==output('slow', r=1):
-						scrollspeed=output('med', r=1)
+					if scrollspeed == output('slow', r=1):
+						scrollspeed = output('med', r=1)
 						scroll=0.03
-					elif scrollspeed==output('med', r=1):
-						scrollspeed=output('fast', r=1)
+					elif scrollspeed == output('med', r=1):
+						scrollspeed = output('fast', r=1)
 						scroll=0.01
 					else:
-						scrollspeed=output('fast', r=1)
+						scrollspeed = output('fast', r=1)
 						scroll=0.05
-				elif choice_opt==output('annoy'):
+				elif choice_opt == output('annoy', r=1):
 					getInput.alert(output('broken3', r=1))
 					continue
 					if not annoy:
