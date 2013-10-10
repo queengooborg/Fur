@@ -6,14 +6,18 @@ version=329
 officialversion="0.2 Alpha"
 langversneeded=0.1
 #Dependencies:
-	#For iPad:
-	#	Pythonista
-	#For PC:
-	#	Colorama: https://pypi.python.org/pypi/colorama/
-	#	EasyGUI: http://easygui.sourceforge.net/
-	#	PyGame: http://www.pygame.org/
+#	For iPad:
+#		Pythonista
+#	For PC:
+#		Colorama: https://pypi.python.org/pypi/colorama/
+#		EasyGUI: http://easygui.sourceforge.net/
+#		PyGame: http://www.pygame.org/
 
 from pelt import *
+from pelt import _
+
+#from pelt.io.network import output, getInput
+
 sync(version, True, 'Fur')
 
 #initialize variables
@@ -26,10 +30,12 @@ frnd_gender=None
 frnd_gndrpn=None
 frnd_nane=None
 
+print(dir())
+print (pelt._)
 species = ["Wolf","Cat","Dragon","Bear","Fox","Mouse","Bird","Otter"]
 for i in range(len(species)):
 	temp = species[i].lower()
-	species[i] = output(temp, r=1)
+	species[i] = _(temp)
 
 try: console.clear()
 except: pass
@@ -41,7 +47,7 @@ def quit(msg, nosave=False):
 	if nosave: pass
 	else: pass #save()
 	color('red')
-	if ios and not devplayer: notification.schedule(output('mailto2', r=1), 15, 'Beep', output('mailto1', r=1))
+	if ios and not devplayer: notification.schedule(_('mailto2'), 15, 'Beep', _('mailto1'))
 	if msg: sys.exit(msg)
 	else: sys.exit(0)
 
@@ -89,13 +95,13 @@ def mainmenu():
 	output('title')
 	scroll = temp
 	time.sleep(3)
-	if ios: temp = output('cancel', r=1)
-	else: temp = output('ok', r=1)
-	getInput.alert(output('broken1', r=1, addon=temp))
+	if ios: temp = _('cancel')
+	else: temp = _('ok')
+	getInput.alert(_('broken1') %temp)
 	#print available choices and wait for the user to pick a valid choice
 	while True:
 		output('')
-		choice = getInput.choice(output('title', r=1),[output('start', r=1), 'Developer: Skip Dialogue', output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
+		choice = getInput.choice(_('title'),[_('start'), 'Developer: Skip Dialogue', output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
 		output('')
 		if choice==output('start', r=1): start()
 		elif choice=='Developer: Skip Dialogue': gameplay('part1')
