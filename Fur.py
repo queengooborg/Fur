@@ -258,6 +258,15 @@ def part1():
 	output('p1m26', addon=frnd_name, s=1)
 	output('p1m27', s=5)
 	output('')
+	output('helpquit')
+	output('helpsave')
+	output('helpload')
+	output('helphelp')
+	output('helpexamine')
+	output('helpeat')
+	output('helpdrink')
+	output('helptake')
+	output('helpgo')
 	gameplay('part1')
 
 def gameplay(map):
