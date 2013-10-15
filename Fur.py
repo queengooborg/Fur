@@ -1,8 +1,8 @@
 #Fur
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
-#Last edited September 8, 2013 at 11:12
-version=340
+#Last edited October 15, 2013 at 15:46
+version=343
 officialversion="0.2 Alpha"
 langversneeded=0.1
 #Dependencies:
@@ -14,7 +14,6 @@ langversneeded=0.1
 #		PyGame: http://www.pygame.org/
 
 from pelt import *
-from pelt import _
 
 #from pelt.io.network import output, getInput
 
@@ -30,12 +29,10 @@ frnd_gender=None
 frnd_gndrpn=None
 frnd_nane=None
 
-print(dir())
-print (pelt._)
 species = ["Wolf","Cat","Dragon","Bear","Fox","Mouse","Bird","Otter"]
 for i in range(len(species)):
 	temp = species[i].lower()
-	species[i] = _(temp)
+	species[i] = m(temp)
 
 try: console.clear()
 except: pass
@@ -47,7 +44,7 @@ def quit(msg, nosave=False):
 	if nosave: pass
 	else: pass #save()
 	color('red')
-	if ios and not devplayer: notification.schedule(_('mailto2'), 15, 'Beep', _('mailto1'))
+	if ios and not devplayer: notification.schedule(m('mailto2'), 15, 'Beep', m('mailto1'))
 	if msg: sys.exit(msg)
 	else: sys.exit(0)
 
@@ -95,60 +92,60 @@ def mainmenu():
 	output('title')
 	scroll = temp
 	time.sleep(3)
-	if ios: temp = _('cancel')
-	else: temp = _('ok')
-	getInput.alert(_('broken1') %temp)
+	if ios: temp = m('cancel')
+	else: temp = m('ok')
+	getInput.alert(m('broken1') %temp)
 	#print available choices and wait for the user to pick a valid choice
 	while True:
 		output('')
-		choice = getInput.choice(_('title'),[_('start'), 'Developer: Skip Dialogue', output('load', r=1),output('options', r=1),output('quit', r=1)])#, window=True)
+		choice = getInput.choice(m('title'),[m('start'), 'Developer: Skip Dialogue', m('load'), m('options'), m('quit')])#, window=True)
 		output('')
-		if choice==output('start', r=1): start()
+		if choice==m('start'): start()
 		elif choice=='Developer: Skip Dialogue': gameplay('part1')
-		elif choice==output('load', r=1):
-			getInput.alert(output('broken3', r=1))
+		elif choice==m('load'):
+			getInput.alert(m('broken3'))
 			continue
 			i = load()
 			if i and devplayer: gameplay()
 			elif not i: continue
-			elif not devplayer: quit(output('broken4', r=1), nosave=True)
-		elif choice==output('options', r=1):
+			elif not devplayer: quit(m('broken4'), nosave=True)
+		elif choice==m('options'):
 			wait_opt = True
 			while wait_opt:
-				choice_opt = getInput.choice(output('title', r=1),[output('scroll', r=1, addon=scrollspeed),output('annoy', r=1),output('beta', r=1),output('lang', r=1),output('back', r=1)])
-				if choice_opt == output('scroll', r=1, addon=scrollspeed):
-					if scrollspeed == output('slow', r=1):
-						scrollspeed = output('med', r=1)
+				choice_opt = getInput.choice(m('title'), [m('scroll' %scrollspeed), m('annoy'), m('beta'), m('lang'), m('back')])
+				if choice_opt == m('scroll' %scrollspeed):
+					if scrollspeed == m('slow'):
+						scrollspeed = m('med')
 						scroll=0.03
-					elif scrollspeed == output('med', r=1):
-						scrollspeed = output('fast', r=1)
+					elif scrollspeed == m('med'):
+						scrollspeed = m('fast')
 						scroll=0.01
 					else:
-						scrollspeed = output('fast', r=1)
+						scrollspeed = m('slow')
 						scroll=0.05
-				elif choice_opt == output('annoy', r=1):
-					getInput.alert(output('broken3', r=1))
+				elif choice_opt == m('annoy'):
+					getInput.alert(m('broken3'))
 					continue
 					if not annoy:
-						getInput.alert(output('annoyon', r=1))
+						getInput.alert(m('annoyon'))
 						annoy = True
 					else:
-						getInput.alert(output('annoyoff', r=1))
+						getInput.alert(m('annoyoff'))
 						annoy = False
-				elif choice_opt==output('beta', r=1):
+				elif choice_opt==m('beta'):
 					if not devplayer:
-						getInput.alert(output('betaon', r=1))
+						getInput.alert(m('betaon'))
 						devplayer = True
 					else:
-						getInput.alert(output('betaoff', r=1))
+						getInput.alert(m('betaoff'))
 						devplayer = False
-				elif choice_opt == output('lang', r=1): language()
+				elif choice_opt == m('lang'): language()
 				elif choice_opt == 0:
 					with open('options.pyp', 'wb') as handle:
 						pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
 					wait_opt=False
 				else: output('inputerror')
-		elif choice==0: quit(output('quitmsg', r=1), nosave=True)
+		elif choice==0: quit(m('quitmsg'), nosave=True)
 		else: output('inputerror')
 
 #When starting the game, program must ask if the player is a boy or girl.
@@ -156,22 +153,22 @@ def start():
 	global gender, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species
 	waiting=True
 	while waiting:
-		temp = getInput.choice(output('setupgndr', r=1), [output('boy', r=1), output('girl', r=1)])
-		if temp == output('boy', r=1):
+		temp = getInput.choice(m('setupgndr'), [m('boy'), m('girl')])
+		if temp == m('boy'):
 			gender=output('boy', r=1, modifier="lower")
 			frnd_gender=output('girl', r=1, modifier="lower")
-			frnd_gndrpn=output('she', r=1)
-		elif temp == output('girl', r=1):
+			frnd_gndrpn=m('she')
+		elif temp == m('girl'):
 			gender=output('girl', r=1, modifier="lower")
 			frnd_gender=output('boy', r=1, modifier="lower")
-			frnd_gndrpn=output('he', r=1)
-		else: quit(output('quitmsg', r=1), nosave=True)
+			frnd_gndrpn=m('he')
+		else: quit(m('quitmsg'), nosave=True)
 		waiting=False
-	player_species = getInput.choice(output('setuprace', r=1), species)
-	if player_species == 1: quit(output('quitmsg', r=1), nosave=True)
+	player_species = getInput.choice(m('setuprace'), species)
+	if player_species == 1: quit(m('quitmsg'), nosave=True)
 	waiting = True
 	while waiting:
-		temp = getInput.text(output('setupname', r=1))
+		temp = getInput.text(m('setupname'))
 		temp = temp.title().split(' ')
 		try:
 			player_name = temp[0]
@@ -181,7 +178,7 @@ def start():
 			if temp:
 				temp = temp[0]
 				while waiting:
-					temp2 = getInput.text(output('setuplast', r=1, addon=temp))
+					temp2 = getInput.text(m('setuplast' %temp))
 					temp2 = temp2.title()
 					if temp2:
 						player_name = temp
@@ -220,33 +217,32 @@ def part1():
 	output('p1m10', s=2)
 	output('p1m11', newline=False, s=1)
 	waiting = True
-	title = output('setup9', r=1, addon=(frnd_gndrpn, frnd_gender))
 	while waiting:
-		frnd_name=getInput.text(output('setup9', r=1, addon=(frnd_gndrpn,frnd_gender)))
-		if frnd_name == None or frnd_name == 0: quit(output('nofriendnameerror', r=1))
+		frnd_name=getInput.text(m('setup9' %(frnd_gndrpn, frnd_gender)))
+		if frnd_name == None or frnd_name == 0: quit(m('nofriendnameerror'))
 		frnd_name = frnd_name.title()
 		i = False
 		if frnd_name: waiting = False
-		else: output('nofriendnameerror', r=1, addon=(frnd_gndrpn, frnd_gender))
+		else: m('nofriendnameerror' %(frnd_gndrpn, frnd_gender))
 	player = Ally(loc, player_name, player_last, species, gender, 1)
 	friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
 	output('p1m12', addon=frnd_name, s=2)
 	output('p1m13', s=1)
 	output('p1m14', addon=player_name, s=2)
-	if player_species == output('fox', r=1): temp = output('meyou', r=1)
-	else: temp = output('you', r=1)
+	if player_species == output('fox', r=1): temp = m('meyou')
+	else: temp = m('you')
 	output('p1m15', addon=(frnd_name, player_name, player_species, temp), s=2)
 	output('p1m16', s=1)
-	if player_species == output('fox', r=1): temp = output('foxdesc', r=1)
-	elif player_species == output('dragon', r=1): temp = output('dragondesc', r=1)
+	if player_species == m('fox'): temp = m('foxdesc')
+	elif player_species == m('dragon'): temp = m('dragondesc')
 	else:
-		temp = output('p1m18', r=1, addon=frnd_gender)+'  '
-		if player_species == output('wolf', r=1): temp += output('wolfdesc', r=1)
-		elif player_species == output('cat', r=1): temp += output('catdesc', r=1)
-		elif player_species == output('bird', r=1): temp += output('birddesc', r=1)
-		elif player_species == output('bear', r=1): temp += output('beardesc', r=1)
-		elif player_species == output('mouse', r=1): temp += output('mousedesc', r=1)
-		elif player_species == output('otter', r=1): temp += output('otterdesc', r=1)
+		temp = m('p1m18' %frnd_gender)+'  '
+		if player_species == m('wolf'): temp += m('wolfdesc')
+		elif player_species == m('cat'): temp += m('catdesc')
+		elif player_species == m('bird'): temp += m('birddesc')
+		elif player_species == m('bear'): temp += m('beardesc')
+		elif player_species == m('mouse'): temp += m('mousedesc')
+		elif player_species == m('otter'): temp += m('otterdesc')
 	output('p1m17', addon=temp, s=0.5)
 	output('p1m19', s=3)
 	output('p1m20', addon=frnd_name, s=1)
@@ -284,15 +280,15 @@ def gameplay(map):
 	location = level.rooms[0]
 	while playing:
 		output("")
-		cmnd = getCommand(getInput.text(location.describe(r=True)+'\n'+output('gameaction', r=1)))
-		if not cmnd or cmnd['verb'] == output('quitcmd', r=1): quit(output('quitmsg', r=1))
-		elif cmnd['verb'] == output('savecmd', r=1):
+		cmnd = getCommand(getInput.text(location.describe(r=True)+'\n'+m('gameaction')))
+		if not cmnd or cmnd['verb'] == m('quitcmd'): quit(m('quitmsg'))
+		elif cmnd['verb'] == m('savecmd'):
 			save()
 			continue
-		elif cmnd['verb'] == output('loadcmd', r=1):
+		elif cmnd['verb'] == m('loadcmd'):
 			load()
 			continue
-		elif cmnd['verb'] == output('helpcmd', r=1):
+		elif cmnd['verb'] == m('helpcmd'):
 			output('helpquit')
 			output('helpsave')
 			output('helpload')
@@ -307,13 +303,13 @@ def gameplay(map):
 		if not noun: continue
 		else:
 			item = location.findItem(noun)
-			if cmnd['verb'] == output('examinecmd', r=1) and hasattr(item, 'examine'): item.examine()
-			elif cmnd['verb'] == output('eatcmd', r=1) and hasattr(item, 'eat'): item.eat()
-			elif cmnd['verb'] == output('drinkcmd', r=1) and hasattr(item, 'drink'): item.drink()
-			elif cmnd['verb'] == output('takecmd', r=1) and hasattr(player, 'take'): player.take(item)
-			elif cmnd['verb'] == output('opencmd', r=1) and hasattr(item, 'open'): item.open()
+			if cmnd['verb'] == m('examinecmd') and hasattr(item, 'examine'): item.examine()
+			elif cmnd['verb'] == m('eatcmd') and hasattr(item, 'eat'): item.eat()
+			elif cmnd['verb'] == m('drinkcmd') and hasattr(item, 'drink'): item.drink()
+			elif cmnd['verb'] == m('takecmd') and hasattr(player, 'take'): player.take(item)
+			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open()
 			elif not item:
-				if cmnd['verb'] == output('gocmd', r=1):
+				if cmnd['verb'] == m('gocmd'):
 					roomname = location.go(noun)
 					if not roomname: output('doormissing')
 					elif roomname == "locked": output('doorlocked')
@@ -331,10 +327,10 @@ def gameplay(map):
 def init():
 	global ios, pc
 	if ios:
-		choice = getInput.choice(output('iosask', r=1), ['iPhone','iPad'])
+		choice = getInput.choice(m('iosask'), ['iPhone','iPad'])
 		if choice == 1: pc = 'iPhone'
 		elif choice == 2: pc = 'iPad'
-		else: quit(output('iosquit', r=1), nosave=True)
+		else: quit(m('iosquit'), nosave=True)
 
 	if len(sys.argv) > 1:
 		arg = sys.argv[1:]

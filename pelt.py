@@ -1,5 +1,5 @@
 import time, os, pickle, sys, random, locale, re
-from localio import *
+from localio import output, newline, getInput, activate
 
 try:
 	import console, notification
@@ -18,6 +18,7 @@ def sync(vers, debugmode, title):
 	version = vers
 	debug = debugmode
 	gametitle = title
+	activate()
 
 #define the attributes of an item
 class Item(object):
@@ -192,8 +193,6 @@ def getCommand(sentence):
 		else: cmnd['extra'] = words[2:]
 	return cmnd
 
-getInput = getinput()
-
 def language():
 	global lang, msgs
 	wait=True
@@ -206,7 +205,7 @@ def language():
 				with open('options.pyp', 'wb') as handle: pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
 				wait2=False
 			elif choice == 0 or choice == 4: quit('', nosave=True)
-			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=True)
+			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)
 		if lang == "English":
 			with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
 		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)
@@ -215,9 +214,15 @@ def setlang(lang):
 	global msgs
 	with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
 	
-def _(key): #, *args):
+def m(key, r=0, modifier='normal'):
 	global lang, msgs
-	return msgs[key] #%args
+	if r == 1:
+		print "You should fix this message, it has m('"+key+"', r=1).  Remove the r=1"
+	return msgs[key]
+	#if modifier == 'caps': msg = msgs[key].upper()
+	#elif modifier == 'title': msg = msgs[key].title()
+	#elif modifier == 'lower': msg = msgs[key].lower()
+	#return msg
 
 #PARSER
 def getblocks(start, end, data, max):

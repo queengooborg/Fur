@@ -1,12 +1,25 @@
-from pelt import _
-#from pelt import *
+import pelt
+import time, os, pickle, sys, random, locale, re
+
+def activate():
+	global scroll, ios
+	scroll = pelt.scroll
+	ios = pelt.ios
+	pc = pelt.pc
+	if ios:
+		import console, notification
+		from scene import *
+	else:
+		import colorama, easygui #, menu, pygame
+		colorama.init()
+		#pygame.init()
 
 #Function that prints the messages
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
-	global scroll, styles, annoy, msgs
+	global scroll
 	#modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
-		if dict: _(msg)
+		if dict: pelt.m(msg)
 	except KeyError:
 		if msg == '': pass
 		else: msg = "WARNING: "+msg+" is not a valid keyword."
@@ -18,15 +31,12 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 	elif modifier == 'lower': msg = msg.lower()
 	if r == 0:
 		for c in msg:
-			if annoy: color('random')
-			sys.stdout.write(styles+c)
+			sys.stdout.write(c)
 			if not noscroll:
 				sys.stdout.flush()
 				time.sleep(scroll)
 		if newline: sys.stdout.write('\n')
 		if noscroll: sys.stdout.flush()
-		color('reset')
-		sys.stdout.write(styles)
 		sys.stdout.flush()
 	elif r == 1: return msg
 	time.sleep(s)
@@ -35,7 +45,7 @@ def newline():
 	sys.stdout.write('\n')
 	sys.stdout.flush()
 
-class getinput():
+class GetInput():
 	def __init__(self):
 		self.network = False
 		self.firstmsg = True
@@ -59,7 +69,7 @@ class getinput():
 		strings = [str(c) for c in choices]
 		if ios and __name__ in '__main__':
 			temp = strings[-1]
-			if temp == output('quit', r=1) or temp == output('back', r=1) or temp == output('cancel', r=1): strings.remove(temp)
+			if temp == m('quit') or temp == m('back') or temp == m('cancel'): strings.remove(temp)
 			try:
 				if len(strings) == 1: choice = console.alert(msg, '', strings[0])
 				elif len(strings) == 2: choice = console.alert(msg, '', strings[0], strings[1])
@@ -100,7 +110,7 @@ class getinput():
 				time.sleep(0.1)
 				number = choice
 		temp = str(choice)
-		if temp == output('quit', r=1) or temp == output('back', r=1) or temp == output('cancel', r=1): return 0
+		if temp == m('quit') or temp == m('back') or temp == m('cancel'): return 0
 		return choices[number-1]
 
 	def alert(self, msg):
@@ -110,3 +120,4 @@ class getinput():
 			else:
 				easygui.msgbox(title='PELT Engine - '+gametitle+' v'+str(version), msg=msg)
 
+getInput = GetInput()
