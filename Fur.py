@@ -84,22 +84,21 @@ def mainmenu():
 	#Print the title, author, and version
 	color('reset')
 	output('author')
-	output('version', addon='r'+str(version))
-	time.sleep(2)
+	temp = 'r' + str(version)
+	output('version', addon=temp, s=2)
 	temp = scroll
 	scroll = 0.2
-	output('')
-	output('title')
+	newline()
+	output('title', s=3)
 	scroll = temp
-	time.sleep(3)
 	if ios: temp = m('cancel')
 	else: temp = m('ok')
 	getInput.alert(m('broken1') %temp)
 	#print available choices and wait for the user to pick a valid choice
 	while True:
-		output('')
+		newline()
 		choice = getInput.choice(m('title'),[m('start'), 'Developer: Skip Dialogue', m('load'), m('options'), m('quit')])#, window=True)
-		output('')
+		newline()
 		if choice==m('start'): start()
 		elif choice=='Developer: Skip Dialogue': gameplay('part1')
 		elif choice==m('load'):
@@ -192,9 +191,9 @@ def start():
 		i += 1
 		output(str(i)+"...", dict=False, newline=False)
 		time.sleep(1)
-	output('')
+	newline()
 	output('setupeyeopen', addon=(player_species), s=4)
-	output('')
+	newline()
 	part1()
 
 #part 1 init
@@ -253,7 +252,7 @@ def part1():
 	output('p1m25', s=2)
 	output('p1m26', addon=frnd_name, s=1)
 	output('p1m27', s=5)
-	output('')
+	newline()
 	output('helpquit')
 	output('helpsave')
 	output('helpload')

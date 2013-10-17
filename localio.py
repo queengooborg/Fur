@@ -1,11 +1,14 @@
 import pelt
 import time, os, pickle, sys, random, locale, re
+import easygui
 
 def activate():
-	global scroll, ios
+	global scroll, ios, pc, gametitle, version
 	scroll = pelt.scroll
 	ios = pelt.ios
 	pc = pelt.pc
+	gametitle = pelt.gametitle
+	version = pelt.version
 	if ios:
 		import console, notification
 		from scene import *
@@ -17,9 +20,10 @@ def activate():
 #Function that prints the messages
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
 	global scroll
-	#modifier = caps, title, lower, normal (when modifier isn't present)
+	s = 0 # TEMPORARY LINE
+	# modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
-		if dict: pelt.m(msg)
+		if dict: msg = pelt.m(msg)
 	except KeyError:
 		if msg == '': pass
 		else: msg = "WARNING: "+msg+" is not a valid keyword."
@@ -45,7 +49,7 @@ def newline():
 	sys.stdout.write('\n')
 	sys.stdout.flush()
 
-class GetInput():
+class Input():
 	def __init__(self):
 		self.network = False
 		self.firstmsg = True
@@ -69,7 +73,7 @@ class GetInput():
 		strings = [str(c) for c in choices]
 		if ios and __name__ in '__main__':
 			temp = strings[-1]
-			if temp == m('quit') or temp == m('back') or temp == m('cancel'): strings.remove(temp)
+			if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): strings.remove(temp)
 			try:
 				if len(strings) == 1: choice = console.alert(msg, '', strings[0])
 				elif len(strings) == 2: choice = console.alert(msg, '', strings[0], strings[1])
@@ -120,4 +124,4 @@ class GetInput():
 			else:
 				easygui.msgbox(title='PELT Engine - '+gametitle+' v'+str(version), msg=msg)
 
-getInput = GetInput()
+getInput = Input()

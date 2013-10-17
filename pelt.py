@@ -216,6 +216,7 @@ def setlang(lang):
 	
 def m(key, r=0, modifier='normal'):
 	global lang, msgs
+	if lang == "English": setlang('en')
 	if r == 1:
 		print "You should fix this message, it has m('"+key+"', r=1).  Remove the r=1"
 	return msgs[key]
