@@ -55,23 +55,23 @@ class Input():
 		self.firstmsg = True
 	
 	def network(self):
-		if ios:
+		try:
 			if self.network:
 				console.hide_activity()
 				self.network = False
 			else:
 				console.show_activity()
 				self.network = True
-		else: pass
+		except: pass
 
 	def text(self, msg):
-		if ios and __name__ in '__main__': choice = console.input_alert(msg, '', '', 'Ok')
-		else: choice = easygui.enterbox(msg=msg, title='PELT Engine - '+gametitle+' v'+str(version))
+		try: choice = console.input_alert(msg, '', '', 'Ok')
+		except: choice = easygui.enterbox(msg=msg, title='PELT Engine - '+gametitle+' v'+str(version))
 		return choice
 	
 	def choice(self, msg, choices, window=False):
 		strings = [str(c) for c in choices]
-		if ios and __name__ in '__main__':
+		try:
 			temp = strings[-1]
 			if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): strings.remove(temp)
 			try:
@@ -102,7 +102,7 @@ class Input():
 							waiting = False
 				number = choice
 			except KeyboardInterrupt: return 0
-		else:
+		except:
 			if not window:
 				choice = easygui.buttonbox(msg=msg, title='PELT Engine - '+gametitle+' v'+str(version), choices=strings)
 				i = 1
@@ -118,10 +118,10 @@ class Input():
 		return choices[number-1]
 
 	def alert(self, msg):
-			if ios and __name__ in '__main__':
-				try: console.alert('',msg)
-				except KeyboardInterrupt: pass
-			else:
-				easygui.msgbox(title='PELT Engine - '+gametitle+' v'+str(version), msg=msg)
+		try:
+			try: console.alert('',msg)
+			except KeyboardInterrupt: pass
+		except:
+			easygui.msgbox(title='PELT Engine - '+gametitle+' v'+str(version), msg=msg)
 
 getInput = Input()

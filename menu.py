@@ -157,6 +157,7 @@ def main(options):
 		for event in events:
 			if event.type == pygame.QUIT:
 				temp = False
+				pygame.quit()
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_LEFT:
 					menu.selectItem(menu.selectedItemNumber + 1)
