@@ -13,11 +13,14 @@ except ImportError:
 	pc = 'computer'
 	ios = False
 
-def sync(vers, debugmode, title):
+def sync(vers, debugmode, title, modules=[], args={}):
 	global version, debug, gametitle
 	version = vers
 	debug = debugmode
 	gametitle = title
+	for m in modules:
+		m.activate()
+	from localio import output, newline, getInput, activate
 	activate()
 
 #define the attributes of an item
@@ -43,12 +46,12 @@ class Chest(Item):
 
 	def __init__(self, contents=[], key=None):
 		self.contents = contents
-		self.open = False
+		self.copen = False
 		if not key: self.locked = False
 		else:
 			self.locked = True
 			self.key = key
-		Item.__init__(self, "Chest")
+		Item.__init__(self, "chest")
 	
 	def __str__(self):
 		return 'chest'
@@ -56,8 +59,7 @@ class Chest(Item):
 	@classmethod
 	def fromText(cls, text):
 		
-		
-		placedMatch = self.placedRE.search(text)
+		placedMatch = cls.placedRE.search(text)
 		if placedMatch:
 			# assign to variables
 			pass
@@ -102,12 +104,13 @@ class Chest(Item):
 				if item.name == self.key:
 					self.locked = False
 					output('chestunlocked', addon=self.key)
-				else:
-					output('chestlocked')
-					return
-		if self.open: output('chestopenerror')
+					continue
+			if self.locked:
+				output('chestlocked')
+				return
+		if self.copen: output('chestopenerror')
 		else:
-			self.open = True
+			self.copen = True
 			output('chestopen', addon=self.contents.join(', '))
 	
 #define drink item
@@ -182,7 +185,7 @@ def getCommand(sentence):
 
 	cmnd['verb'] = words[0].lower()
 
-	if len(words) > 1: cmnchesd['noun'] = words[1].lower()
+	if len(words) > 1: cmnd['noun'] = words[1].lower()
 
 	if len(words) > 2:
 		if words[2] == output('with', r=1) or words[2] == output('using', r=1):
@@ -583,10 +586,17 @@ class Attack(object):
 	
 	def use(self, attacker, attacked):
 		temp = 1.5 if self.type == attacked.type else 1
-		#attack.bonus = 4, 2, 1, 5, 2.5, or 0
-		damage = self.pwr
+		dice = random.randint(0,10)
+		if dice <= 3: crit = 0.5
+		elif dice >= 8: crit = 1.5
+		else: crit = 1
+		damage = (((((self.pwr + attacker.attk)*2)*temp)-(attacked.dfns/1.1))/3)*crit
 		attacked.take_damage(damage)
-		print str(attacked)+' took '+str(damage)+' damage'
+		print(str(attacked)+' took '+str(damage)+' damage')
+		crit += 5
+		if crit == 0.5: print('The attack was not very effective.')
+		elif crit == 1.5: print('The attack landed a critical hit!')
+			
 
 def color(color):
 	global styles

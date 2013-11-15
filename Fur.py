@@ -2,8 +2,8 @@
 #Text-based RPG by Dark Tailed
 #Created May 10, 2013 at 15:14 
 #Last edited October 15, 2013 at 15:46
-version=343
-officialversion="0.2 Alpha"
+version=351
+officialversion="0.3 Alpha"
 langversneeded=0.1
 #Dependencies:
 #	For iPad:
@@ -17,7 +17,9 @@ from pelt import *
 
 #from pelt.io.network import output, getInput
 
-sync(version, True, 'Fur')
+import localio, netio
+
+sync(version, True, 'Fur', modules=[localio])
 
 #initialize variables
 loc=None
@@ -80,7 +82,7 @@ def load():
 		return False
 
 def mainmenu():
-	global version, scrollspeed, scroll, loc, devplayer, annoy, pc, ios, msgs
+	global version, scrollspeed, scroll, loc, devplayer, annoy, pc, ios, msgs, player, friend
 	#Print the title, author, and version
 	color('reset')
 	output('author')
@@ -100,7 +102,10 @@ def mainmenu():
 		choice = getInput.choice(m('title'),[m('start'), 'Developer: Skip Dialogue', m('load'), m('options'), m('quit')])#, window=True)
 		newline()
 		if choice==m('start'): start()
-		elif choice=='Developer: Skip Dialogue': gameplay('part1')
+		elif choice=='Developer: Skip Dialogue':
+			player = Ally(loc, player_name, player_last, species, gender, 1)
+			friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
+			gameplay('part1')
 		elif choice==m('load'):
 			getInput.alert(m('broken3'))
 			continue
@@ -268,8 +273,8 @@ def gameplay(map):
 	global loc, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
 	playing=True
 	#quit(output('broken4', r=1))
-	if ios: maploc = map+'.level'
-	else: maploc = 'levels/'+map+'.level'
+	if ios: maploc = map+'.plf'
+	else: maploc = 'levels/'+map+'.plf'
 	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
 	color('blue')
 	output(level.name, dict=False, s=2)
@@ -280,6 +285,8 @@ def gameplay(map):
 	while playing:
 		output("")
 		cmnd = getCommand(getInput.text(location.describe(r=True)+'\n'+m('gameaction')))
+
+		# single-word commands
 		if not cmnd or cmnd['verb'] == m('quitcmd'): quit(m('quitmsg'))
 		elif cmnd['verb'] == m('savecmd'):
 			save()
@@ -298,29 +305,33 @@ def gameplay(map):
 			output('helptake')
 			output('helpgo')
 			continue
+			
+		# two-word commands
 		noun = cmnd.get('noun')
 		if not noun: continue
+
+		if cmnd['verb'] == m('gocmd'):
+			roomname = location.go(noun)
+			if not roomname: output('doormissing')
+			elif roomname == "locked": output('doorlocked')
+			elif roomname == "invalid": output('directionerror')
+			elif roomname == "Finish": quit('broken4')
+			else:
+				i = 0
+				for r in level.rooms:
+					if r.name == roomname: break
+					else: i += 1
+				location = level.rooms[i]
 		else:
+			# commands that require an item
 			item = location.findItem(noun)
-			if cmnd['verb'] == m('examinecmd') and hasattr(item, 'examine'): item.examine()
+			if not item:
+				output('itemerror', addon=noun)
+			elif cmnd['verb'] == m('examinecmd') and hasattr(item, 'examine'): item.examine()
 			elif cmnd['verb'] == m('eatcmd') and hasattr(item, 'eat'): item.eat()
 			elif cmnd['verb'] == m('drinkcmd') and hasattr(item, 'drink'): item.drink()
 			elif cmnd['verb'] == m('takecmd') and hasattr(player, 'take'): player.take(item)
-			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open()
-			elif not item:
-				if cmnd['verb'] == m('gocmd'):
-					roomname = location.go(noun)
-					if not roomname: output('doormissing')
-					elif roomname == "locked": output('doorlocked')
-					elif roomname == "invalid": output('directionerror')
-					elif roomname == "Finish": quit('broken4')
-					else:
-						i = 0
-						for r in level.rooms:
-							if r.name == roomname: break
-							else: i += 1
-						location = level.rooms[i]
-				else: output('itemerror', addon=noun)
+			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open(player.inventory)
 			else: output('cmderror')
 
 def init():

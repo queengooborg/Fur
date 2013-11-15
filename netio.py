@@ -1,10 +1,17 @@
-def activate():
+from pelt import m
+
+socket = None
+
+def activate(**kwargs):
 	"""Synchronize the netio.py and the game's global variables."""
-	pass
+	global socket
+	socket = kwargs.get("socket")
+	
 
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
 	"""Send a message to the remote client."""
-	pass
+	global socket
+	socket.send(m(msg))
 
 def newline():
 	"""Tell the remote client to print a newline."""
@@ -23,7 +30,9 @@ class Input():
 	
 	def text(self, msg): 
 		"""Ask the remote client for text feedback."""
-		pass
+		global socket
+		output(msg)
+		return socket.recv()
 	
 	def choice(self, msg, choices, window=False):
 		"""Send the remote client a multiple choice question and wait for response."""

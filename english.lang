@@ -527,80 +527,83 @@ sS'ok'
 p257
 S'Ok'
 p258
-sS'iosask'
+sS'opencmd'
 p259
-S'Are you on an iPhone or iPad?  This is important for gameplay.'
+g31
+sS'iosask'
 p260
-sS'helpquit'
+S'Are you on an iPhone or iPad?  This is important for gameplay.'
 p261
-S'quit - Saves and quits the game.'
+sS'helpquit'
 p262
-sS'birddesc'
+S'quit - Saves and quits the game.'
 p263
-S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
+sS'birddesc'
 p264
-sS'no'
+S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
 p265
-S'No'
+sS'no'
 p266
-sS'beta'
+S'No'
 p267
-S'Beta Tester Mode'
+sS'beta'
 p268
-sS'dragon'
+S'Beta Tester Mode'
 p269
-S'Dragon'
+sS'dragon'
 p270
-sS'iosquit'
+S'Dragon'
 p271
-S'User did not choose iPhone or iPad.'
+sS'iosquit'
 p272
-sS'bird'
+S'User did not choose iPhone or iPad.'
 p273
-S'Bird'
+sS'bird'
 p274
-sS'itemnormal'
+S'Bird'
 p275
-S"This %s doesn't seem to be unusual."
+sS'itemnormal'
 p276
-sS'wolf'
+S"This %s doesn't seem to be unusual."
 p277
-S'Wolf'
+sS'wolf'
 p278
-sS'attackerror'
+S'Wolf'
 p279
-S'Not a valid attack.'
+sS'attackerror'
 p280
-sS'dragondesc'
+S'Not a valid attack.'
 p281
-S'You have scales and the tail of a dragon.  In your throat you feel a hot presence.'
+sS'dragondesc'
 p282
-sS'p1m24'
+S'You have scales and the tail of a dragon.  In your throat you feel a hot presence.'
 p283
-S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
+sS'p1m24'
 p284
-sS'p1m27'
+S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
 p285
-S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
+sS'p1m27'
 p286
-sS'p1m26'
+S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
 p287
-S"%s: I didn't mean it like that!"
+sS'p1m26'
 p288
-sS'p1m21'
+S"%s: I didn't mean it like that!"
 p289
-S"You tell yourself to calm down so you can figure out why you're half-%s."
+sS'p1m21'
 p290
-sS'options'
+S"You tell yourself to calm down so you can figure out why you're half-%s."
 p291
-S'Options'
+sS'options'
 p292
-sS'p1m23'
+S'Options'
 p293
-S'You accidentally said the last part out loud.  You meant only to think it.'
+sS'p1m23'
 p294
-sS'p1m22'
+S'You accidentally said the last part out loud.  You meant only to think it.'
 p295
-S"You: I'm a human though..."
+sS'p1m22'
 p296
+S"You: I'm a human though..."
+p297
 s.

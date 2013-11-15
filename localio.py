@@ -71,7 +71,7 @@ class Input():
 	
 	def choice(self, msg, choices, window=False):
 		strings = [str(c) for c in choices]
-		try:
+		if ios:
 			temp = strings[-1]
 			if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): strings.remove(temp)
 			try:
@@ -102,7 +102,7 @@ class Input():
 							waiting = False
 				number = choice
 			except KeyboardInterrupt: return 0
-		except:
+		else:
 			if not window:
 				choice = easygui.buttonbox(msg=msg, title='PELT Engine - '+gametitle+' v'+str(version), choices=strings)
 				i = 1
@@ -114,7 +114,7 @@ class Input():
 				time.sleep(0.1)
 				number = choice
 		temp = str(choice)
-		if temp == m('quit') or temp == m('back') or temp == m('cancel'): return 0
+		if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): return 0
 		return choices[number-1]
 
 	def alert(self, msg):

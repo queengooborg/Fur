@@ -12,23 +12,23 @@ class Battle(object):
 		self.players = players
 		self.enemies = enemies
 	
-	def main(self):
-		while True:
-			for c in self.getPlayers:
-				if type(c) == Ally:
-					action = pelt.getInput.choice('What to do?',['Attack','Er...','Um...'])
-					if action == 'Attack': self.attack(c)
-				elif type(c) == Enemy:
-					pass
-	
 	def getPlayers(self):
 		chars = self.players + self.enemies
-		return [c in chars if c.life > 0]
+		return [c for c in chars if c.life > 0]
+	
+	def main(self):
+		while True:
+			for c in self.getPlayers():
+				if type(c) == pelt.Ally:
+					action = pelt.getInput.choice('What to do?',['Attack','Er...','Um...'])
+					if action == 'Attack': self.attack(c)
+				elif type(c) == pelt.Enemy:
+					pass
 
 	def attack(self, player):
-		attack = pelt.getInput.choice('Which Attack?', player.attacks)
+		atk = pelt.getInput.choice('Which Attack?', player.attacks)
 		enemy = pelt.getInput.choice('Attack Who?', self.enemies)
-		attack.use(player, enemy)
+		atk.use(player, enemy)
 
 	def items():
 		pass
