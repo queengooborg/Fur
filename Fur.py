@@ -1,10 +1,15 @@
-#Fur
-#Text-based RPG by Dark Tailed
-#Created May 10, 2013 at 15:14 
-#Last edited October 15, 2013 at 15:46
-version=351
-officialversion="0.3 Alpha"
-langversneeded=0.1
+title = 'Fur'
+author = 'Kurai Atonitsuka and Mike Glover'
+#Text-based RPG by Kurai Atonitsuka
+#Created May 10, 2013 at 15:14
+#Last edited November 26, 2013 at 19:23
+
+version=356
+officialversion = "0.2 Alpha"
+langversneeded = 0.1
+
+devmode = True
+
 #Dependencies:
 #	For iPad:
 #		Pythonista
@@ -17,9 +22,9 @@ from pelt import *
 
 #from pelt.io.network import output, getInput
 
-import localio, netio
+import localio, netio, custio
 
-sync(version, True, 'Fur', modules=[localio])
+sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
 
 #initialize variables
 loc=None
@@ -46,7 +51,7 @@ def quit(msg, nosave=False):
 	if nosave: pass
 	else: pass #save()
 	color('red')
-	if ios and not devplayer: notification.schedule(m('mailto2'), 15, 'Beep', m('mailto1'))
+	#if ios and not devplayer: notification.schedule(m('mailto2'), 15, 'Beep', m('mailto1'))
 	if msg: sys.exit(msg)
 	else: sys.exit(0)
 
@@ -83,36 +88,38 @@ def load():
 
 def mainmenu():
 	global version, scrollspeed, scroll, loc, devplayer, annoy, pc, ios, msgs, player, friend
-	#Print the title, author, and version
-	color('reset')
-	output('author')
-	temp = 'r' + str(version)
-	output('version', addon=temp, s=2)
-	temp = scroll
-	scroll = 0.2
-	newline()
-	output('title', s=3)
-	scroll = temp
 	if ios: temp = m('cancel')
 	else: temp = m('ok')
 	getInput.alert(m('broken1') %temp)
 	#print available choices and wait for the user to pick a valid choice
 	while True:
 		newline()
-		choice = getInput.choice(m('title'),[m('start'), 'Developer: Skip Dialogue', m('load'), m('options'), m('quit')])#, window=True)
+		choices = [m('start'), m('custom'), m('options'), m('quit')]
+		devchoices = ['Developer: Skip Dialogue']
+		if devmode:
+			for devchoice in devchoices: choices.append(devchoice)
+		choice = getInput.choice(m('title'), choices)#, window=True)
 		newline()
-		if choice==m('start'): start()
+		if choice==m('start'):
+			wait_sta = True
+			while wait_sta:
+				choice_sta = getInput.choice(m('start'), [m('new'), m('load'), m('back')])
+				if choice_sta == m('new'): start()
+				elif choice_sta == m('load'):
+					getInput.alert(m('broken3'))
+					continue
+					i = load()
+					if i and devplayer: gameplay()
+					elif not i: continue
+					elif not devplayer: quit(m('broken4'), nosave=True)
+				elif choice_sta == 0: wait_sta = False
+				else: output('inputerror')
 		elif choice=='Developer: Skip Dialogue':
 			player = Ally(loc, player_name, player_last, species, gender, 1)
 			friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
 			gameplay('part1')
-		elif choice==m('load'):
-			getInput.alert(m('broken3'))
-			continue
-			i = load()
-			if i and devplayer: gameplay()
-			elif not i: continue
-			elif not devplayer: quit(m('broken4'), nosave=True)
+		elif choice==m('custom'):
+			custmenu()
 		elif choice==m('options'):
 			wait_opt = True
 			while wait_opt:
@@ -150,6 +157,19 @@ def mainmenu():
 					wait_opt=False
 				else: output('inputerror')
 		elif choice==0: quit(m('quitmsg'), nosave=True)
+		else: output('inputerror')
+
+#Menu for custom levels
+def custmenu():
+	output('custtitle', s=3)
+	#custio.connect()
+	while True:
+		choice = getInput.choice(m('custtitle'), [m('custstart'), m('custdown'), m('custup'), m('custcreate'), m('back')])
+		if choice == m('custstart'): pass
+		elif choice == m('custdown'): pass
+		elif choice == m('custup'): pass
+		elif choice == m('custcreate'): pass
+		elif choice == 0: return False
 		else: output('inputerror')
 
 #When starting the game, program must ask if the player is a boy or girl.

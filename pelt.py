@@ -1,3 +1,9 @@
+#PELT Engine
+#Created September 12, 2013 at 17:17
+#Last edited November 26, 2013 at 16:56
+
+peltvers = 53
+
 import time, os, pickle, sys, random, locale, re
 from localio import output, newline, getInput, activate
 
@@ -13,15 +19,24 @@ except ImportError:
 	pc = 'computer'
 	ios = False
 
-def sync(vers, debugmode, title, modules=[], args={}):
-	global version, debug, gametitle
+def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], args={}):
+	global version, officialversion, langversneeded, debug, gametitle, author
 	version = vers
+	officialversion = officialvers
+	langversneeded = langversneed
 	debug = debugmode
 	gametitle = title
+	author = auth
 	for m in modules:
 		m.activate()
 	from localio import output, newline, getInput, activate
 	activate()
+	#Print the title, author, and version
+	color('reset')
+	output('author', addon=author)
+	output('version', addon=(officialvers, version), s=2)
+	newline()
+	output('title', s=3)
 
 #define the attributes of an item
 class Item(object):
@@ -587,10 +602,11 @@ class Attack(object):
 	def use(self, attacker, attacked):
 		temp = 1.5 if self.type == attacked.type else 1
 		dice = random.randint(0,10)
-		if dice <= 3: crit = 0.5
-		elif dice >= 8: crit = 1.5
+		if dice <= 1: crit = 0.5
+		elif dice >= 10: crit = 1.5
 		else: crit = 1
-		damage = (((((self.pwr + attacker.attk)*2)*temp)-(attacked.dfns/1.1))/3)*crit
+		damage = ((((((self.pwr + attacker.attk)*2)*temp)-(attacked.dfns/1.1))/3)*crit)+(random.randint(0,20)-10)
+		damage = int(damage)
 		attacked.take_damage(damage)
 		print(str(attacked)+' took '+str(damage)+' damage')
 		crit += 5

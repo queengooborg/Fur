@@ -155,4 +155,4 @@ msgs = {'title':u'Fur',
 
 import pickle
 
-with open('spanish.lang', 'wb') as handle: pickle.dump(msgs, handle)
+with open('../spanish.lang', 'wb') as handle: pickle.dump(msgs, handle)

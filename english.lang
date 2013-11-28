@@ -7,9 +7,9 @@ sS'helpexamine'
 p3
 S'examine [item] - shows description of item'
 p4
-sS'helpsave'
+sS'custstart'
 p5
-S'save - Saves the game'
+S'Start Level'
 p6
 sS'helpcmd'
 p7
@@ -39,9 +39,9 @@ sS'inputerror'
 p19
 S'Invalid Input'
 p20
-sS'doorhere'
+sS'p1m25'
 p21
-S'There is a door to the %s'
+S'You: Yeah, thanks.'
 p22
 sS'setupeyeopen'
 p23
@@ -59,551 +59,571 @@ sS'yes'
 p29
 S'Yes'
 p30
-sS'open'
+sS'custom'
 p31
-g31
-sS'helpgo'
+S'Community Levels'
 p32
-S'go [direction] - Go through the door in the defined direction'
+sS'open'
 p33
-sS'quit'
+g33
+sS'helpgo'
 p34
-S'Quit'
+S'go [direction] - Go through the door in the defined direction'
 p35
-sS'slow'
+sS'quit'
 p36
-S'Slow'
+S'Quit'
 p37
-sS'savecmd'
+sS'slow'
 p38
-S'save'
+S'Slow'
 p39
-sS'her'
+sS'savecmd'
 p40
-g40
-sS'title'
+S'save'
 p41
-S'Fur'
+sS'her'
 p42
-sS'drinkpoisoned'
+g42
+sS'title'
 p43
-S'That %s had a fatal poison inside.  You are now dead.'
+S'Fur'
 p44
-sS'helpdrink'
+sS'drinkpoisoned'
 p45
-S'drink [item] - if item is a drink, will drink item'
+S'That %s had a fatal poison inside.  You are now dead.'
 p46
-sS'fast'
+sS'helpdrink'
 p47
-S'Fast'
+S'drink [item] - if item is a drink, will drink item'
 p48
-sS'next'
+sS'fast'
 p49
-S'Next Page'
+S'Fast'
 p50
-sS'eatcmd'
+sS'next'
 p51
-S'eat'
+S'Next Page'
 p52
-sS'start'
+sS'eatcmd'
 p53
-S'Start Game'
+S'eat'
 p54
-sS'setup9'
+sS'start'
 p55
-S'Enter the name of your friend, remember, %s is a %s.'
+S'Start Game'
 p56
-sS'p1m20'
+sS'setup9'
 p57
-S'%s: ...What?'
+S'Enter the name of your friend, remember, %s is a %s.'
 p58
-sS'betaon'
+sS'p1m20'
 p59
-S'Beta tester mode now active.'
+S'%s: ...What?'
 p60
-sS'quitcmd'
+sS'betaon'
 p61
-g34
-sS'helpload'
+S'Beta tester mode now active.'
 p62
-S'load - Loads the game from a save file (dangerous)'
+sS'quitcmd'
 p63
-sS'otter'
+g36
+sS'helpsave'
 p64
-S'Otter'
+S'save - Saves the game'
 p65
-sS'doormissing'
+sS'otter'
 p66
-S'There is no door in that direction.'
+S'Otter'
 p67
-sS'playerdesc'
+sS'doormissing'
 p68
-S'%s %s the %s %s, carrying %s, at %s, Level %s.  Can use the attacks %s'
+S'There is no door in that direction.'
 p69
-sS'quitmsg'
+sS'playerdesc'
 p70
-S"Quit on user's demand."
+S'%s %s the %s %s, carrying %s, at %s, Level %s.  Can use the attacks %s'
 p71
-sS'p1m5'
+sS'quitmsg'
 p72
-S'???: Wake up!'
+S"Quit on user's demand."
 p73
-sS'chestopenerror'
+sS'p1m5'
 p74
-S'The chest is already open!'
+S'???: Wake up!'
 p75
-sS'his'
+sS'chestopenerror'
 p76
-g76
-sS'setupgndr'
+S'The chest is already open!'
 p77
-S'Are you a boy or a girl?'
+sS'his'
 p78
-sS'save1'
+g78
+sS'setupgndr'
 p79
-S'Save %s'
+S'Are you a boy or a girl?'
 p80
-sS'save2'
+sS'save1'
 p81
-S'Save %s: %s'
+S'Save %s'
 p82
-sS'save3'
+sS'save2'
 p83
-S'Save to File'
+S'Save %s: %s'
 p84
-sS'save4'
+sS'save3'
 p85
-S'Load File'
+S'Save to File'
 p86
-sS'bear'
+sS'save4'
 p87
-S'Bear'
+S'Load File'
 p88
-sS'drinkpoisonedmdg'
+sS'bear'
 p89
-S'User drank poison from a %s'
+S'Bear'
 p90
-sS'cmderror'
+sS'custdown'
 p91
-S"I don't know how to do that."
+S'Download Level'
 p92
-sS'takecmd'
+sS'cmderror'
 p93
-S'take'
+S"I don't know how to do that."
 p94
-sS'using'
+sS'takecmd'
 p95
-g95
-sS'type1'
+S'take'
 p96
-S'Normal'
+sS'helpload'
 p97
-sS'with'
+S'load - Loads the game from a save file (dangerous)'
 p98
-g98
-sS'him'
+sS'using'
 p99
 g99
-sS'foodeaten'
+sS'type1'
 p100
-S'That %s was very tasty!'
+S'Normal'
 p101
-sS'he'
+sS'custcreate'
 p102
-g102
-sS'annoy'
+S'Create Level'
 p103
-S'Annoyance Mode (Broken ATM)'
+sS'with'
 p104
-sS'setuplast'
+g104
+sS'him'
 p105
-S'%s...and your last?'
+g105
+sS'foodeaten'
 p106
-sS'foodpoisoned'
+S'That %s was very tasty!'
 p107
-S'That %s was covered in fatal poison.  You are now dead.'
+sS'he'
 p108
-sS'meyou'
+g108
+sS'annoy'
 p109
-S'me and you'
+S'Annoyance Mode (Broken ATM)'
 p110
-sS'annoyon'
+sS'setuplast'
 p111
-S'Annoyance mode now active.'
+S'%s...and your last?'
 p112
-sS'chestlocked'
+sS'foodpoisoned'
 p113
-S'Chest is locked with a key.'
+S'That %s was covered in fatal poison.  You are now dead.'
 p114
-sS'scroll'
+sS'meyou'
 p115
-S'Scroll Speed (%s)'
+S'me and you'
 p116
-sS'itemerror'
+sS'annoyon'
 p117
-S"I don't see any %s here."
+S'Annoyance mode now active.'
 p118
-sS'usingerror'
+sS'chestlocked'
 p119
-S'What do you want to %s the %s with?'
+S'Chest is locked with a key.'
 p120
-sS'cat'
+sS'scroll'
 p121
-S'Cat'
+S'Scroll Speed (%s)'
 p122
-sS'broken2'
+sS'itemerror'
 p123
-S'Broken ATM'
+S"I don't see any %s here."
 p124
-sS'broken3'
+sS'drinkpoisonedmdg'
 p125
-S"It's broken at the moment!"
+S'User drank poison from a %s'
 p126
-sS'broken1'
+sS'usingerror'
 p127
-S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "%s"'
+S'What do you want to %s the %s with?'
 p128
-sS'she'
+sS'cat'
 p129
-g129
-sS'broken4'
+S'Cat'
 p130
-S'Next part is still in development.  Please load in a developer save to unlock the next part.'
+sS'broken2'
 p131
-sS'foodpoisonedmsg'
+S'Broken ATM'
 p132
-S'User ate a poisoned %s'
+sS'broken3'
 p133
-sS'helphelp'
+S"It's broken at the moment!"
 p134
-S'help - Displays this message'
+sS'broken1'
 p135
-sS'itemhere'
+S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "%s"'
 p136
-S'There is a %s here'
+sS'she'
 p137
-sS'p1m4'
+g137
+sS'broken4'
 p138
-S'???: ...Hey, you lazy %s!'
+S'Next part is still in development.  Please load in a developer save to unlock the next part.'
 p139
-sS'betaoff'
+sS'foodpoisonedmsg'
 p140
-S'Beta tester mode revoked.'
+S'User ate a poisoned %s'
 p141
-sS'p1title'
+sS'helphelp'
 p142
-S'PART 1: The Awakening'
+S'help - Displays this message'
 p143
-sS'savewarning'
+sS'itemhere'
 p144
-S'WARNING: File belongs to %s %s the %s.  Okay to overwrite?'
+S'There is a %s here'
 p145
-sS'doordesc'
+sS'p1m4'
 p146
-S'A door to the %s that leads to the %s.'
+S'???: ...Hey, you lazy %s!'
 p147
-sS'p1m9'
+sS'betaoff'
 p148
-S'Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
+S'Beta tester mode revoked.'
 p149
-sS'back'
+sS'p1title'
 p150
-S'Back'
+S'PART 1: The Awakening'
 p151
-sS'attack1desc'
+sS'savewarning'
 p152
-S'A simple punch'
+S'WARNING: File belongs to %s %s the %s.  Okay to overwrite?'
 p153
-sS'helptake'
+sS'doordesc'
 p154
-S'take [item] - if item is movable, will take item'
+S'A door to the %s that leads to the %s.'
 p155
-sS'loadcmd'
+sS'p1m9'
 p156
-g1
-sS'p1m8'
+S'Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
 p157
-S'Your eyes focus and you figure out why the %s looked so strange.  %s was fox-like, with fur covering %s entire body, and a big tail sticking out behind %s.'
+sS'back'
 p158
-sS'colorerror'
+S'Back'
 p159
-S'Color input was invalid.'
+sS'attack1desc'
 p160
-sS'p1m6'
+S'A simple punch'
 p161
-S'You slowly open your eyes.  A young %s about your age is trying to shake you awake.  You notice something strange about the %s, but your eyes are still blurred from waking up.'
+sS'helptake'
 p162
-sS'p1m7'
+S'take [item] - if item is movable, will take item'
 p163
-S"???: You're awake!  I've been shaking you for over an hour or so!"
+sS'loadcmd'
 p164
-sS'girl'
+g1
+sS'custup'
 p165
-S'Girl'
+S'Upload Level'
 p166
-sS'nofriendnameerror'
+sS'p1m8'
 p167
-S"You didn't type your friend's name!  Remember, %s is a %s."
+S'Your eyes focus and you figure out why the %s looked so strange.  %s was fox-like, with fur covering %s entire body, and a big tail sticking out behind %s.'
 p168
-sS'mouse'
+sS'colorerror'
 p169
-S'Mouse'
+S'Color input was invalid.'
 p170
-sS'p1m3'
+sS'p1m6'
 p171
-S'???: ...Wake up...'
+S'You slowly open your eyes.  A young %s about your age is trying to shake you awake.  You notice something strange about the %s, but your eyes are still blurred from waking up.'
 p172
-sS'gameinputerror'
+sS'p1m7'
 p173
-S"I didn't understand what you typed."
+S"???: You're awake!  I've been shaking you for over an hour or so!"
 p174
-sS'p1m1'
+sS'girl'
 p175
-S'???: ...'
+S'Girl'
 p176
-sS'p1m14'
+sS'nofriendnameerror'
 p177
-S"You: ...I'm %s."
+S"You didn't type your friend's name!  Remember, %s is a %s."
 p178
-sS'p1m15'
+sS'mouse'
 p179
-S"%s: %s...it's a funny name for a %s like %s!"
+S'Mouse'
 p180
-sS'p1m16'
+sS'p1m3'
 p181
-S'You: What?'
+S'???: ...Wake up...'
 p182
-sS'setupname'
+sS'gameinputerror'
 p183
-S'Your name is?'
+S"I didn't understand what you typed."
 p184
-sS'p1m10'
+sS'p1m1'
 p185
-S'You: Who are you?'
+S'???: ...'
 p186
-sS'p1m11'
+sS'p1m14'
 p187
-S'???: Me?  My name is...'
+S"You: ...I'm %s."
 p188
-sS'p1m12'
+sS'p1m15'
 p189
-S"%s.  What's yours?"
+S"%s: %s...it's a funny name for a %s like %s!"
 p190
-sS'author'
+sS'p1m16'
 p191
-S'Made by Dark Tailed'
+S'You: What?'
 p192
-sS'doorlocked'
+sS'setupname'
 p193
-S"You try to open the door but the handle won't budge."
+S'Your name is?'
 p194
-sS'p1m2'
+sS'p1m10'
 p195
-S'???: ...Hey...'
+S'You: Who are you?'
 p196
-sS'chestopen'
+sS'p1m11'
 p197
-S'Opened the chest, %s was inside.'
+S'???: Me?  My name is...'
 p198
-sS'fox'
+sS'p1m12'
 p199
-S'Fox'
+S"%s.  What's yours?"
 p200
-sS'p1m19'
+sS'author'
 p201
-S"You start to panic inside.  You think 'what is going on?'"
+S'Made by %s'
 p202
-sS'beardesc'
+sS'doorlocked'
 p203
-S'However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
+S"You try to open the door but the handle won't budge."
 p204
-sS'gameaction'
+sS'p1m2'
 p205
-S'What will you do?'
+S'???: ...Hey...'
 p206
-sS'version'
+sS'chestopen'
 p207
-S'Version %s'
+S'Opened the chest, %s was inside.'
 p208
-sS'chestdescopen'
+sS'fox'
 p209
-S'A chest that contains %s and is open.'
+S'Fox'
 p210
-sS'closed'
+sS'p1m19'
 p211
-g211
-sS'setuprace'
+S"You start to panic inside.  You think 'what is going on?'"
 p212
-S'Choose an animal.'
+sS'beardesc'
 p213
-sS'directionerror'
+S'However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
 p214
-S"That's not a proper direction."
+sS'gameaction'
 p215
-sS'you'
+S'What will you do?'
 p216
-g216
-sS'foxdesc'
+sS'version'
 p217
-S'You also look just like a fox, with a tail and everything.'
+S'Version %s, Revision %s'
 p218
-sS'saveerror'
+sS'chestdescopen'
 p219
-S'Not a valid save file.'
+S'A chest that contains %s and is open.'
 p220
-sS'med'
+sS'closed'
 p221
-S'Medium'
+g221
+sS'setuprace'
 p222
-sS'mailto1'
+S'Choose an animal.'
 p223
-S'mailto:dark.tailed.wolf@gmail.com?subject=I%20just%20played%20your%20game%20Fur!&body=I%20rate%20Fur%20(out%20of%205):%20'
+sS'directionerror'
 p224
-sS'p1m13'
+S"That's not a proper direction."
 p225
-S'You lower your fists.'
+sS'new'
 p226
-sS'mailto2'
+S'New Game'
 p227
-S'Thanks for playing fur!  Please send feedback by tapping on me.'
+sS'you'
 p228
-sS'mousedesc'
+g228
+sS'foxdesc'
 p229
-S'However you have small hands, a skinny tail, and big ears, just like a mouse.'
+S'You also look just like a fox, with a tail and everything.'
 p230
-sS'gamestart'
+sS'saveerror'
 p231
-S'You are in a room.'
+S'Not a valid save file.'
 p232
-sS'drinkcmd'
+sS'med'
 p233
-S'drink'
+S'Medium'
 p234
-sS'catdesc'
+sS'p1m13'
 p235
-S'However your hands have very sharp claws and you look more like a cat.'
+S'You lower your fists.'
 p236
-sS'p1m25'
+sS'doorhere'
 p237
-S'You: Yeah, thanks.'
+S'There is a door to the %s'
 p238
-sS'title2'
+sS'mousedesc'
 p239
-S'Fur - Version %s'
+S'However you have small hands, a skinny tail, and big ears, just like a mouse.'
 p240
-sS'p1m17'
+sS'gamestart'
 p241
-S'You then look down at yourself.  %s'
+S'You are in a room.'
 p242
-sS'gocmd'
+sS'drinkcmd'
 p243
-S'go'
+S'drink'
 p244
-sS'annoyoff'
+sS'catdesc'
 p245
-S'Annoyance mode revoked.'
+S'However your hands have very sharp claws and you look more like a cat.'
 p246
-sS'attack1'
-p247
-S'Punch'
-p248
-sS'otterdesc'
-p249
-S"However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
-p250
-sS'lang'
-p251
-S'Language'
-p252
-sS'boy'
-p253
-S'Boy'
-p254
-sS'wolfdesc'
-p255
-S"However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
-p256
-sS'ok'
-p257
-S'Ok'
-p258
-sS'opencmd'
-p259
-g31
-sS'iosask'
-p260
-S'Are you on an iPhone or iPad?  This is important for gameplay.'
-p261
-sS'helpquit'
-p262
-S'quit - Saves and quits the game.'
-p263
-sS'birddesc'
-p264
-S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
-p265
-sS'no'
-p266
-S'No'
-p267
-sS'beta'
-p268
-S'Beta Tester Mode'
-p269
-sS'dragon'
-p270
-S'Dragon'
-p271
-sS'iosquit'
-p272
-S'User did not choose iPhone or iPad.'
-p273
-sS'bird'
-p274
-S'Bird'
-p275
-sS'itemnormal'
-p276
-S"This %s doesn't seem to be unusual."
-p277
-sS'wolf'
-p278
-S'Wolf'
-p279
-sS'attackerror'
-p280
-S'Not a valid attack.'
-p281
 sS'dragondesc'
-p282
+p247
 S'You have scales and the tail of a dragon.  In your throat you feel a hot presence.'
+p248
+sS'title2'
+p249
+S'%s - Version %s'
+p250
+sS'p1m17'
+p251
+S'You then look down at yourself.  %s'
+p252
+sS'gocmd'
+p253
+S'go'
+p254
+sS'annoyoff'
+p255
+S'Annoyance mode revoked.'
+p256
+sS'attack1'
+p257
+S'Punch'
+p258
+sS'otterdesc'
+p259
+S"However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
+p260
+sS'lang'
+p261
+S'Language'
+p262
+sS'boy'
+p263
+S'Boy'
+p264
+sS'wolfdesc'
+p265
+S"However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
+p266
+sS'ok'
+p267
+S'Ok'
+p268
+sS'opencmd'
+p269
+g33
+sS'iosask'
+p270
+S'Are you on an iPhone or iPad?  This is important for gameplay.'
+p271
+sS'helpquit'
+p272
+S'quit - Saves and quits the game.'
+p273
+sS'birddesc'
+p274
+S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
+p275
+sS'no'
+p276
+S'No'
+p277
+sS'beta'
+p278
+S'Beta Tester Mode'
+p279
+sS'dragon'
+p280
+S'Dragon'
+p281
+sS'iosquit'
+p282
+S'User did not choose iPhone or iPad.'
 p283
-sS'p1m24'
+sS'bird'
 p284
-S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
+S'Bird'
 p285
-sS'p1m27'
+sS'itemnormal'
 p286
-S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
+S"This %s doesn't seem to be unusual."
 p287
-sS'p1m26'
+sS'wolf'
 p288
-S"%s: I didn't mean it like that!"
+S'Wolf'
 p289
-sS'p1m21'
+sS'attackerror'
 p290
-S"You tell yourself to calm down so you can figure out why you're half-%s."
+S'Not a valid attack.'
 p291
-sS'options'
+sS'custtitle'
 p292
-S'Options'
+S'Custom Levels Menu'
 p293
-sS'p1m23'
+sS'p1m24'
 p294
-S'You accidentally said the last part out loud.  You meant only to think it.'
+S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
 p295
-sS'p1m22'
+sS'p1m27'
 p296
-S"You: I'm a human though..."
+S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
 p297
+sS'p1m26'
+p298
+S"%s: I didn't mean it like that!"
+p299
+sS'p1m21'
+p300
+S"You tell yourself to calm down so you can figure out why you're half-%s."
+p301
+sS'options'
+p302
+S'Options'
+p303
+sS'p1m23'
+p304
+S'You accidentally said the last part out loud.  You meant only to think it.'
+p305
+sS'p1m22'
+p306
+S"You: I'm a human though..."
+p307
 s.

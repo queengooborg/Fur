@@ -1,3 +1,7 @@
+#PELT Battle Sequence
+#Created September 3, 2013 at 13:20
+#Last modified November 14, 2013 at 11:42
+
 # Attack
 # Items
 # Magic

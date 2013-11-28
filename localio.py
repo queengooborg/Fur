@@ -1,6 +1,11 @@
+#PELT Local I/O
+#Created October 19, 2013 at 23:37
+#Last modified November 26, 2013 at 16:11
+
 import pelt
 import time, os, pickle, sys, random, locale, re
 import easygui
+#import menu
 
 def activate():
 	global scroll, ios, pc, gametitle, version
@@ -112,7 +117,7 @@ class Input():
 			else:
 				choice = menu.main(strings)
 				time.sleep(0.1)
-				number = choice
+				return choice
 		temp = str(choice)
 		if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): return 0
 		return choices[number-1]

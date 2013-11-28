@@ -151,4 +151,4 @@ msgs = {'title':'Fur',
 
 import pickle
 
-with open('xino.lang', 'wb') as handle: pickle.dump(msgs, handle)
+with open('../xino.lang', 'wb') as handle: pickle.dump(msgs, handle)
