@@ -1,21 +1,3 @@
-[Level is "{Name}" sized {Height}x{Width}]
-
-[Dialogue is:
-	<Player talking> %Player% {Player's Dialogue}
-	<Other character talking> %Friend1% {Friend1's Dialogue}
-	<Action> %Action% {The Action, remember you can put %Player% and %Friend1% in the action}
-	<Choice> %Choice% {Question}
-		${Choice 1}$ {Action or Dialogue} $
-		${Choice 2}$ {Action or Dialogue} $
-	%End Choice%
-Finish Dialogue]
-
-[Room is:
-	Called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}:
-    <To make a Door or Trapdoor> {Door/Trapdoor} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
-    <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
-Finish Room]
-
 Level is "Part 1: The Awakening" sized 40x50
 
 Dialogue is:

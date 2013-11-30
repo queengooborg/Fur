@@ -1,11 +1,11 @@
 title = 'Fur'
-author = 'Kurai Atonitsuka and Mike Glover'
+author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka
 #Created May 10, 2013 at 15:14
 #Last edited November 26, 2013 at 19:23
 
-version=356
-officialversion = "0.2 Alpha"
+version=362
+officialversion = "0.21 Alpha"
 langversneeded = 0.1
 
 devmode = True
@@ -22,7 +22,7 @@ from pelt import *
 
 #from pelt.io.network import output, getInput
 
-import localio, netio, custio
+import localio, netio#, custio
 
 sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
 
@@ -49,7 +49,7 @@ except: pass
 def quit(msg, nosave=False):
 	global ios, devplayer
 	if nosave: pass
-	else: pass #save()
+	else: save()
 	color('red')
 	#if ios and not devplayer: notification.schedule(m('mailto2'), 15, 'Beep', m('mailto1'))
 	if msg: sys.exit(msg)
@@ -98,7 +98,7 @@ def mainmenu():
 		devchoices = ['Developer: Skip Dialogue']
 		if devmode:
 			for devchoice in devchoices: choices.append(devchoice)
-		choice = getInput.choice(m('title'), choices)#, window=True)
+		choice = getInput.choice(title, choices)#, window=True)
 		newline()
 		if choice==m('start'):
 			wait_sta = True
@@ -202,7 +202,7 @@ def start():
 			if temp:
 				temp = temp[0]
 				while waiting:
-					temp2 = getInput.text(m('setuplast' %temp))
+					temp2 = getInput.text(m('setuplast') %temp)
 					temp2 = temp2.title()
 					if temp2:
 						player_name = temp
@@ -235,19 +235,19 @@ def part1():
 	if frnd_gndrpn == output('he', r=1): temp = output('he', r=1, modifier='title')
 	else: temp = output('she', r=1, modifier='title')
 	if frnd_gender == output('girl', r=1, modifier='lower'): temp2 = output('her', r=1)
-	else: temp2 = output('his', r=1)
+	else: temp2 = output('him', r=1)
 	output('p1m8', addon=(frnd_gender, temp, temp2, temp2), s=0.5)
 	output('p1m9', s=0.5)
 	output('p1m10', s=2)
 	output('p1m11', newline=False, s=1)
 	waiting = True
 	while waiting:
-		frnd_name=getInput.text(m('setup9' %(frnd_gndrpn, frnd_gender)))
+		frnd_name=getInput.text(m('setup9') %(frnd_gndrpn, frnd_gender))
 		if frnd_name == None or frnd_name == 0: quit(m('nofriendnameerror'))
 		frnd_name = frnd_name.title()
 		i = False
 		if frnd_name: waiting = False
-		else: m('nofriendnameerror' %(frnd_gndrpn, frnd_gender))
+		else: m('nofriendnameerror') %(frnd_gndrpn, frnd_gender)
 	player = Ally(loc, player_name, player_last, species, gender, 1)
 	friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
 	output('p1m12', addon=frnd_name, s=2)
@@ -260,7 +260,7 @@ def part1():
 	if player_species == m('fox'): temp = m('foxdesc')
 	elif player_species == m('dragon'): temp = m('dragondesc')
 	else:
-		temp = m('p1m18' %frnd_gender)+'  '
+		temp = m('p1m18') %frnd_gender+'  '
 		if player_species == m('wolf'): temp += m('wolfdesc')
 		elif player_species == m('cat'): temp += m('catdesc')
 		elif player_species == m('bird'): temp += m('birddesc')

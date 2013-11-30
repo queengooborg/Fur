@@ -1,11 +1,17 @@
 #PELT Local I/O
 #Created October 19, 2013 at 23:37
-#Last modified November 26, 2013 at 16:11
+#Last modified November 29, 2013 at 18:02
 
 import pelt
 import time, os, pickle, sys, random, locale, re
 import easygui
 #import menu
+
+gametitle = ''
+scroll = 0.03
+ios = False
+pc = ''
+version = 0
 
 def activate():
 	global scroll, ios, pc, gametitle, version
@@ -47,8 +53,8 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 		if newline: sys.stdout.write('\n')
 		if noscroll: sys.stdout.flush()
 		sys.stdout.flush()
+		time.sleep(s)
 	elif r == 1: return msg
-	time.sleep(s)
 
 def newline():
 	sys.stdout.write('\n')

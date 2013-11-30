@@ -1,0 +1,218 @@
+(dp0
+S'doorhere'
+p1
+S'There is a door to the %s'
+p2
+sS'playerdesc'
+p3
+S'%s %s the %s %s, carrying %s, at %s, Level %s.  Can use the attacks %s'
+p4
+sS'inputerror'
+p5
+S'Invalid Input'
+p6
+sS'chestunlocked'
+p7
+S'Unlocked the chest using %s.'
+p8
+sS'cancel'
+p9
+S'Cancel'
+p10
+sS'yes'
+p11
+S'Yes'
+p12
+sS'open'
+p13
+g13
+sS'quit'
+p14
+S'Quit'
+p15
+sS'slow'
+p16
+S'Slow'
+p17
+sS'title'
+p18
+S'%s'
+p19
+sS'fast'
+p20
+S'Fast'
+p21
+sS'next'
+p22
+S'Next Page'
+p23
+sS'foodpoisoned'
+p24
+S'That %s was covered in fatal poison.  You are now dead.'
+p25
+sS'chestopenerror'
+p26
+S'The chest is already open!'
+p27
+sS'save1'
+p28
+S'Save %s'
+p29
+sS'save2'
+p30
+S'Save %s: %s'
+p31
+sS'save3'
+p32
+S'Save to File'
+p33
+sS'save4'
+p34
+S'Load File'
+p35
+sS'cmderror'
+p36
+S"I don't know how to do that."
+p37
+sS'using'
+p38
+g38
+sS'with'
+p39
+g39
+sS'foodeaten'
+p40
+S'That %s was very tasty!'
+p41
+sS'chestdescclosed'
+p42
+S'A closed chest.'
+p43
+sS'foodpoisonedmsg'
+p44
+S'User ate a poisoned %s'
+p45
+sS'itemerror'
+p46
+S"I don't see any %s here."
+p47
+sS'itemhere'
+p48
+S'There is a %s here'
+p49
+sS'savewarning'
+p50
+S'WARNING: File belongs to %s %s the %s.  Okay to overwrite?'
+p51
+sS'doormissing'
+p52
+S'There is no door in that direction.'
+p53
+sS'back'
+p54
+S'Back'
+p55
+sS'doordesc'
+p56
+S'A door to the %s that leads to the %s.'
+p57
+sS'colorerror'
+p58
+S'Color input was invalid.'
+p59
+sS'directionerror'
+p60
+S"That's not a proper direction."
+p61
+sS'girl'
+p62
+S'Girl'
+p63
+sS'type1'
+p64
+S'Normal'
+p65
+sS'chestlocked'
+p66
+S'Chest is locked with a key.'
+p67
+sS'drinkpoisonedmsg'
+p68
+S'User drank poison from a %s'
+p69
+sS'no'
+p70
+S'No'
+p71
+sS'doorlocked'
+p72
+S"You try to open the door but the handle won't budge."
+p73
+sS'chestopen'
+p74
+S'Opened the chest, %s was inside.'
+p75
+sS'usingerror'
+p76
+S'What do you want to %s the %s with?'
+p77
+sS'version'
+p78
+S'Version %s, Revision %s'
+p79
+sS'chestdescopen'
+p80
+S'A chest that contains %s and is open.'
+p81
+sS'closed'
+p82
+g82
+sS'saveerror'
+p83
+S'Not a valid save file.'
+p84
+sS'med'
+p85
+S'Medium'
+p86
+sS'title2'
+p87
+S'%s - Version %s'
+p88
+sS'drinkpoisoned'
+p89
+S'That %s had a fatal poison inside.  You are now dead.'
+p90
+sS'lang'
+p91
+S'Language'
+p92
+sS'boy'
+p93
+S'Boy'
+p94
+sS'ok'
+p95
+S'Ok'
+p96
+sS'author'
+p97
+S'Made by %s'
+p98
+sS'attack1desc'
+p99
+S'A simple punch'
+p100
+sS'itemnormal'
+p101
+S"This %s doesn't seem to be unusual."
+p102
+sS'attackerror'
+p103
+S'Not a valid attack.'
+p104
+sS'attack1'
+p105
+S'Punch'
+p106
+s.

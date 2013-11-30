@@ -2,7 +2,7 @@
 #Created September 12, 2013 at 17:17
 #Last edited November 26, 2013 at 16:56
 
-peltvers = 53
+peltvers = 56
 
 import time, os, pickle, sys, random, locale, re
 from localio import output, newline, getInput, activate
@@ -36,7 +36,7 @@ def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], a
 	output('author', addon=author)
 	output('version', addon=(officialvers, version), s=2)
 	newline()
-	output('title', s=3)
+	output('title', addon=gametitle, s=3)
 
 #define the attributes of an item
 class Item(object):
@@ -211,8 +211,14 @@ def getCommand(sentence):
 		else: cmnd['extra'] = words[2:]
 	return cmnd
 
+def setlang(lang):
+	global msgs
+	with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
+	with open('en-pelt.lang', 'rb') as handle2: msgs2 = pickle.load(handle2)
+	msgs.update(msgs2)
+
 def language():
-	global lang, msgs
+	global lang
 	wait=True
 	wait2=True
 	while wait:
@@ -224,13 +230,8 @@ def language():
 				wait2=False
 			elif choice == 0 or choice == 4: quit('', nosave=True)
 			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)
-		if lang == "English":
-			with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
+		if lang == "English": setlang('en')
 		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)
-
-def setlang(lang):
-	global msgs
-	with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
 	
 def m(key, r=0, modifier='normal'):
 	global lang, msgs
@@ -515,7 +516,7 @@ def saveload(save, overwarning=False, overaddon=False):
 		if save: choice = getInput.choice(output('save3', r=1),saveslist)
 		else: choice = getInput.choice(output('save4', r=1),saveslist)
 		if choice == 'c': return False
-		choice = str_to_int(choice)
+		choice = str_to_int(choice[4:])
 		if choice > 0 and choice <= len(saves):
 			if pc == 'computer': response = 'saves/save'+str(choice)+".save"
 			else: response = 'save'+str(choice)+".save"
@@ -652,12 +653,11 @@ try:
 		annoy = handle[2]
 		devplayer = handle[3]
 	if lang == "English": setlang('en')
-except:
+except pickle.UnpicklingError:
 	scrollspeed='Medium'
 	scroll=0.03
-	lang=None
+	lang='en'
 	annoy=False
 	devplayer=True
-	language()
 
 styles = ''
