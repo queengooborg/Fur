@@ -1,11 +1,10 @@
 title = 'Fur'
 author = 'Nightwave Studios'
-#Text-based RPG by Kurai Atonitsuka
+#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios
 #Created May 10, 2013 at 15:14
-#Last edited November 26, 2013 at 19:23
 
-version=362
-officialversion = "0.21 Alpha"
+version=377
+officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
 devmode = True
@@ -22,7 +21,7 @@ from pelt import *
 
 #from pelt.io.network import output, getInput
 
-import localio, netio#, custio
+import localio, netio, custio
 
 sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
 
@@ -168,7 +167,7 @@ def custmenu():
 		if choice == m('custstart'): pass
 		elif choice == m('custdown'): pass
 		elif choice == m('custup'): pass
-		elif choice == m('custcreate'): pass
+		elif choice == m('custcreate'): custio.custcreate()
 		elif choice == 0: return False
 		else: output('inputerror')
 
@@ -354,7 +353,7 @@ def gameplay(map):
 			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open(player.inventory)
 			else: output('cmderror')
 
-def init():
+def init(args = None):
 	global ios, pc
 	if ios:
 		choice = getInput.choice(m('iosask'), ['iPhone','iPad'])
@@ -362,15 +361,17 @@ def init():
 		elif choice == 2: pc = 'iPad'
 		else: quit(m('iosquit'), nosave=True)
 
-	if len(sys.argv) > 1:
-		arg = sys.argv[1:]
-		if "nostory" in arg:
+	if not args:
+		args = sys.argv[1:]
+	if len(args) > 0:
+		if "nostory" in args:
 			loc = 'p1MainRoom'
 			gameplay()
-		elif "betatester" in arg: devplayer = True
-		elif "annoy" in arg: annoy = True
+		elif "betatester" in args: devplayer = True
+		elif "annoy" in args: annoy = True
 
 	mainmenu()
 
-try: init()
-except SystemExit: pass
+if __name__ in "__main__":
+	try: init()
+	except SystemExit: pass

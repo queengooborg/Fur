@@ -1,8 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
-#Last edited November 26, 2013 at 16:56
 
-peltvers = 56
+peltvers = 61
 
 import time, os, pickle, sys, random, locale, re
 from localio import output, newline, getInput, activate
@@ -540,7 +539,7 @@ def saveload(save, overwarning=False, overaddon=False):
 
 #converts a string to an integer and returns -1 if string is not a number
 def str_to_int(text):
-	try: response=int(text)
+	try: response = int(text)
 	except ValueError: return -1
 	return response
 
@@ -661,3 +660,8 @@ except pickle.UnpicklingError:
 	devplayer=True
 
 styles = ''
+
+if __name__ in "__main__":
+	pass
+	try: init()
+	except SystemExit: pass

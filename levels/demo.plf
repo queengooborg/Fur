@@ -3,13 +3,15 @@
 [Level is "{Name}" sized {Height}x{Width}]
 
 [Dialogue is:
+	<Define section> &{Section Name}
 	<Player talking> %Player% {Player's Dialogue}
-	<Other character talking> %Friend1% {Friend1's Dialogue}
+	<Other character talking> %Friend1% {Friend1's Dialogue (Friend1 can be anything else)}
 	<Action> %Action% {The Action, remember you can put %Player% and %Friend1% in the action}
 	<Choice> %Choice% {Question}
 		${Choice 1}$ {Action or Dialogue} $
 		${Choice 2}$ {Action or Dialogue} $
 	%End Choice%
+	<Apply Stat or Give Item> *{Stat/Item} {Stat/Item Name} %Friend1% {Amount (When a stat, 1 or higher will apply, 0 will evict)}
 Finish Dialogue]
 
 [Room is:
@@ -28,13 +30,15 @@ Level is "Format Demo" sized 640x1280
 [To make starting Dialogue:
 
 Dialogue is:
+	<Define section> &{Section Name}
 	<Player talking> %Player% {Player's Dialogue}
-	<Other character talking> %Friend1% {Friend1's Dialogue}
+	<Other character talking> %Friend1% {Friend1's Dialogue (Friend1 can be anything else)}
 	<Action> %Action% {The Action, remember you can put %Player% and %Friend1% in the action}
 	<Choice> %Choice% {Question}
 		${Choice 1}$ {Action or Dialogue} $
 		${Choice 2}$ {Action or Dialogue} $
 	%End Choice%
+	<Apply Stat or Give Item> *{Stat/Item} {Stat/Item Name} %{Character Name (stat only)}% {Amount (When a stat, 1 or higher will apply, 0 will evict)}
 Finish Dialogue
 ]
 
@@ -47,6 +51,15 @@ Dialogue is:
 		$No$ %Player% Hi %Friend2%.
 		%Friend2% Hi %Player%. $
 	%End Choice%
+	
+	&Sudden Speech at a Random Point, Don't Know When
+	%Friend1% Hey, I feel a little sick.
+	*Stat Poison %Friend1% 1
+	%Player% Why don't you lie down for a while?
+	%Action% %Friend1% lies down, then gets back up minutes after.
+	*Stat Poison %Friend1% 0
+	%Friend1% Thanks, I feel better now.  Here, have this.
+	*Item Potion 1
 Finish Dialogue
 
 [To make an Enemy:

@@ -134,5 +134,45 @@ class Input():
 			except KeyboardInterrupt: pass
 		except:
 			easygui.msgbox(title='PELT Engine - '+gametitle+' v'+str(version), msg=msg)
+	
+	def multtext(self, msg, fields, optfields = None):
+		orgmsg = str(msg)
+		disfields = []
+		for field in fields: disfields.append(field)
+		if optfields:
+			for optfield in optfields: disfields.append(optfield+" (Optional)")
+		try:
+			response = []
+			for field in fields:
+				waiting = True
+				while waiting:
+					choice = console.input_alert(msg+"  Enter the "+str(field), '', '', 'Ok')
+					if choice != "": waiting = False
+				response.append(choice)
+			for field in optfields:
+				fields.append(field)
+				choice = console.input_alert(msg+"  Enter the "+str(field), '', '', 'Ok')
+				response.append(choice)
+		except:
+			waiting = True
+			while waiting:
+				waiting = True
+				temp = False
+				while waiting:
+					response = easygui.multenterbox(msg, 'PELT Engine - '+gametitle+' v'+str(version), disfields)
+					x = 0
+					if response:
+						for resp in response:
+							if x <= len(fields):
+								if resp == "":
+									msg = "One or more required fields are not filled out.  "+orgmsg
+									temp = True
+									break
+							else: break
+							x += 1
+						if not temp: waiting = False
+						else: temp = False
+		dictresp = dict(zip(disfields, response))
+		return dictresp
 
 getInput = Input()

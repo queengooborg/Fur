@@ -112,107 +112,115 @@ sS'back'
 p54
 S'Back'
 p55
-sS'doordesc'
+sS'iosquit'
 p56
-S'A door to the %s that leads to the %s.'
+S'User did not choose iPhone or iPad.'
 p57
-sS'colorerror'
+sS'doordesc'
 p58
-S'Color input was invalid.'
+S'A door to the %s that leads to the %s.'
 p59
-sS'directionerror'
+sS'colorerror'
 p60
-S"That's not a proper direction."
+S'Color input was invalid.'
 p61
-sS'girl'
+sS'directionerror'
 p62
-S'Girl'
+S"That's not a proper direction."
 p63
-sS'type1'
+sS'girl'
 p64
-S'Normal'
+S'Girl'
 p65
-sS'chestlocked'
+sS'type1'
 p66
-S'Chest is locked with a key.'
+S'Normal'
 p67
-sS'drinkpoisonedmsg'
+sS'chestlocked'
 p68
-S'User drank poison from a %s'
+S'Chest is locked with a key.'
 p69
-sS'no'
+sS'drinkpoisonedmsg'
 p70
-S'No'
+S'User drank poison from a %s'
 p71
-sS'doorlocked'
+sS'no'
 p72
-S"You try to open the door but the handle won't budge."
+S'No'
 p73
-sS'chestopen'
+sS'doorlocked'
 p74
-S'Opened the chest, %s was inside.'
+S"You try to open the door but the handle won't budge."
 p75
-sS'usingerror'
+sS'chestopen'
 p76
-S'What do you want to %s the %s with?'
+S'Opened the chest, %s was inside.'
 p77
-sS'version'
+sS'usingerror'
 p78
-S'Version %s, Revision %s'
+S'What do you want to %s the %s with?'
 p79
-sS'chestdescopen'
+sS'version'
 p80
-S'A chest that contains %s and is open.'
+S'Version %s, Revision %s'
 p81
-sS'closed'
+sS'chestdescopen'
 p82
-g82
-sS'saveerror'
+S'A chest that contains %s and is open.'
 p83
-S'Not a valid save file.'
+sS'closed'
 p84
-sS'med'
+g84
+sS'saveerror'
 p85
-S'Medium'
+S'Not a valid save file.'
 p86
-sS'title2'
+sS'med'
 p87
-S'%s - Version %s'
+S'Medium'
 p88
-sS'drinkpoisoned'
+sS'title2'
 p89
-S'That %s had a fatal poison inside.  You are now dead.'
+S'%s - Version %s'
 p90
-sS'lang'
+sS'drinkpoisoned'
 p91
-S'Language'
+S'That %s had a fatal poison inside.  You are now dead.'
 p92
-sS'boy'
+sS'lang'
 p93
-S'Boy'
+S'Language'
 p94
-sS'ok'
+sS'boy'
 p95
-S'Ok'
+S'Boy'
 p96
-sS'author'
+sS'ok'
 p97
-S'Made by %s'
+S'Ok'
 p98
-sS'attack1desc'
+sS'iosask'
 p99
-S'A simple punch'
+S'Are you on an iPhone or iPad?  This is important for gameplay.'
 p100
-sS'itemnormal'
+sS'author'
 p101
-S"This %s doesn't seem to be unusual."
+S'Made by %s'
 p102
-sS'attackerror'
+sS'attack1desc'
 p103
-S'Not a valid attack.'
+S'A simple punch'
 p104
-sS'attack1'
+sS'itemnormal'
 p105
-S'Punch'
+S"This %s doesn't seem to be unusual."
 p106
+sS'attackerror'
+p107
+S'Not a valid attack.'
+p108
+sS'attack1'
+p109
+S'Punch'
+p110
 s.

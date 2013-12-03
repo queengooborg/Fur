@@ -102,8 +102,6 @@ msgs = {'nofriendnameerror':"You didn't type your friend's name!  Remember, %s i
 'gocmd':'go',
 'helpgo':'go [direction] - Go through the door in the defined direction',
 'opencmd':'open',
-'iosask':'Are you on an iPhone or iPad?  This is important for gameplay.',
-'iosquit':'User did not choose iPhone or iPad.'
 }
 
 import pickle
