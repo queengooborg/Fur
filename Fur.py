@@ -3,7 +3,7 @@ author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios
 #Created May 10, 2013 at 15:14
 
-version=377
+version=388
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
@@ -21,7 +21,7 @@ from pelt import *
 
 #from pelt.io.network import output, getInput
 
-import localio, netio, custio
+import custio
 
 sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
 

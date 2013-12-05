@@ -1,10 +1,10 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 61
+peltvers = 85
 
-import time, os, pickle, sys, random, locale, re
-from localio import output, newline, getInput, activate
+import time, os, pickle, sys, random, locale, re, argparse
+from localio import output, newline, getInput, color
 
 try:
 	import console, notification
@@ -19,21 +19,18 @@ except ImportError:
 	ios = False
 
 def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], args={}):
-	global version, officialversion, langversneeded, debug, gametitle, author
+	global version, officialversion, langversneeded, debug, gametitle, author, peltvers
 	version = vers
 	officialversion = officialvers
 	langversneeded = langversneed
 	debug = debugmode
 	gametitle = title
 	author = auth
-	for m in modules:
-		m.activate()
-	from localio import output, newline, getInput, activate
-	activate()
+	#from localio import output, newline, getInput, color
 	#Print the title, author, and version
 	color('reset')
 	output('author', addon=author)
-	output('version', addon=(officialvers, version), s=2)
+	output('version', addon=(officialversion, peltvers), s=2)
 	newline()
 	output('title', addon=gametitle, s=3)
 
@@ -209,39 +206,6 @@ def getCommand(sentence):
 				return None
 		else: cmnd['extra'] = words[2:]
 	return cmnd
-
-def setlang(lang):
-	global msgs
-	with open('english.lang', 'rb') as handle: msgs = pickle.load(handle)
-	with open('en-pelt.lang', 'rb') as handle2: msgs2 = pickle.load(handle2)
-	msgs.update(msgs2)
-
-def language():
-	global lang
-	wait=True
-	wait2=True
-	while wait:
-		while wait2:
-			choice = getInput.choice('Language/Idioma', ['English','Espanol (Archivo del Idioma no Esta Presente)','Francais (Fichier de Langue pas present', 'Quit'])
-			if choice == 1:
-				lang = "English"
-				with open('options.pyp', 'wb') as handle: pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
-				wait2=False
-			elif choice == 0 or choice == 4: quit('', nosave=True)
-			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)
-		if lang == "English": setlang('en')
-		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)
-	
-def m(key, r=0, modifier='normal'):
-	global lang, msgs
-	if lang == "English": setlang('en')
-	if r == 1:
-		print "You should fix this message, it has m('"+key+"', r=1).  Remove the r=1"
-	return msgs[key]
-	#if modifier == 'caps': msg = msgs[key].upper()
-	#elif modifier == 'title': msg = msgs[key].title()
-	#elif modifier == 'lower': msg = msgs[key].lower()
-	#return msg
 
 #PARSER
 def getblocks(start, end, data, max):
@@ -538,9 +502,9 @@ def saveload(save, overwarning=False, overaddon=False):
 			output('')
 
 #converts a string to an integer and returns -1 if string is not a number
-def str_to_int(text):
+def str_to_int(text, default=-1):
 	try: response = int(text)
-	except ValueError: return -1
+	except ValueError: return default
 	return response
 
 #define the player and characters
@@ -612,56 +576,16 @@ class Attack(object):
 		crit += 5
 		if crit == 0.5: print('The attack was not very effective.')
 		elif crit == 1.5: print('The attack landed a critical hit!')
-			
 
-def color(color):
-	global styles
-	styles = ''
-	if color == 'red':
-		try: console.set_color(1.0, 0.0, 0.0)
-		except: styles += colorama.Fore.RED
-	elif color == 'green':
-		try: console.set_color(0.2, 0.8, 0.2)
-		except: styles += colorama.Fore.GREEN
-	elif color == 'blue':
-		try: console.set_color(0.0, 0.0, 1.0)
-		except: styles += colorama.Fore.CYAN
-	elif color == 'reset':
-		try:
-			console.set_color(0.2, 0.2, 0.2)
-			console.set_font()
-		except: styles += colorama.Fore.RESET
-	elif color == 'random':
-		try: console.set_color(random.random(),random.random(),random.random())
-		except:
-			list = [colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW, colorama.Fore.BLUE, colorama.Fore.MAGENTA, colorama.Fore.CYAN, colorama.Fore.WHITE]
-			styles += random.choice(list)
-	elif color == 'bold':
-		try: console.set_font('Helvetica', 32.0)
-		except: pass
-	else: output('colorerror')
-
-try:
-	with open('options.pyp', 'rb') as handle:
-		handle = pickle.load(handle)
-		lang = handle[0]
-		scrollspeed = handle[1]
-		if scrollspeed == 'Fast': scroll = 0.01
-		elif scrollspeed == 'Medium': scroll = 0.03
-		elif scrollspeed == 'Slow': scroll = 0.05
-		annoy = handle[2]
-		devplayer = handle[3]
-	if lang == "English": setlang('en')
-except pickle.UnpicklingError:
-	scrollspeed='Medium'
-	scroll=0.03
-	lang='en'
-	annoy=False
-	devplayer=True
-
-styles = ''
-
-if __name__ in "__main__":
-	pass
-	try: init()
-	except SystemExit: pass
+def language():
+	wait=True
+	wait2=True
+	while wait:
+		while wait2:
+			choice = getInput.choice('Language/Idioma', ['English','Espanol (Archivo del Idioma no Esta Presente)','Francais (Fichier de Langue pas present', 'Quit'])
+			if choice == 1:
+				i18n.setlang("en")
+				wait2 = False
+			elif choice == 0 or choice == 4: quit('', nosave=True)
+			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)
+		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)

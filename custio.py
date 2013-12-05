@@ -5,16 +5,15 @@ import socket
 
 #socket.settimeout(30)
 
-#import urllib2
+import urllib2
 import easygui as eg
-import localio
-from pelt import str_to_int
+from pelt import str_to_int, localio
 import pelt
 
 def internet(page, timeout=10):
 	pass #return urllib2.urlopen(page, timeout)
 
-def output(msg, newline=True, noscroll=False):
+def poutput(msg, newline=True, noscroll=False):
 	for c in msg:
 		sys.stdout.write(c)
 		if not noscroll:
@@ -48,7 +47,7 @@ def custcreate():
 	#Dialogue
 	
 	dialexists = localio.getInput.choice("Would you like to add dialogue to the level?", ['Yes', 'No'])
-	if dialexists = "Yes": dialexists = True
+	if dialexists == "Yes": dialexists = True
 	else: dialexists = False
 	
 	dialogue = []
@@ -78,7 +77,7 @@ def custcreate():
 			elif type == option[4]:
 				op = ["Stat", "Item"]
 				statitem = localio.getInput.choice("Give Stat or Item", op)
-				if statitem = op[0]:
+				if statitem == op[0]:
 					opt = ["Name", "Player", "Amount (0 will remove stat)"]
 					orgmsg = "Give Stat"
 					msg = orgmsg
@@ -93,7 +92,7 @@ def custcreate():
 								dialogue.append("*Stat "+stat[opt[0]]+" "+stat[opt[1]]+" "+stat[opt[2]])
 								waiting = False
 						else: waiting = False
-				elif statitem = op[1]:
+				elif statitem == op[1]:
 					opt = ["Name", "Amount (any number above 0)"]
 					orgmsg = "Give Item"
 					msg = orgmsg
@@ -102,8 +101,9 @@ def custcreate():
 						item = localio.getInput.multtext(msg, opt)
 						if item:
 							msg = orgmsg
-							amount = str_to_int(stat[opt[2]])
-							if amount <= 0: msg = "Amount is not a valid number.  "+msg
+							invalid = -1000
+							amount = str_to_int(stat[opt[2]], default=invalid)
+							if amount != invalid: msg = "Amount is not a valid number.  "+msg
 							else:
 								dialogue.append("*Item "+item[opt[0]]+" "+stat[opt[1]])
 								waiting = False
@@ -117,5 +117,7 @@ def custcreate():
 		for dialogu in dialogue: level.append("\t"+dialogu)
 	level.append("Finish Dialogue")
 	
+	
+		
 	# XXX continue with program
 

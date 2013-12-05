@@ -162,7 +162,7 @@ S'What do you want to %s the %s with?'
 p79
 sS'version'
 p80
-S'Version %s, Revision %s'
+S'Version %s, PELT Version %s'
 p81
 sS'chestdescopen'
 p82

@@ -1,7 +1,7 @@
 msgs = {'title':'%s',
 'title2':'%s - Version %s',
 'author':'Made by %s',
-'version':'Version %s, Revision %s',
+'version':'Version %s, PELT Version %s',
 'save1':'Save %s',
 'save2':'Save %s: %s',
 'save3':'Save to File',
@@ -57,6 +57,10 @@ msgs = {'title':'%s',
 'iosquit':'User did not choose iPhone or iPad.'
 }
 
-import pickle
+import pickle, os.path
 
-with open('../en-pelt.lang', 'wb') as handle: pickle.dump(msgs, handle)
+rootdir = os.path.dirname(os.path.dirname(__file__))
+resourcedir = os.path.join(rootdir, 'resources')
+langdir = os.path.join(resourcedir, 'langs')
+
+with open(os.path.join(langdir, "en-pelt.py"), 'wb') as handle: pickle.dump(msgs, handle)

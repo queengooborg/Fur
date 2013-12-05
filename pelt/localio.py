@@ -1,40 +1,32 @@
 #PELT Local I/O
 #Created October 19, 2013 at 23:37
-#Last modified November 29, 2013 at 18:02
 
-import pelt
+from i18n import m
+import config
 import time, os, pickle, sys, random, locale, re
 import easygui
 #import menu
 
-gametitle = ''
-scroll = 0.03
-ios = False
-pc = ''
-version = 0
+try:
+	import console, notification
+	from scene import *
+	config.pc = 'iphone'
+	config.ios = True
+except ImportError:
+	import colorama, easygui #, menu, pygame
+	colorama.init()
+	#pygame.init()
+	config.pc = 'computer'
+	config.ios = False
 
-def activate():
-	global scroll, ios, pc, gametitle, version
-	scroll = pelt.scroll
-	ios = pelt.ios
-	pc = pelt.pc
-	gametitle = pelt.gametitle
-	version = pelt.version
-	if ios:
-		import console, notification
-		from scene import *
-	else:
-		import colorama, easygui #, menu, pygame
-		colorama.init()
-		#pygame.init()
+styles = ''
 
 #Function that prints the messages
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
-	global scroll
-	s = 0 # TEMPORARY LINE
+	#s = 0 # TEMPORARY LINE
 	# modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
-		if dict: msg = pelt.m(msg)
+		if dict: msg = m(msg)
 	except KeyError:
 		if msg == '': pass
 		else: msg = "WARNING: "+msg+" is not a valid keyword."
@@ -49,7 +41,7 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 			sys.stdout.write(c)
 			if not noscroll:
 				sys.stdout.flush()
-				time.sleep(scroll)
+				time.sleep(config.scroll)
 		if newline: sys.stdout.write('\n')
 		if noscroll: sys.stdout.flush()
 		sys.stdout.flush()
@@ -84,7 +76,7 @@ class Input():
 		strings = [str(c) for c in choices]
 		if ios:
 			temp = strings[-1]
-			if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): strings.remove(temp)
+			if temp == m('quit') or temp == m('back') or temp == m('cancel'): strings.remove(temp)
 			try:
 				if len(strings) == 1: choice = console.alert(msg, '', strings[0])
 				elif len(strings) == 2: choice = console.alert(msg, '', strings[0], strings[1])
@@ -125,7 +117,7 @@ class Input():
 				time.sleep(0.1)
 				return choice
 		temp = str(choice)
-		if temp == pelt.m('quit') or temp == pelt.m('back') or temp == pelt.m('cancel'): return 0
+		if temp == m('quit') or temp == m('back') or temp == m('cancel'): return 0
 		return choices[number-1]
 
 	def alert(self, msg):
@@ -172,7 +164,36 @@ class Input():
 							x += 1
 						if not temp: waiting = False
 						else: temp = False
-		dictresp = dict(zip(disfields, response))
+					else: waiting = False
+		if response: dictresp = dict(zip(disfields, response))
+		else: return None
 		return dictresp
 
 getInput = Input()
+
+def color(color):
+	global styles
+	styles = ''
+	if color == 'red':
+		try: console.set_color(1.0, 0.0, 0.0)
+		except: styles += colorama.Fore.RED
+	elif color == 'green':
+		try: console.set_color(0.2, 0.8, 0.2)
+		except: styles += colorama.Fore.GREEN
+	elif color == 'blue':
+		try: console.set_color(0.0, 0.0, 1.0)
+		except: styles += colorama.Fore.CYAN
+	elif color == 'reset':
+		try:
+			console.set_color(0.2, 0.2, 0.2)
+			console.set_font()
+		except: styles += colorama.Fore.RESET
+	elif color == 'random':
+		try: console.set_color(random.random(),random.random(),random.random())
+		except:
+			list = [colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW, colorama.Fore.BLUE, colorama.Fore.MAGENTA, colorama.Fore.CYAN, colorama.Fore.WHITE]
+			styles += random.choice(list)
+	elif color == 'bold':
+		try: console.set_font('Helvetica', 32.0)
+		except: pass
+	else: output('colorerror')

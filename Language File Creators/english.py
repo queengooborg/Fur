@@ -104,6 +104,10 @@ msgs = {'nofriendnameerror':"You didn't type your friend's name!  Remember, %s i
 'opencmd':'open',
 }
 
-import pickle
+import pickle, os.path
 
-with open('../english.lang', 'wb') as handle: pickle.dump(msgs, handle)
+rootdir = os.path.dirname(os.path.dirname(__file__))
+resourcedir = os.path.join(rootdir, 'resources')
+langdir = os.path.join(resourcedir, 'langs')
+
+with open(os.path.join(langdir, "english.py"), 'wb') as handle: pickle.dump(msgs, handle)
