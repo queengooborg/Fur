@@ -1,0 +1,407 @@
+(dp0
+S'helpexamine'
+p1
+S'examine [item] - shows description of item'
+p2
+sS'otterdesc'
+p3
+S"However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
+p4
+sS'helpsave'
+p5
+S'save - Saves the game'
+p6
+sS'setupeyeopen'
+p7
+S"You should've opened your eyes by now.  Good.  You have finished your rebirth.  You will enter Quilar as a half-%s..."
+p8
+sS'gameaction'
+p9
+S'What will you do?'
+p10
+sS'helpgo'
+p11
+S'go [direction] - Go through the door in the defined direction'
+p12
+sS'eatcmd'
+p13
+S'eat'
+p14
+sS'setup9'
+p15
+S'Enter the name of your friend, remember, %s is a %s.'
+p16
+sS'betaon'
+p17
+S'Beta tester mode now active.'
+p18
+sS'he'
+p19
+g19
+sS'his'
+p20
+g20
+sS'setupgndr'
+p21
+S'Are you a boy or a girl?'
+p22
+sS'setuprace'
+p23
+S'Choose an animal.'
+p24
+sS'bear'
+p25
+S'Bear'
+p26
+sS'him'
+p27
+g27
+sS'broken2'
+p28
+S'Broken ATM'
+p29
+sS'broken3'
+p30
+S"It's broken at the moment!"
+p31
+sS'setupname'
+p32
+S'Your name is?'
+p33
+sS'she'
+p34
+g34
+sS'broken4'
+p35
+S'Next part is still in development.  Please load in a developer save to unlock the next part.'
+p36
+sS'helphelp'
+p37
+S'help - Displays this message'
+p38
+sS'savecmd'
+p39
+S'save'
+p40
+sS'gamestart'
+p41
+S'You are in a room.'
+p42
+sS'fox'
+p43
+S'Fox'
+p44
+sS'broken1'
+p45
+S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "%s"'
+p46
+sS'new'
+p47
+S'New Game'
+p48
+sS'bird'
+p49
+S'Bird'
+p50
+sS'mousedesc'
+p51
+S'However you have small hands, a skinny tail, and big ears, just like a mouse.'
+p52
+sS'drinkcmd'
+p53
+S'drink'
+p54
+sS'wolfdesc'
+p55
+S"However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
+p56
+sS'wolf'
+p57
+S'Wolf'
+p58
+sS'p1m25'
+p59
+S'You: Yeah, thanks.'
+p60
+sS'p1m24'
+p61
+S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
+p62
+sS'p1m27'
+p63
+S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
+p64
+sS'p1m26'
+p65
+S"%s: I didn't mean it like that!"
+p66
+sS'p1m21'
+p67
+S"You tell yourself to calm down so you can figure out why you're half-%s."
+p68
+sS'p1m20'
+p69
+S'%s: ...What?'
+p70
+sS'p1m23'
+p71
+S'You accidentally said the last part out loud.  You meant only to think it.'
+p72
+sS'p1m22'
+p73
+S"You: I'm a human though..."
+p74
+sS'load'
+p75
+S'Load Game (Broken ATM)'
+p76
+sS'custstart'
+p77
+S'Start Level'
+p78
+sS'helpcmd'
+p79
+S'help'
+p80
+sS'examinecmd'
+p81
+S'examine'
+p82
+sS'setupeyeclose'
+p83
+S'%s %s...Good.  Now you may enter the gates and find yourself in "Fur"...close your eyes and count to 3, then open your eyes...'
+p84
+sS'helpeat'
+p85
+S'eat [item] - If item is food, will eat item'
+p86
+sS'her'
+p87
+g87
+sS'helpdrink'
+p88
+S'drink [item] - if item is a drink, will drink item'
+p89
+sS'custom'
+p90
+S'Community Levels'
+p91
+sS'start'
+p92
+S'Start Game'
+p93
+sS'options'
+p94
+S'Options'
+p95
+sS'quitcmd'
+p96
+S'quit'
+p97
+sS'helpload'
+p98
+S'load - Loads the game from a save file (dangerous)'
+p99
+sS'quitmsg'
+p100
+S"Quit on user's demand."
+p101
+sS'takecmd'
+p102
+S'take'
+p103
+sS'custcreate'
+p104
+S'Create Level'
+p105
+sS'otter'
+p106
+S'Otter'
+p107
+sS'annoy'
+p108
+S'Annoyance Mode (Broken ATM)'
+p109
+sS'setuplast'
+p110
+S'%s...and your last?'
+p111
+sS'meyou'
+p112
+S'me and you'
+p113
+sS'annoyon'
+p114
+S'Annoyance mode now active.'
+p115
+sS'cat'
+p116
+S'Cat'
+p117
+sS'betaoff'
+p118
+S'Beta tester mode revoked.'
+p119
+sS'p1m8'
+p120
+S'Your eyes focus and you figure out why the %s looked so strange.  %s was fox-like, with fur covering %s entire body, and a big tail sticking out behind %s.'
+p121
+sS'custdown'
+p122
+S'Download Level'
+p123
+sS'helptake'
+p124
+S'take [item] - if item is movable, will take item'
+p125
+sS'loadcmd'
+p126
+g75
+sS'custup'
+p127
+S'Upload Level'
+p128
+sS'p1title'
+p129
+S'PART 1: The Awakening'
+p130
+sS'p1m9'
+p131
+S'Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
+p132
+sS'p1m6'
+p133
+S'You slowly open your eyes.  A young %s about your age is trying to shake you awake.  You notice something strange about the %s, but your eyes are still blurred from waking up.'
+p134
+sS'p1m7'
+p135
+S"???: You're awake!  I've been shaking you for over an hour or so!"
+p136
+sS'p1m4'
+p137
+S'???: ...Hey, you lazy %s!'
+p138
+sS'nofriendnameerror'
+p139
+S"You didn't type your friend's name!  Remember, %s is a %s."
+p140
+sS'mouse'
+p141
+S'Mouse'
+p142
+sS'p1m3'
+p143
+S'???: ...Wake up...'
+p144
+sS'gameinputerror'
+p145
+S"I didn't understand what you typed."
+p146
+sS'p1m1'
+p147
+S'???: ...'
+p148
+sS'p1m14'
+p149
+S"You: ...I'm %s."
+p150
+sS'p1m15'
+p151
+S"%s: %s...it's a funny name for a %s like %s!"
+p152
+sS'p1m16'
+p153
+S'You: What?'
+p154
+sS'p1m5'
+p155
+S'???: Wake up!'
+p156
+sS'p1m10'
+p157
+S'You: Who are you?'
+p158
+sS'p1m11'
+p159
+S'???: Me?  My name is...'
+p160
+sS'p1m12'
+p161
+S"%s.  What's yours?"
+p162
+sS'p1m13'
+p163
+S'You lower your fists.'
+p164
+sS'p1m2'
+p165
+S'???: ...Hey...'
+p166
+sS'p1m18'
+p167
+S"They are in a similar state to those of the %s's."
+p168
+sS'p1m19'
+p169
+S"You start to panic inside.  You think 'what is going on?'"
+p170
+sS'beardesc'
+p171
+S'However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
+p172
+sS'you'
+p173
+g173
+sS'foxdesc'
+p174
+S'You also look just like a fox, with a tail and everything.'
+p175
+sS'catdesc'
+p176
+S'However your hands have very sharp claws and you look more like a cat.'
+p177
+sS'dragondesc'
+p178
+S'You have scales and the tail of a dragon.  In your throat you feel a hot presence.'
+p179
+sS'beta'
+p180
+S'Beta Tester Mode'
+p181
+sS'p1m17'
+p182
+S'You then look down at yourself.  %s'
+p183
+sS'gocmd'
+p184
+S'go'
+p185
+sS'annoyoff'
+p186
+S'Annoyance mode revoked.'
+p187
+sS'opencmd'
+p188
+S'open'
+p189
+sS'birddesc'
+p190
+S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
+p191
+sS'dragon'
+p192
+S'Dragon'
+p193
+sS'custtitle'
+p194
+S'Custom Levels Menu'
+p195
+sS'helpquit'
+p196
+S'quit - Saves and quits the game.'
+p197
+sS'scroll'
+p198
+S'Scroll Speed (%s)'
+p199
+s.

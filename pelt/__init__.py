@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
+
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 85
+peltvers = 87
 
 import time, os, pickle, sys, random, locale, re, argparse
 from localio import output, newline, getInput, color
@@ -582,10 +584,11 @@ def language():
 	wait2=True
 	while wait:
 		while wait2:
-			choice = getInput.choice('Language/Idioma', ['English','Espanol (Archivo del Idioma no Esta Presente)','Francais (Fichier de Langue pas present', 'Quit'])
-			if choice == 1:
+			choice = getInput.choice('Language/Idioma', ['English','Espanol (Archivo del Idioma no Esta Presente)','Francais (Fichier de Langue pas present)', 'Quit'])
+			if choice == 'English':
 				i18n.setlang("en")
 				wait2 = False
-			elif choice == 0 or choice == 4: quit('', nosave=True)
+			elif choice == '': quit('', nosave=True)
 			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)
 		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)
+

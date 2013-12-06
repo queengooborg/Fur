@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+#PELT I18N (Internationalization)
+#Created December 4, 2013 at 15:30
+
 import config
 import os.path, pickle
 
@@ -6,7 +11,10 @@ def setlang(lang):
 	langdir = os.path.join(config.langdir, lang)
 	msgs = {}
 	for l in os.listdir(langdir):
-		with open(os.path.join(langdir, l), 'rb') as handle: msgs.update(pickle.load(handle))
+		langfile = os.path.join(langdir, l)
+		if not "Icon" in l:
+			if not "desktop.ini" in l:
+				with open(langfile, 'rb') as handle: msgs.update(pickle.load(handle))
 	config.lang = lang
 	config.saveopt()
 	

@@ -64,6 +64,6 @@ import pickle, os.path
 rootdir = os.path.dirname(os.path.dirname(__file__))
 resourcedir = os.path.join(rootdir, 'resources')
 langsdir = os.path.join(resourcedir, 'langs')
-langdir = os.path.join(langsdir, 'en')
+langdir = os.path.join(langsdir, 'es')
 
-with open(os.path.join(langdir, "en-pelt.lang"), 'wb') as handle: pickle.dump(msgs, handle)
+with open(os.path.join(langdir, "es-pelt.lang"), 'wb') as handle: pickle.dump(msgs, handle)

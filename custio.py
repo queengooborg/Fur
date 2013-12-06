@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #Fur Custom Level Functions
 #Created November 26, 2013 at 18:32
 
@@ -6,7 +8,6 @@ import socket
 #socket.settimeout(30)
 
 import urllib2
-import easygui as eg
 from pelt import str_to_int, localio
 import pelt
 
@@ -28,8 +29,7 @@ def connect():
 	output('Connecting to KageASHI...')
 	try: success = None #urllib2.urlopen(domain, None, 10)
 	except:
-		output('Sorry, cannot connect to KageASHI.  More details will be shown in a new window.')
-		eg.exceptionbox()
+		output('Sorry, cannot connect to KageASHI.')
 
 def custcreate():
 	#Level Metadata

@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+#PELT Config
+#Created December 4, 2013 at 15:22
+
 import pickle, os.path
 
 rootdir = os.path.dirname(os.path.dirname(__file__))

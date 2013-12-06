@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 title = 'Fur'
 author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios

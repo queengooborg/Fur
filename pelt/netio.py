@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 #PELT Network I/O
 #Created October 17, 2013 at 11:04
-#Last modified November 4, 2013 at 18:58
 
 from pelt import m
 

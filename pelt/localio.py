@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #PELT Local I/O
 #Created October 19, 2013 at 23:37
 
