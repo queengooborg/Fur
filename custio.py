@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #Fur Custom Level Functions
 #Created November 26, 2013 at 18:32
 
@@ -117,7 +115,63 @@ def custcreate():
 		for dialogu in dialogue: level.append("\t"+dialogu)
 	level.append("Finish Dialogue")
 	
+	# XXX add enemies
 	
+	roomexists = False
+	wait = True
+	roomdata = []
+	while wait:
+		waiting = True
+		msg = "Add a New Room"
+		while waiting:
+			op = ["Room Name", "Height", "Width", "Floor Letter" "X Placement", "Y Placement"]
+			me = localio.getInput.multtext(msg, op)
+			msg = "Add a New Room"
+			if metadata:
+				h = str_to_int(me['Height'])
+				w = str_to_int(me['Width'])
+				x = str_to_int(me['X Placement'])
+				y = str_to_int(me['Y Placement'])
+				if -1 not in [h, w, x, y] and len(me["Floor Letter"]) < 1:
+					roomdata.append("Called "+me['Room Name']+" sized "+me['Height']+"x"+me['Width']+" placed "+me['Floor Letter']+me['X Placement']+"x"+me['Y Placement'])
+					wait = False
+				else: msg = "Invalid input.  "+msg
+			else:
+				if roomexists: wait = False
+				else: msg = "You need to add at least one room.  "+msg
+		
+		waitin = True
+		while waitin:
+			opt = ["Create Door", "Create Trapdoor", "Create Chest", "Finish Room"]
+			choice = localio.getInput.choice("Add Elements to "+me['Room Name'], opt)
+			if choice == opt[0]:
+				doordata = localio.getInput.multtext(opt[0], ["To Room", "On Wall", "Blocks From Wall", "From Wall"], ["Locked With Key", "Properties"])
+				placement = str_to_int(doordata['Blocks From Wall'])
+				if not placement == -1:
+					door = "Door to "+doordata['To Room']+" on "+doordata['On Wall']+" "+doordata['Blocks From Wall']+" from "+doordata['From Wall']
+					if doordata['Locked With Key']:
+						door += " locked with "+doordata['Locked With Key']
+						if doordata['Properties']: door += " ("+doordata['Properties']+")"
+				else: print "Blocks From Wall is an invalid choice"
+			elif choice == opt[1]:
+				doordata = localio.getInput.multtext(opt[0], ["To Room", "From First Wall", "Blocks From First Wall", "From Second Wall", "Blocks From Second Wall"], ["Locked With Key", "Properties"])
+				placemen1 = str_to_int(doordata['Blocks From First Wall'])
+				placemen2 = str_to_int(doordata['Blocks From Second Wall'])
+				if not placemen1 == -1 or placemen2 == -1:
+					door = "Door to "+doordata['To Room']+" on "+doordata['Blocks From First Wall']+" from "+doordata['On First Wall']+" and "+doordata['Blocks From Second Wall']+" from "+doordata['From Second Wall']
+					if doordata['Locked With Key']:
+						door += " locked with "+doordata['Locked With Key']
+						if doordata['Properties']: door += " ("+doordata['Properties']+")"
+				else: print "Blocks From Wall is an invalid choice"
+			elif choice == opt[2]:
+				pass
+		
+		"""Room is:
+	Called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}
+    <To make a Door or Trapdoor> {Door/Trapdoor} to {Room} <Optional> locked with {Key Name} <Optional> ({Properties}) </Optional> </Optional> <If Door> on {Left/Right/Top/Bottom} {Pixels} from {Left/Right/Top/Bottom} </If Door> </To make a Door or Trapdoor>
+    <To make a Chest> Chest placed {X Coord in Room}x{Y Coord in Room} with ({Item 1}, {Item 2}, {Etc.}) </To make a Chest>
+Finish Room
+]"""
 		
 	# XXX continue with program
 

@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
-
 title = 'Fur'
 author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios
 #Created May 10, 2013 at 15:14
 
-version=388
+version=392
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
-
-devmode = True
 
 #Dependencies:
 #	For iPad:
@@ -19,9 +15,14 @@ devmode = True
 #		EasyGUI: http://easygui.sourceforge.net/
 #		PyGame: http://www.pygame.org/
 
+#Import PELT
 from pelt import *
+from pelt.i18n import m
 
-#from pelt.io.network import output, getInput
+#Initialize config variables (obsolete)
+devmode = True
+annoy = False
+gui = True
 
 import custio
 
@@ -294,8 +295,7 @@ def gameplay(map):
 	global loc, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
 	playing=True
 	#quit(output('broken4', r=1))
-	if ios: maploc = map+'.plf'
-	else: maploc = 'levels/'+map+'.plf'
+	maploc = 'resources/levels/'+map+'.plf'
 	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
 	color('blue')
 	output(level.name, dict=False, s=2)
@@ -369,8 +369,9 @@ def init(args = None):
 		if "nostory" in args:
 			loc = 'p1MainRoom'
 			gameplay()
-		elif "betatester" in args: devplayer = True
-		elif "annoy" in args: annoy = True
+		elif "betatester" in args: config.devplayer = True
+		elif "annoy" in args: config.annoy = True
+		elif "nogui" in args: config.gui = False
 
 	mainmenu()
 

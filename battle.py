@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #PELT Battle Sequence
 #Created September 3, 2013 at 13:20
 

@@ -1,33 +1,34 @@
-# -*- coding: utf-8 -*-
-
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 87
+peltvers = 95
 
 import time, os, pickle, sys, random, locale, re, argparse
 from localio import output, newline, getInput, color
+import config
+from i18n import m, setlang
 
 try:
 	import console, notification
 	from scene import *
 	pc = 'iphone'
-	ios = True
+	config.ios = True
 except ImportError:
 	import colorama, easygui #, menu, pygame
 	colorama.init()
 	#pygame.init()
 	pc = 'computer'
-	ios = False
+	config.ios = False
+ios = config.ios
 
 def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], args={}):
 	global version, officialversion, langversneeded, debug, gametitle, author, peltvers
-	version = vers
-	officialversion = officialvers
+	version = config.version = vers
+	officialversion = config.officialversion = officialvers
 	langversneeded = langversneed
 	debug = debugmode
-	gametitle = title
-	author = auth
+	gametitle = config.gametitle = title
+	author = config.author = auth
 	#from localio import output, newline, getInput, color
 	#Print the title, author, and version
 	color('reset')
@@ -113,18 +114,17 @@ class Chest(Item):
 	
 	def open(self, inventory):
 		if self.locked:
-			for item in inventory:
-				if item.name == self.key:
-					self.locked = False
-					output('chestunlocked', addon=self.key)
-					continue
-			if self.locked:
+			if self.key in inventory:
+				self.locked = False
+				output('chestunlocked', addon=self.key)
+			else:
 				output('chestlocked')
 				return
 		if self.copen: output('chestopenerror')
 		else:
 			self.copen = True
-			output('chestopen', addon=self.contents.join(', '))
+			output('chestopen', addon=', '.join(self.contents))
+			for item in self.contents: inventory.append(item)
 	
 #define drink item
 class Drink(Item):
@@ -503,7 +503,7 @@ def saveload(save, overwarning=False, overaddon=False):
 			output('saveerror')
 			output('')
 
-#converts a string to an integer and returns -1 if string is not a number
+#converts a string to an integer and returns -1 (or default) if string is not a number
 def str_to_int(text, default=-1):
 	try: response = int(text)
 	except ValueError: return default
@@ -586,7 +586,7 @@ def language():
 		while wait2:
 			choice = getInput.choice('Language/Idioma', ['English','Espanol (Archivo del Idioma no Esta Presente)','Francais (Fichier de Langue pas present)', 'Quit'])
 			if choice == 'English':
-				i18n.setlang("en")
+				setlang("en")
 				wait2 = False
 			elif choice == '': quit('', nosave=True)
 			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)

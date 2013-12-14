@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #PELT Config
 #Created December 4, 2013 at 15:22
 
@@ -20,13 +18,15 @@ try:
 		elif scrollspeed == 'Slow': scroll = 0.05
 		annoy = handle[2]
 		devplayer = handle[3]
+		gui = handle[4]
 	if lang == "English": lang = 'en'
-except pickle.UnpicklingError:
+except (pickle.UnpicklingError, IndexError, EOFError):
 	scrollspeed = 'Medium'
 	scroll = 0.03
 	lang = 'en'
 	annoy = False
 	devplayer = True
+	gui = False
 
 def saveopt():
-	pass # XXX fix me
+	with open(optionspath, 'wb') as handle: pickle.dump([lang, scrollspeed, annoy, devplayer, gui], handle)

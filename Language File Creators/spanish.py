@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 msgs = {'nofriendnameerror':"You didn't type your friend's name!  Remember, %s is a %s.",
 'he':'he',
 'she':'she',
@@ -113,4 +111,4 @@ resourcedir = os.path.join(rootdir, 'resources')
 langsdir = os.path.join(resourcedir, 'langs')
 langdir = os.path.join(langsdir, 'es')
 
-with open(os.path.join(langdir, "español.lang"), 'wb') as handle: pickle.dump(msgs, handle)
+with open(os.path.join(langdir, "espanol.lang"), 'wb') as handle: pickle.dump(msgs, handle)

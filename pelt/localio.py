@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-
 #PELT Local I/O
 #Created October 19, 2013 at 23:37
 
 from i18n import m
-import config
+import config, pelt
 import time, os, pickle, sys, random, locale, re
 import easygui
 #import menu
@@ -14,7 +12,7 @@ try:
 	from scene import *
 	config.pc = 'iphone'
 	config.ios = True
-except ImportError:
+except ImportError as error:
 	import colorama, easygui #, menu, pygame
 	colorama.init()
 	#pygame.init()
@@ -54,7 +52,7 @@ def newline():
 	sys.stdout.write('\n')
 	sys.stdout.flush()
 
-class Input():
+class guiInput():
 	def __init__(self):
 		self.network = False
 		self.firstmsg = True
@@ -71,12 +69,13 @@ class Input():
 
 	def text(self, msg):
 		try: choice = console.input_alert(msg, '', '', 'Ok')
-		except: choice = easygui.enterbox(msg=msg, title='PELT Engine - '+gametitle+' v'+str(version))
+		except:
+			choice = easygui.enterbox(msg=msg, title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version))
 		return choice
 	
 	def choice(self, msg, choices, window=False):
 		strings = [str(c) for c in choices]
-		if ios:
+		if config.ios:
 			temp = strings[-1]
 			if temp == m('quit') or temp == m('back') or temp == m('cancel'): strings.remove(temp)
 			try:
@@ -109,7 +108,7 @@ class Input():
 			except KeyboardInterrupt: return 0
 		else:
 			if not window:
-				choice = easygui.buttonbox(msg=msg, title='PELT Engine - '+gametitle+' v'+str(version), choices=strings)
+				choice = easygui.buttonbox(msg=msg, title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version), choices=strings)
 				i = 1
 				for c in strings:
 					if choice == c: number = i
@@ -123,37 +122,35 @@ class Input():
 		return choices[number-1]
 
 	def alert(self, msg):
-		try:
+		if config.ios:
 			try: console.alert('',msg)
 			except KeyboardInterrupt: pass
-		except:
-			easygui.msgbox(title='PELT Engine - '+gametitle+' v'+str(version), msg=msg)
+		else: easygui.msgbox(title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version), msg=msg)
 	
 	def multtext(self, msg, fields, optfields = None):
 		orgmsg = str(msg)
 		disfields = []
 		for field in fields: disfields.append(field)
-		if optfields:
-			for optfield in optfields: disfields.append(optfield+" (Optional)")
-		try:
-			response = []
+		if optfields: disfields += ['%s (Optional)' %f for f in optfields]
+		if config.ios:
+			response = {}
 			for field in fields:
 				waiting = True
 				while waiting:
-					choice = console.input_alert(msg+"  Enter the "+str(field), '', '', 'Ok')
+					choice = self.text(msg+"  Enter the "+str(field))
 					if choice != "": waiting = False
-				response.append(choice)
+				response[field] = choice
 			for field in optfields:
 				fields.append(field)
-				choice = console.input_alert(msg+"  Enter the "+str(field), '', '', 'Ok')
-				response.append(choice)
-		except:
+				choice = self.text(msg+"  Enter the "+str(field))
+				response[field] = choice
+		else:
 			waiting = True
 			while waiting:
 				waiting = True
 				temp = False
 				while waiting:
-					response = easygui.multenterbox(msg, 'PELT Engine - '+gametitle+' v'+str(version), disfields)
+					response = easygui.multenterbox(msg, 'PELT Engine - '+pelt.gametitle+' v'+str(pelt.version), disfields)
 					x = 0
 					if response:
 						for resp in response:
@@ -167,11 +164,59 @@ class Input():
 						if not temp: waiting = False
 						else: temp = False
 					else: waiting = False
-		if response: dictresp = dict(zip(disfields, response))
-		else: return None
-		return dictresp
+		if not response: return None
+		return response
 
-getInput = Input()
+class TerminalInput():
+	def __init__(self):
+		self.network = False
+		self.firstmsg = True
+	
+	def network(self):
+		try:
+			if self.network:
+				console.hide_activity()
+				self.network = False
+			else:
+				console.show_activity()
+				self.network = True
+		except: pass
+
+	def text(self, msg): return raw_input(msg+"  ")
+	
+	def choice(self, msg, choices, window=False):
+		choicerange = range(len(choices))
+		for i in choicerange:
+			output("%d: %s" %(i+1, choices[i]), dict=False)
+		while True:
+			choic = pelt.str_to_int(raw_input("%s  " %msg), default=0)
+			if choic-1 not in choicerange: continue
+			if choices[choic-1] == m('quit') or choices[choic-1] == m('back') or choices[choic-1] == m('cancel'): return 0
+			return choices[choic-1]
+
+	def alert(self, msg): output(msg, dict=False)
+	
+	def multtext(self, msg, fields, optfields = None):
+		orgmsg = str(msg)
+		disfields = []
+		for field in fields: disfields.append(field)
+		if optfields: disfields += ['%s (Optional)' %f for f in optfields]
+		response = {}
+		for field in fields:
+			waiting = True
+			while waiting:
+				choice = self.text(msg+"  Enter the "+str(field))
+				if choice != "": waiting = False
+			response[field] = choice
+		for field in optfields:
+			fields.append(field)
+			choice = self.text(msg+"  Enter the "+str(field))
+			response[field] = choice
+		if not response: return None
+		return response
+
+if config.gui: getInput = guiInput()
+else: getInput = TerminalInput()
 
 def color(color):
 	global styles

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 msgs = {'nofriendnameerror':"You didn't type your friend's name!  Remember, %s is a %s.",
 'he':'he',
 'she':'she',

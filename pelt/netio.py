@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #PELT Network I/O
 #Created October 17, 2013 at 11:04
 

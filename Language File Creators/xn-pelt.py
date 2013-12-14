@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 msgs = {'title':'%s',
 'title2':'%s - Version %s',
 'author':'Made by %s',

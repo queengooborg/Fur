@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #PELT I18N (Internationalization)
 #Created December 4, 2013 at 15:30
 
@@ -14,7 +12,8 @@ def setlang(lang):
 		langfile = os.path.join(langdir, l)
 		if not "Icon" in l:
 			if not "desktop.ini" in l:
-				with open(langfile, 'rb') as handle: msgs.update(pickle.load(handle))
+				if not ".DS_Store" in l:
+					with open(langfile, 'rb') as handle: msgs.update(pickle.load(handle))
 	config.lang = lang
 	config.saveopt()
 	
