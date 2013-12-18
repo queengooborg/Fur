@@ -2,7 +2,7 @@
 #Created December 4, 2013 at 15:30
 
 import config
-import os.path, pickle
+import os.path, pickle, re
 
 def setlang(lang):
 	global msgs
@@ -17,11 +17,12 @@ def setlang(lang):
 	config.lang = lang
 	config.saveopt()
 	
-def m(key, r=0, modifier='normal'):
+def m(key, r=0, modifier='normal', color=False):
 	global msgs
-	if r == 1:
-		print "You should fix this message, it has m('"+key+"', r=1).  Remove the r=1"
-	return msgs[key]
+	if r == 1: print "You should fix this message, it has m('"+key+"', r=1).  Remove the r=1"
+	msg = msgs[key]
+	if not color: re.sub(msg, "\[[^\]]\]", "")
+	return msg
 	#if modifier == 'caps': msg = msgs[key].upper()
 	#elif modifier == 'title': msg = msgs[key].title()
 	#elif modifier == 'lower': msg = msgs[key].lower()

@@ -23,10 +23,11 @@ styles = ''
 
 #Function that prints the messages
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
+	global styles
 	#s = 0 # TEMPORARY LINE
 	# modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
-		if dict: msg = m(msg)
+		if dict: msg = m(msg, color=True)
 	except KeyError:
 		if msg == '': pass
 		else: msg = "WARNING: "+msg+" is not a valid keyword."
@@ -37,11 +38,27 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 	elif modifier == 'title': msg = msg.title()
 	elif modifier == 'lower': msg = msg.lower()
 	if r == 0:
+		style = False
+		colour = ""
 		for c in msg:
-			sys.stdout.write(c)
-			if not noscroll:
+			if c == "[":
+				style = True
+				colour = ""
+			if style: colour += c
+			if c == "]":
+				style = False
+				color(colour[1:-1])
+			
+			if not style and c != "]":
+				sys.stdout.write(styles)
 				sys.stdout.flush()
-				time.sleep(config.scroll)
+				sys.stdout.write(c)
+				if not noscroll:
+					sys.stdout.flush()
+					time.sleep(config.scroll)
+				
+		color('reset')
+		sys.stdout.write(styles)
 		if newline: sys.stdout.write('\n')
 		if noscroll: sys.stdout.flush()
 		sys.stdout.flush()
@@ -220,7 +237,8 @@ else: getInput = TerminalInput()
 
 def color(color):
 	global styles
-	styles = ''
+	if len(styles) > 25: styles = ''
+	color = color.lower()
 	if color == 'red':
 		try: console.set_color(1.0, 0.0, 0.0)
 		except: styles += colorama.Fore.RED
@@ -230,11 +248,14 @@ def color(color):
 	elif color == 'blue':
 		try: console.set_color(0.0, 0.0, 1.0)
 		except: styles += colorama.Fore.CYAN
+	elif color == 'yellow':
+		try: console.set_color(0.8, 0.8, 0.2)
+		except: styles += colorama.Fore.YELLOW
 	elif color == 'reset':
 		try:
 			console.set_color(0.2, 0.2, 0.2)
 			console.set_font()
-		except: styles += colorama.Fore.RESET
+		except: styles = colorama.Fore.RESET
 	elif color == 'random':
 		try: console.set_color(random.random(),random.random(),random.random())
 		except:

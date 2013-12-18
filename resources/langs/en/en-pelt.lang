@@ -162,7 +162,7 @@ S'What do you want to %s the %s with?'
 p79
 sS'version'
 p80
-S'Version %s, Pelt Version %s'
+S'[red]Version %s, [blue]Pelt Version %s'
 p81
 sS'chestdescopen'
 p82

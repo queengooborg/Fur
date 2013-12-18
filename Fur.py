@@ -3,7 +3,7 @@ author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios
 #Created May 10, 2013 at 15:14
 
-version=392
+version = 396
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
@@ -326,7 +326,7 @@ def gameplay(map):
 			output('helptake')
 			output('helpgo')
 			continue
-			
+
 		# two-word commands
 		noun = cmnd.get('noun')
 		if not noun: continue

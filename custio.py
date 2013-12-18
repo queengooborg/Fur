@@ -145,26 +145,26 @@ def custcreate():
 			opt = ["Create Door", "Create Trapdoor", "Create Chest", "Finish Room"]
 			choice = localio.getInput.choice("Add Elements to "+me['Room Name'], opt)
 			if choice == opt[0]:
-				doordata = localio.getInput.multtext(opt[0], ["To Room", "On Wall", "Blocks From Wall", "From Wall"], ["Locked With Key", "Properties"])
-				placement = str_to_int(doordata['Blocks From Wall'])
+				data = localio.getInput.multtext(opt[0], ["To Room", "On Wall", "Blocks From Wall", "From Wall"], ["Locked With Key", "Properties"])
+				placement = str_to_int(data['Blocks From Wall'])
 				if not placement == -1:
-					door = "Door to "+doordata['To Room']+" on "+doordata['On Wall']+" "+doordata['Blocks From Wall']+" from "+doordata['From Wall']
-					if doordata['Locked With Key']:
-						door += " locked with "+doordata['Locked With Key']
-						if doordata['Properties']: door += " ("+doordata['Properties']+")"
+					door = "Door to "+data['To Room']+" on "+data['On Wall']+" "+data['Blocks From Wall']+" from "+data['From Wall']
+					if data['Locked With Key']:
+						door += " locked with "+data['Locked With Key']
+						if data['Properties']: door += " ("+data['Properties']+")"
 				else: print "Blocks From Wall is an invalid choice"
 			elif choice == opt[1]:
-				doordata = localio.getInput.multtext(opt[0], ["To Room", "From First Wall", "Blocks From First Wall", "From Second Wall", "Blocks From Second Wall"], ["Locked With Key", "Properties"])
-				placemen1 = str_to_int(doordata['Blocks From First Wall'])
-				placemen2 = str_to_int(doordata['Blocks From Second Wall'])
+				data = localio.getInput.multtext(opt[0], ["To Room", "From First Wall", "Blocks From First Wall", "From Second Wall", "Blocks From Second Wall"], ["Locked With Key", "Properties"])
+				placemen1 = str_to_int(data['Blocks From First Wall'])
+				placemen2 = str_to_int(data['Blocks From Second Wall'])
 				if not placemen1 == -1 or placemen2 == -1:
-					door = "Door to "+doordata['To Room']+" on "+doordata['Blocks From First Wall']+" from "+doordata['On First Wall']+" and "+doordata['Blocks From Second Wall']+" from "+doordata['From Second Wall']
-					if doordata['Locked With Key']:
-						door += " locked with "+doordata['Locked With Key']
-						if doordata['Properties']: door += " ("+doordata['Properties']+")"
+					door = "Door to "+data['To Room']+" on "+data['Blocks From First Wall']+" from "+data['On First Wall']+" and "+data['Blocks From Second Wall']+" from "+data['From Second Wall']
+					if data['Locked With Key']:
+						door += " locked with "+data['Locked With Key']
+						if data['Properties']: door += " ("+data['Properties']+")"
 				else: print "Blocks From Wall is an invalid choice"
 			elif choice == opt[2]:
-				pass
+				data = localio.getInput.choice("Create Chest", ["X Placement", "Y Placement", "Items"])
 		
 		"""Room is:
 	Called {Room Name} sized {Height}x{Width} placed {X Coord}x{Y Coord}

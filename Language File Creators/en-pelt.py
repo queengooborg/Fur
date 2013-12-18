@@ -1,7 +1,7 @@
 msgs = {'title':'%s',
 'title2':'%s - Version %s',
 'author':'Made by %s',
-'version':'Version %s, Pelt Version %s',
+'version':'[red]Version %s, [blue]Pelt Version %s',
 'save1':'Save %s',
 'save2':'Save %s: %s',
 'save3':'Save to File',
