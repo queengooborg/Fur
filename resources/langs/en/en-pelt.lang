@@ -1,7 +1,7 @@
 (dp0
 S'doorhere'
 p1
-S'There is a door to the %s'
+S'[yellow]There is a door to the %s'
 p2
 sS'playerdesc'
 p3
@@ -9,26 +9,26 @@ S'%s %s the %s %s, carrying %s, at %s, Level %s.  Can use the attacks %s'
 p4
 sS'inputerror'
 p5
-S'Invalid Input'
+S'[red]Invalid Input'
 p6
 sS'chestunlocked'
 p7
-S'Unlocked the chest using %s.'
+S'[blue]Unlocked the chest using %s.'
 p8
 sS'cancel'
 p9
-S'Cancel'
+S'[red]Cancel'
 p10
 sS'yes'
 p11
-S'Yes'
+S'[green]Yes'
 p12
 sS'open'
 p13
 g13
 sS'quit'
 p14
-S'Quit'
+S'[red]Quit'
 p15
 sS'slow'
 p16
@@ -48,11 +48,11 @@ S'Next Page'
 p23
 sS'foodpoisoned'
 p24
-S'That %s was covered in fatal poison.  You are now dead.'
+S'[red]That %s was covered in fatal poison.  You are now dead.'
 p25
 sS'chestopenerror'
 p26
-S'The chest is already open!'
+S'[red]The chest is already open!'
 p27
 sS'save1'
 p28
@@ -72,7 +72,7 @@ S'Load File'
 p35
 sS'cmderror'
 p36
-S"I don't know how to do that."
+S"[red]I don't know how to do that."
 p37
 sS'using'
 p38
@@ -94,23 +94,23 @@ S'User ate a poisoned %s'
 p45
 sS'itemerror'
 p46
-S"I don't see any %s here."
+S"[red]I don't see any %s here."
 p47
 sS'itemhere'
 p48
-S'There is a %s here'
+S'[yellow]There is a %s here'
 p49
 sS'savewarning'
 p50
-S'WARNING: File belongs to %s %s the %s.  Okay to overwrite?'
+S'[red]WARNING: File belongs to %s %s the %s.  Okay to overwrite?'
 p51
 sS'doormissing'
 p52
-S'There is no door in that direction.'
+S'[red]There is no door in that direction.'
 p53
 sS'back'
 p54
-S'Back'
+S'[red]Back'
 p55
 sS'iosquit'
 p56
@@ -118,15 +118,15 @@ S'User did not choose iPhone or iPad.'
 p57
 sS'doordesc'
 p58
-S'A door to the %s that leads to the %s.'
+S'[yellow]A door to the %s that leads to the %s.'
 p59
 sS'colorerror'
 p60
-S'Color input was invalid.'
+S'[red]Color input was invalid.'
 p61
 sS'directionerror'
 p62
-S"That's not a proper direction."
+S"[red]That's not a proper direction."
 p63
 sS'girl'
 p64
@@ -138,7 +138,7 @@ S'Normal'
 p67
 sS'chestlocked'
 p68
-S'Chest is locked with a key.'
+S'[red]Chest is locked with a key.'
 p69
 sS'drinkpoisonedmsg'
 p70
@@ -146,15 +146,15 @@ S'User drank poison from a %s'
 p71
 sS'no'
 p72
-S'No'
+S'[red]No'
 p73
 sS'doorlocked'
 p74
-S"You try to open the door but the handle won't budge."
+S"[red]You try to open the door but the handle won't budge."
 p75
 sS'chestopen'
 p76
-S'Opened the chest, %s was inside.'
+S'[blue]Opened the chest, %s was inside.'
 p77
 sS'usingerror'
 p78
@@ -162,7 +162,7 @@ S'What do you want to %s the %s with?'
 p79
 sS'version'
 p80
-S'[red]Version %s, [blue]Pelt Version %s'
+S'[green]Version %s, [blue]Pelt Version %s'
 p81
 sS'chestdescopen'
 p82
@@ -173,7 +173,7 @@ p84
 g84
 sS'saveerror'
 p85
-S'Not a valid save file.'
+S'[red]Not a valid save file.'
 p86
 sS'med'
 p87
@@ -185,7 +185,7 @@ S'%s - Version %s'
 p90
 sS'drinkpoisoned'
 p91
-S'That %s had a fatal poison inside.  You are now dead.'
+S'[red]That %s had a fatal poison inside.  You are now dead.'
 p92
 sS'lang'
 p93
@@ -197,7 +197,7 @@ S'Boy'
 p96
 sS'ok'
 p97
-S'Ok'
+S'[green]Ok'
 p98
 sS'iosask'
 p99
@@ -217,7 +217,7 @@ S"This %s doesn't seem to be unusual."
 p106
 sS'attackerror'
 p107
-S'Not a valid attack.'
+S'[red]Not a valid attack.'
 p108
 sS'attack1'
 p109

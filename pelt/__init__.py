@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 99
+peltvers = 100
 
 import time, os, pickle, sys, random, locale, re, argparse
 from localio import output, newline, getInput, color

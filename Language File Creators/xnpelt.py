@@ -79,7 +79,7 @@ msgs = {'nofriendnameerror':"[red]You didn't type your friend's name!  Remember,
 'p1m26':"%s: [blue]I didn't mean it like that!",
 'p1m27':"[red]You didn't mean to say that sarcastically, but you did not appreciate %s's comment.",
 'p1m28':"You: [yellow]I don't know what's going on.  I wake up, and I'm half-%s.  But...we're going to have to find out.  But before that, where are we?",
-'p1title':'PART 1: The Awakening',
+'p1title':'[green]PART 1: The Awakening',
 'gamestart':"You are in a room.",
 'gameaction':"What will you do?",
 'gameinputerror':"I didn't understand what you typed.",
@@ -113,6 +113,6 @@ langsdir = os.path.join(resourcedir, 'langs')
 langdir = os.path.join(langsdir, 'xn')
 
 def compile():
-	with open(os.path.join(langdir, "xino.lang"), 'wb') as handle: pickle.dump(msgs, handle)
+	with open(os.path.join(langdir, "xn-pelt.lang"), 'wb') as handle: pickle.dump(msgs, handle)
 
 compile()

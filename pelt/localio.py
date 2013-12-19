@@ -19,13 +19,15 @@ except ImportError as error:
 	config.pc = 'computer'
 	config.ios = False
 
-styles = ''
+styles = colorama.Fore.WHITE
 
 #Function that prints the messages
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
-	global styles
 	#s = 0 # TEMPORARY LINE
 	# modifier = caps, title, lower, normal (when modifier isn't present)
+	color('reset')
+	sys.stdout.write(styles)
+	sys.stdout.flush()
 	try:
 		if dict: msg = m(msg, color=True)
 	except KeyError:
@@ -39,28 +41,26 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 	elif modifier == 'lower': msg = msg.lower()
 	if r == 0:
 		style = False
-		colour = ""
+		colour = ''
 		for c in msg:
-			if c == "[":
-				style = True
-				colour = ""
+			if c == "[": style = True
 			if style: colour += c
 			if c == "]":
 				style = False
 				color(colour[1:-1])
-			
-			if not style and c != "]":
 				sys.stdout.write(styles)
 				sys.stdout.flush()
+				colour = ''
+			
+			if not style and c != "]":
 				sys.stdout.write(c)
 				if not noscroll:
 					sys.stdout.flush()
 					time.sleep(config.scroll)
-				
+		
+		if newline: sys.stdout.write('\n')
 		color('reset')
 		sys.stdout.write(styles)
-		if newline: sys.stdout.write('\n')
-		if noscroll: sys.stdout.flush()
 		sys.stdout.flush()
 		time.sleep(s)
 	elif r == 1: return msg
@@ -204,7 +204,7 @@ class TerminalInput():
 	def choice(self, msg, choices, window=False):
 		choicerange = range(len(choices))
 		for i in choicerange:
-			output("%d: %s" %(i+1, choices[i]), dict=False)
+			output("[yellow]%d: [reset]%s" %(i+1, choices[i]), dict=False)
 		while True:
 			choic = pelt.str_to_int(raw_input("%s  " %msg), default=0)
 			if choic-1 not in choicerange: continue
@@ -237,8 +237,8 @@ else: getInput = TerminalInput()
 
 def color(color):
 	global styles
-	if len(styles) > 25: styles = ''
-	color = color.lower()
+	if len(styles) > 20: styles = colorama.Fore.WHITE
+	styles = colorama.Fore.WHITE
 	if color == 'red':
 		try: console.set_color(1.0, 0.0, 0.0)
 		except: styles += colorama.Fore.RED
@@ -249,13 +249,19 @@ def color(color):
 		try: console.set_color(0.0, 0.0, 1.0)
 		except: styles += colorama.Fore.CYAN
 	elif color == 'yellow':
-		try: console.set_color(0.8, 0.8, 0.2)
+		try: console.set_color(0.6, 0.6, 0.1)
 		except: styles += colorama.Fore.YELLOW
+	elif color == 'darkblue':
+		try: console.set_color(0.6, 0.6, 1.0)
+		except: styles += colorama.Fore.BLUE
+	elif color == 'magneta':
+		try: console.set_color(1.0, 0.2, 1.0)
+		except: styles += colorama.Fore.MAGENTA
 	elif color == 'reset':
 		try:
 			console.set_color(0.2, 0.2, 0.2)
 			console.set_font()
-		except: styles = colorama.Fore.RESET
+		except: styles += colorama.Fore.WHITE
 	elif color == 'random':
 		try: console.set_color(random.random(),random.random(),random.random())
 		except:

@@ -3,7 +3,7 @@ author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios
 #Created May 10, 2013 at 15:14
 
-version = 396
+version = 400
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
@@ -259,7 +259,7 @@ def part1():
 	else: temp = m('you')
 	output('p1m15', addon=(frnd_name, player_name, player_species, temp), s=2)
 	output('p1m16', s=1)
-	if player_species == m('fox'): temp = m('foxdesc')
+	if player_species == m('fox'): temp = m('foxdesc') %frnd_name
 	elif player_species == m('dragon'): temp = m('dragondesc')
 	else:
 		temp = m('p1m18') %frnd_gender+'  '
@@ -278,7 +278,8 @@ def part1():
 	output('p1m24', addon=(frnd_name, player_species, frnd_gndrpn), s=3)
 	output('p1m25', s=2)
 	output('p1m26', addon=frnd_name, s=1)
-	output('p1m27', s=5)
+	output('p1m27', addon=frnd_name, s=2)
+	output('p1m28', addon=player_species, s=5)
 	newline()
 	output('helpquit')
 	output('helpsave')

@@ -5,7 +5,7 @@ S'examine [item] - shows description of item'
 p2
 sS'otterdesc'
 p3
-S"However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
+S"[red]However your hands look more like an otter's.  You feel your face and find wet quills.  Behind you is a long tail."
 p4
 sS'helpsave'
 p5
@@ -62,7 +62,7 @@ S'Broken ATM'
 p29
 sS'broken3'
 p30
-S"It's broken at the moment!"
+S"[red]It's broken at the moment!"
 p31
 sS'setupname'
 p32
@@ -93,7 +93,7 @@ S'Fox'
 p44
 sS'broken1'
 p45
-S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "%s"'
+S'There are some parts of the game that are broken at the moment.  Those parts will be fixed soon.  To close these popup alerts, press "%s[reset]"'
 p46
 sS'new'
 p47
@@ -105,7 +105,7 @@ S'Bird'
 p50
 sS'mousedesc'
 p51
-S'However you have small hands, a skinny tail, and big ears, just like a mouse.'
+S'[red]However you have small hands, a skinny tail, and big ears, just like a mouse.'
 p52
 sS'drinkcmd'
 p53
@@ -113,295 +113,299 @@ S'drink'
 p54
 sS'wolfdesc'
 p55
-S"However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
+S"[red]However you look more like a wolf with a wolf's tail.  You feel your face and find a big snout."
 p56
 sS'wolf'
 p57
 S'Wolf'
 p58
-sS'p1m25'
+sS'p1m28'
 p59
-S'You: Yeah, thanks.'
+S"You: [yellow]I don't know what's going on.  I wake up, and I'm half-%s.  But...we're going to have to find out.  But before that, where are we?"
 p60
-sS'p1m24'
+sS'p1m25'
 p61
-S"%s: WHAT!  You can't be, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
+S'You: [yellow]Yeah, thanks for that observation.'
 p62
-sS'p1m27'
+sS'p1m24'
 p63
-S"You: I don't know what's going on, but we're going to have to find out.  Where are we?"
+S"%s: [blue]WHAT!  You can't be a human, you've got every aspect of a %s anthro...(%s comes close to you and sniffs you, then pulls back)...and you smell just like one too."
 p64
-sS'p1m26'
+sS'p1m27'
 p65
-S"%s: I didn't mean it like that!"
+S"[red]You didn't mean to say that sarcastically, but you did not appreciate %s's comment."
 p66
-sS'p1m21'
+sS'p1m26'
 p67
-S"You tell yourself to calm down so you can figure out why you're half-%s."
+S"%s: [blue]I didn't mean it like that!"
 p68
-sS'p1m20'
+sS'p1m21'
 p69
-S'%s: ...What?'
+S"[red]You tell yourself to calm down so you can figure out why you're half-%s."
 p70
-sS'p1m23'
+sS'p1m20'
 p71
-S'You accidentally said the last part out loud.  You meant only to think it.'
+S'%s: [blue]...What?'
 p72
-sS'p1m22'
+sS'p1m23'
 p73
-S"You: I'm a human though..."
+S'[red]The last part was accidentally said out loud.  You meant only to think it.'
 p74
-sS'load'
+sS'p1m22'
 p75
-S'Load Game (Broken ATM)'
+S"You: [yellow]But I-I'm human..."
 p76
-sS'custstart'
+sS'load'
 p77
-S'Start Level'
+S'Load Game (Broken ATM)'
 p78
-sS'helpcmd'
+sS'custstart'
 p79
-S'help'
+S'Start Level'
 p80
-sS'examinecmd'
+sS'helpcmd'
 p81
-S'examine'
+S'help'
 p82
-sS'setupeyeclose'
+sS'examinecmd'
 p83
-S'%s %s...Good.  Now you may enter the gates and find yourself in "Fur"...close your eyes and count to 3, then open your eyes...'
+S'examine'
 p84
-sS'helpeat'
+sS'setupeyeclose'
 p85
-S'eat [item] - If item is food, will eat item'
+S'%s %s...Good.  Now you may enter the gates and find yourself in "Fur"...close your eyes and count to 3, then open your eyes...'
 p86
-sS'her'
+sS'helpeat'
 p87
-g87
-sS'helpdrink'
+S'eat [item] - If item is food, will eat item'
 p88
-S'drink [item] - if item is a drink, will drink item'
+sS'her'
 p89
-sS'custom'
+g89
+sS'helpdrink'
 p90
-S'Community Levels'
+S'drink [item] - if item is a drink, will drink item'
 p91
-sS'start'
+sS'custom'
 p92
-S'Start Game'
+S'Community Levels'
 p93
-sS'options'
+sS'start'
 p94
-S'Options'
+S'Start Game'
 p95
-sS'quitcmd'
+sS'options'
 p96
-S'quit'
+S'Options'
 p97
-sS'helpload'
+sS'quitcmd'
 p98
-S'load - Loads the game from a save file (dangerous)'
+S'quit'
 p99
-sS'quitmsg'
+sS'helpload'
 p100
-S"Quit on user's demand."
+S'load - Loads the game from a save file (dangerous)'
 p101
-sS'takecmd'
+sS'quitmsg'
 p102
-S'take'
+S"Quit on user's demand."
 p103
-sS'custcreate'
+sS'takecmd'
 p104
-S'Create Level'
+S'take'
 p105
-sS'otter'
+sS'custcreate'
 p106
-S'Otter'
+S'Create Level'
 p107
-sS'annoy'
+sS'otter'
 p108
-S'Annoyance Mode (Broken ATM)'
+S'Otter'
 p109
-sS'setuplast'
+sS'annoy'
 p110
-S'%s...and your last?'
+S'Annoyance Mode (Broken ATM)'
 p111
-sS'meyou'
+sS'setuplast'
 p112
-S'me and you'
+S'%s...and your last?'
 p113
-sS'annoyon'
+sS'meyou'
 p114
-S'Annoyance mode now active.'
+S'me and you'
 p115
-sS'cat'
+sS'annoyon'
 p116
-S'Cat'
+S'Annoyance mode now active.'
 p117
-sS'betaoff'
+sS'cat'
 p118
-S'Beta tester mode revoked.'
+S'Cat'
 p119
-sS'p1m8'
+sS'betaoff'
 p120
-S'Your eyes focus and you figure out why the %s looked so strange.  %s was fox-like, with fur covering %s entire body, and a big tail sticking out behind %s.'
+S'Beta tester mode revoked.'
 p121
-sS'custdown'
+sS'p1m8'
 p122
-S'Download Level'
+S'[red]Your eyes focus and you figure out why the %s looked so strange.  %s was fox-like, with fur covering %s entire body, and a big tail sticking out behind %s.'
 p123
-sS'helptake'
+sS'custdown'
 p124
-S'take [item] - if item is movable, will take item'
+S'Download Level'
 p125
-sS'loadcmd'
+sS'helptake'
 p126
-g75
-sS'custup'
+S'take [item] - if item is movable, will take item'
 p127
-S'Upload Level'
+sS'loadcmd'
 p128
-sS'p1title'
+g77
+sS'custup'
 p129
-S'PART 1: The Awakening'
+S'Upload Level'
 p130
-sS'p1m9'
+sS'p1title'
 p131
-S'Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
+S'[green]PART 1: The Awakening'
 p132
-sS'p1m6'
+sS'p1m9'
 p133
-S'You slowly open your eyes.  A young %s about your age is trying to shake you awake.  You notice something strange about the %s, but your eyes are still blurred from waking up.'
+S'[red]Your eyes widen and you quickly push yourself back into the wall.  You then raise your arms ready to attack.'
 p134
-sS'p1m7'
+sS'p1m6'
 p135
-S"???: You're awake!  I've been shaking you for over an hour or so!"
+S'[red]You slowly open your eyes.  A young %s about your age is trying to shake you awake.  You notice something strange about the %s, but your eyes are still blurred from waking up.'
 p136
-sS'p1m4'
+sS'p1m7'
 p137
-S'???: ...Hey, you lazy %s!'
+S"???: [blue]You're awake!  I've been shaking you for over an hour or so!"
 p138
-sS'nofriendnameerror'
+sS'p1m4'
 p139
-S"You didn't type your friend's name!  Remember, %s is a %s."
+S'???: [blue]...Hey, you lazy %s!'
 p140
-sS'mouse'
+sS'nofriendnameerror'
 p141
-S'Mouse'
+S"[red]You didn't type your friend's name!  Remember, %s is a %s."
 p142
-sS'p1m3'
+sS'mouse'
 p143
-S'???: ...Wake up...'
+S'Mouse'
 p144
-sS'gameinputerror'
+sS'p1m3'
 p145
-S"I didn't understand what you typed."
+S'???: [blue]...Wake up...'
 p146
-sS'p1m1'
+sS'gameinputerror'
 p147
-S'???: ...'
+S"I didn't understand what you typed."
 p148
-sS'p1m14'
+sS'p1m1'
 p149
-S"You: ...I'm %s."
+S'???: [blue]...'
 p150
-sS'p1m15'
+sS'p1m14'
 p151
-S"%s: %s...it's a funny name for a %s like %s!"
+S"You: [yellow]...I'm %s."
 p152
-sS'p1m16'
+sS'p1m15'
 p153
-S'You: What?'
+S"%s: [blue]%s...it's a funny name for a %s like %s!"
 p154
-sS'p1m5'
+sS'p1m16'
 p155
-S'???: Wake up!'
+S'You: [yellow]Wait, what?'
 p156
-sS'p1m10'
+sS'p1m5'
 p157
-S'You: Who are you?'
+S'???: [blue]Wake up!'
 p158
-sS'p1m11'
+sS'p1m10'
 p159
-S'???: Me?  My name is...'
+S'You: [yellow]Who are you?'
 p160
-sS'p1m12'
+sS'p1m11'
 p161
-S"%s.  What's yours?"
+S'???: [blue]Me?  My name is...'
 p162
-sS'p1m13'
+sS'p1m12'
 p163
-S'You lower your fists.'
+S"[blue]%s.  What's yours?"
 p164
-sS'p1m2'
+sS'p1m13'
 p165
-S'???: ...Hey...'
+S'[red]You lower your fists.'
 p166
-sS'p1m18'
+sS'p1m2'
 p167
-S"They are in a similar state to those of the %s's."
+S'???: [blue]...Hey...'
 p168
-sS'p1m19'
+sS'p1m18'
 p169
-S"You start to panic inside.  You think 'what is going on?'"
+S"[red]They are in a similar state to those of the %s's."
 p170
-sS'beardesc'
+sS'p1m19'
 p171
-S'However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
+S"[red]You start to panic inside.  Just then, you look into a nearby mirror.  You hardly recognize yourself and think 'what is going on?'"
 p172
-sS'you'
+sS'beardesc'
 p173
-g173
-sS'foxdesc'
+S'[red]However you have big hands, big feet, and a short, stubby tail.  You have brown fur just like a bear.'
 p174
-S'You also look just like a fox, with a tail and everything.'
+sS'you'
 p175
-sS'catdesc'
+g175
+sS'foxdesc'
 p176
-S'However your hands have very sharp claws and you look more like a cat.'
+S'[red]You also look just like a fox, almost as if you and %s were twins.'
 p177
-sS'dragondesc'
+sS'catdesc'
 p178
-S'You have scales and the tail of a dragon.  In your throat you feel a hot presence.'
+S'[red]However your hands have very sharp claws and you look more like a cat.'
 p179
-sS'beta'
+sS'dragondesc'
 p180
-S'Beta Tester Mode'
+S'[red]You have scales and the tail of a dragon.  In your throat you feel a hot presence.'
 p181
-sS'p1m17'
+sS'beta'
 p182
-S'You then look down at yourself.  %s'
+S'Beta Tester Mode'
 p183
-sS'gocmd'
+sS'p1m17'
 p184
-S'go'
+S'[red]You then look down at yourself.  %s'
 p185
-sS'annoyoff'
+sS'gocmd'
 p186
-S'Annoyance mode revoked.'
+S'go'
 p187
-sS'opencmd'
+sS'annoyoff'
 p188
-S'open'
+S'Annoyance mode revoked.'
 p189
-sS'birddesc'
+sS'opencmd'
 p190
-S"However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
+S'open'
 p191
-sS'dragon'
+sS'birddesc'
 p192
-S'Dragon'
+S"[red]However you have feathers down your arms like wings and a retrice.  You feel your face and find a bird's beak for your mouth."
 p193
-sS'custtitle'
+sS'dragon'
 p194
-S'Custom Levels Menu'
+S'Dragon'
 p195
-sS'helpquit'
+sS'custtitle'
 p196
-S'quit - Saves and quits the game.'
+S'Custom Levels Menu'
 p197
-sS'scroll'
+sS'helpquit'
 p198
-S'Scroll Speed (%s)'
+S'quit - Saves and quits the game.'
 p199
+sS'scroll'
+p200
+S'Scroll Speed (%s)'
+p201
 s.
