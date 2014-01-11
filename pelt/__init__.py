@@ -1,9 +1,11 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 100
+peltvers = 118
 
 import time, os, pickle, sys, random, locale, re, argparse
+import traceback as tb
+
 from localio import output, newline, getInput, color
 import config
 from i18n import m, setlang
@@ -109,7 +111,7 @@ class Chest(Item):
 		return cls(itemsraw, key)
 
 	def examine(self):
-		if self.open: output('chestdescopen', addon=self.contents.join(', '))
+		if self.open: output('chestdescopen', addon=', '.join(self.contents))
 		else: output('chestdescclosed')
 	
 	def open(self, inventory):
@@ -248,8 +250,7 @@ def preprocess(data):
 	listdata = cleandata.split('\n')
 	temp = []
 	for line in listdata:
-		if line:
-			temp.append(line)
+		if line: temp.append(line)
 	
 	return temp
 
@@ -290,9 +291,10 @@ class Dialogue(object):
 				DialogueSpeech(thing, other)
 
 class Level(object):
-	def __init__(self, name, size, dialogue=None, rooms=[]):
+	def __init__(self, name, size, author=None, dialogue=None, rooms=[]):
 		self.name = name
 		self.size = size
+		self.author = author
 		self.dialogue = dialogue
 		self.rooms = rooms
 	
@@ -304,12 +306,13 @@ class Level(object):
 		
 		#Check and parse level name and size
 		#print('Parsing level metadata...')
-		levelmeta = re.match('Level is "([^"]+)" sized (\d+)x(\d+)', level)
+		levelmeta = re.match('Level is "([^"]+)" sized (\d+)x(\d+) by "([^"]+)"', level)
 		if not levelmeta: raise SyntaxError('Level name and size not on first line.  It was found as {%s}.' %level)
 		name = levelmeta.group(1)
 		strsize = levelmeta.group(2,3)
+		author = levelmeta.group(4)
 		size = (int(strsize[0]), int(strsize[1]))
-		#print('Level metadata parsed.  Level is named %s, %s tiles high, and %s tiles wide' %(name, size[0], size[1]))
+		#print('Level metadata parsed.  Level is named %s, %s tiles high, and %s tiles wide, and author is %s' %(name, size[0], size[1], author))
 		
 		blocks = lines[1:]
 		dialogue = getblocks('Dialogue is:', 'Finish Dialogue', blocks, 1)
@@ -320,7 +323,7 @@ class Level(object):
 			rm = Room.fromText(room)
 			r.append(rm)
 		
-		return cls(name, size, d, r)
+		return cls(name, size, author, d, r)
 	
 	def addRoom(self, room):
 		self.rooms.append(room)

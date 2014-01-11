@@ -5,5 +5,4 @@ aS'Medium'
 p2
 aI00
 aI01
-aI00
 a.

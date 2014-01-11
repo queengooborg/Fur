@@ -4,7 +4,6 @@
 from i18n import m
 import config, pelt
 import time, os, pickle, sys, random, locale, re
-import easygui
 #import menu
 
 try:
@@ -19,15 +18,14 @@ except ImportError as error:
 	config.pc = 'computer'
 	config.ios = False
 
-styles = colorama.Fore.WHITE
+try: styles = colorama.Fore.WHITE #Set color to default...
+except: styles = '' #...and set to a blank string if on iOS
 
 #Function that prints the messages
-def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", r=0, s=0):
+def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", ignorecolor=False, noreset=False, r=0, s=0):
 	#s = 0 # TEMPORARY LINE
+	if not noreset: color('reset')
 	# modifier = caps, title, lower, normal (when modifier isn't present)
-	color('reset')
-	sys.stdout.write(styles)
-	sys.stdout.flush()
 	try:
 		if dict: msg = m(msg, color=True)
 	except KeyError:
@@ -43,24 +41,28 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 		style = False
 		colour = ''
 		for c in msg:
-			if c == "[": style = True
-			if style: colour += c
-			if c == "]":
-				style = False
-				color(colour[1:-1])
-				sys.stdout.write(styles)
-				sys.stdout.flush()
-				colour = ''
+			if not ignorecolor:
+				if c == "[": style = True
+				elif c == "]":
+					style = False
+					color(colour)
+					colour = ''
+				elif style: colour += c
 			
-			if not style and c != "]":
+				else:#if not style and c != "]":
+					sys.stdout.write(c)
+					if not noscroll:
+						sys.stdout.flush()
+						time.sleep(config.scroll)
+			
+			else:
 				sys.stdout.write(c)
 				if not noscroll:
 					sys.stdout.flush()
 					time.sleep(config.scroll)
 		
 		if newline: sys.stdout.write('\n')
-		color('reset')
-		sys.stdout.write(styles)
+		if not noreset: color('reset')
 		sys.stdout.flush()
 		time.sleep(s)
 	elif r == 1: return msg
@@ -138,7 +140,17 @@ class guiInput():
 		if temp == m('quit') or temp == m('back') or temp == m('cancel'): return 0
 		return choices[number-1]
 
-	def alert(self, msg):
+	def alert(self, data):
+		nocolordata = ''
+		color=False
+		for c in data:
+			if c == '[':
+				color=True
+			elif c == ']':
+				color=False
+			elif not color:
+				nocolordata += c
+		msg = nocolordata
 		if config.ios:
 			try: console.alert('',msg)
 			except KeyboardInterrupt: pass
@@ -237,8 +249,10 @@ else: getInput = TerminalInput()
 
 def color(color):
 	global styles
-	if len(styles) > 20: styles = colorama.Fore.WHITE
-	styles = colorama.Fore.WHITE
+	try: #If styles is greater than 20, reset...
+		if len(styles) > 20: styles = colorama.Fore.WHITE
+		styles = colorama.Fore.WHITE
+	except: pass #...or pass if on iOS
 	if color == 'red':
 		try: console.set_color(1.0, 0.0, 0.0)
 		except: styles += colorama.Fore.RED
@@ -271,3 +285,6 @@ def color(color):
 		try: console.set_font('Helvetica', 32.0)
 		except: pass
 	else: output('colorerror')
+	if styles:
+		sys.stdout.write(styles)
+		sys.stdout.flush()

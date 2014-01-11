@@ -1,6 +1,6 @@
 [To Sum It Up]
 
-[Level is "{Name}" sized {Height}x{Width}]
+[Level is "{Name}" sized {Height}x{Width} by "{Author}"]
 
 [Dialogue is:
 	<Define section> &{Section Name}
@@ -24,8 +24,8 @@ Finish Room]
 
 [Examples]
 
-Level is "Format Demo" sized 640x1280
-[Level is "{Name}" sized {Height}x{Width}]
+Level is "Format Demo" sized 640x1280 by "Nightwave Studios"
+[Level is "{Name}" sized {Height}x{Width} by "{Author}"]
 
 [To make starting Dialogue:
 

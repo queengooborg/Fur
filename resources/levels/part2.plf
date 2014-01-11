@@ -19,9 +19,13 @@ Finish Room]
 Level is "Part 2: Escape" sized 20x28
 
 Room is:
-	Called "Main Room" sized 8x14 placed B4x0
+	Called "Main Room" sized 8x14 placed B0x12
 	Door to "Hallway" on Bottom 9 from Left
 	Door to "Living Room" on Right 3 from Top
+Finish Room
+
+Room is:
+	Called "Some Room" sized 0x0 placed B20x6
 Finish Room
 
 Room is:

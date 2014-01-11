@@ -1,52 +1,25 @@
 title = 'Fur'
 author = 'Nightwave Studios'
-#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios
+#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios dark.tailed.wolf@gmail.com
 #Created May 10, 2013 at 15:14
 
-version = 400
+version = 416
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
 #Dependencies:
 #	For iPad:
 #		Pythonista
-#	For PC:
+#	For Mac/Windows/Linux:
 #		Colorama: https://pypi.python.org/pypi/colorama/
 #		EasyGUI: http://easygui.sourceforge.net/
 #		PyGame: http://www.pygame.org/
+#	For Mac:
+#		Terminal-Notifier: sudo gem install terminal-notifier
 
 #Import PELT
 from pelt import *
 from pelt.i18n import m
-
-#Initialize config variables (obsolete)
-devmode = True
-annoy = False
-gui = True
-
-import custio
-
-sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
-
-#initialize variables
-loc=None
-gender=None
-player_name=None
-player_last=None
-player_species=None
-frnd_gender=None
-frnd_gndrpn=None
-frnd_nane=None
-
-species = ["Wolf","Cat","Dragon","Bear","Fox","Mouse","Bird","Otter"]
-for i in range(len(species)):
-	temp = species[i].lower()
-	species[i] = m(temp)
-
-try: console.clear()
-except: pass
-	#os.console('cls')
-	#os.console('clear')
 
 def quit(msg, nosave=False):
 	global ios, devplayer
@@ -125,8 +98,8 @@ def mainmenu():
 		elif choice==m('options'):
 			wait_opt = True
 			while wait_opt:
-				choice_opt = getInput.choice(m('title'), [m('scroll' %scrollspeed), m('annoy'), m('beta'), m('lang'), m('back')])
-				if choice_opt == m('scroll' %scrollspeed):
+				choice_opt = getInput.choice(m('title'), [m('scroll' %config.scrollspeed), m('annoy'), m('beta'), m('lang'), m('back')])
+				if choice_opt == m('scroll' %config.scrollspeed):
 					if scrollspeed == m('slow'):
 						scrollspeed = m('med')
 						scroll=0.03
@@ -356,26 +329,59 @@ def gameplay(map):
 			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open(player.inventory)
 			else: output('cmderror')
 
-def init(args = None):
-	global ios, pc
-	if ios:
-		choice = getInput.choice(m('iosask'), ['iPhone','iPad'])
-		if choice == 1: pc = 'iPhone'
-		elif choice == 2: pc = 'iPad'
-		else: quit(m('iosquit'), nosave=True)
+def init(arglist = None):
+	global ios, pc, devmode, annoy, gui, species, loc, gender, player_name, player_last, player_species, frnd_gender, frnd_gndrpn, frnd_name, args
+	args = arglist
+	try: console.clear()
+	except: pass
+		#os.console('cls')
+		#os.console('clear')
+	try:
+		#Initialize config variables (obsolete)
+		devmode = True
+		annoy = False
+		gui = True
 
-	if not args:
-		args = sys.argv[1:]
-	if len(args) > 0:
-		if "nostory" in args:
-			loc = 'p1MainRoom'
-			gameplay()
-		elif "betatester" in args: config.devplayer = True
-		elif "annoy" in args: config.annoy = True
-		elif "nogui" in args: config.gui = False
+		import custio
 
-	mainmenu()
+		sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
 
-if __name__ in "__main__":
-	try: init()
-	except SystemExit: pass
+		#initialize variables
+		loc=None
+		gender=None
+		player_name=None
+		player_last=None
+		player_species=None
+		frnd_gender=None
+		frnd_gndrpn=None
+		frnd_nane=None
+
+		species = ["Wolf","Cat","Dragon","Bear","Fox","Mouse","Bird","Otter"]
+		for i in range(len(species)):
+			temp = species[i].lower()
+			species[i] = m(temp)
+			
+		if ios:
+			choice = getInput.choice(m('iosask'), ['iPhone','iPad'])
+			if choice == 'iPhone': pc = 'iPhone'
+			elif choice == 'iPad': pc = 'iPad'
+			else: quit(m('iosquit'), nosave=True)
+
+		if not args: args = sys.argv[1:]
+		if len(args) > 0:
+			if "nostory" in args:
+				loc = 'p1MainRoom'
+				gameplay()
+			elif "betatester" in args: config.devplayer = True
+			elif "annoy" in args: config.annoy = True
+			elif "nogui" in args: config.gui = False
+
+		mainmenu()
+	except (SystemExit, KeyboardInterrupt): pass
+	except:
+		tbinfo = "Type: "+str(sys.exc_info()[0])+"\nTraceback: "+str(sys.exc_info()[2])
+		output("[yellow]"+"Type: "+str(sys.exc_info()[0])+"[red]", noscroll=True, dict=False, newline=False, noreset=True)
+		output("\n\n"+tb.format_exc(), noscroll=True, dict=False, ignorecolor=True, noreset=True)
+		#output(tbinfo, dict=False)
+
+if __name__ in '__main__': init()

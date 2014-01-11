@@ -1,16 +1,23 @@
 #Fur Custom Level Functions
 #Created November 26, 2013 at 18:32
 
-import socket
-
 #socket.settimeout(30)
 
-import urllib2
-from pelt import str_to_int, localio
-import pelt
+import webbrowser, urllib2, sys, json
+from pelt import localio
 
-def internet(page, timeout=10):
-	pass #return urllib2.urlopen(page, timeout)
+def output(msg, *args, **kwargs): print msg
+
+def connect(url='', browser=False):
+	try:
+		if browser:
+			webbrowser.open(site+url)
+			localio.getInput.alert('Click Ok/Cancel...')
+		else: return urllib2.urlopen(site+url, None, 10).read()
+	except (urllib2.URLError, urllib2.HTTPError) as error:
+		output('Sorry, cannot connect to KageASHI.')
+		print error
+		return None
 
 def poutput(msg, newline=True, noscroll=False):
 	for c in msg:
@@ -21,13 +28,15 @@ def poutput(msg, newline=True, noscroll=False):
 	if newline: sys.stdout.write('\n')
 	sys.stdout.flush()
 
-domain = "http://kageashi.no-ip.biz/furcommunity/"
+domain = "kageashi.no-ip.biz"
+#domain = "192.168.1.4"
+site = "http://"+domain+"/furcommunity/"
 
-def connect():
-	output('Connecting to KageASHI...')
-	try: success = None #urllib2.urlopen(domain, None, 10)
-	except:
-		output('Sorry, cannot connect to KageASHI.')
+def levellist():
+	levelraw = connect('levels/popular')
+	levels = json.loads(str(levelraw))
+	print "There are", len(levels), 'levels'
+	for level in levels: print level
 
 def custcreate():
 	#Level Metadata

@@ -56,7 +56,7 @@ S'[red]The chest is already open!'
 p27
 sS'save1'
 p28
-S'Save %s'
+S'Save %s (Unused)'
 p29
 sS'save2'
 p30
@@ -162,7 +162,7 @@ S'What do you want to %s the %s with?'
 p79
 sS'version'
 p80
-S'[red]Version %s, [blue]Pelt Version %s'
+S'[green]Version %s, [blue]Pelt Version %s'
 p81
 sS'chestdescopen'
 p82
