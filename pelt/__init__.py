@@ -3,7 +3,45 @@
 
 peltvers = 118
 
+dependencies = 
+{
+	'iOS': [
+		{
+			'name': 'Pythonista',
+			'link': 'the App Store'
+		}
+	],
+	'Computer': [
+		{
+			'name': 'Colorama',
+			'link': 'https://pypi.python.org/pypi/colorama/'
+		},
+		{
+			'name': 'EasyGUI',
+			'link': 'http://easygui.sourceforge.net/'
+		},
+		{
+			'name': 'PyGame',
+			'link': 'http://www.pygame.org/'
+		}
+	],
+	'Mac': [
+		{
+			'name': 'Terminal Notifier',
+			'link': 'sudo gem install terminal-notifier'
+		}
+	],
+	'Windows': [
+		{
+			'name': 'PyWin32',
+			'link': 'http://sourceforge.net/projects/pywin32/files/pywin32/'
+		}
+	],
+	'Linux': []
+}
+
 import time, os, pickle, sys, random, locale, re, argparse
+from platform import system as pcinfo
 import traceback as tb
 
 from localio import output, newline, getInput, color
@@ -13,15 +51,16 @@ from i18n import m, setlang
 try:
 	import console, notification
 	from scene import *
-	pc = 'iphone'
+	config.pc = 'iphone'
 	config.ios = True
 except ImportError:
 	import colorama, easygui #, menu, pygame
 	colorama.init()
 	#pygame.init()
-	pc = 'computer'
+	config.pc = pcinfo()
 	config.ios = False
 ios = config.ios
+pc = config.pc
 
 def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], args={}):
 	global version, officialversion, langversneeded, debug, gametitle, author, peltvers
@@ -595,3 +634,66 @@ def language():
 			else: output("Invalid option/Opcion incorrecto/L'option invalide", dict=False)
 		else: output("Language File Version Incompatible/Version del Archivo del Idioma Incompatible/Version de L'archive du Language Incompatible", dict=True)
 
+#Gameplay for the game
+def gameplay(map):
+	global loc, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
+	playing=True
+	maploc = 'resources/levels/'+map+'.plf'
+	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
+	color('blue')
+	output(level.name, dict=False, s=2)
+	color('reset')
+	output('gamestart')
+	playing=True
+	location = level.rooms[0]
+	while playing:
+		output("")
+		cmnd = getCommand(getInput.text(location.describe(r=True)+'\n'+m('gameaction')))
+
+		# single-word commands
+		if not cmnd or cmnd['verb'] == m('quitcmd'): quit(m('quitmsg'))
+		elif cmnd['verb'] == m('savecmd'):
+			save()
+			continue
+		elif cmnd['verb'] == m('loadcmd'):
+			load()
+			continue
+		elif cmnd['verb'] == m('helpcmd'):
+			output('helpquit')
+			output('helpsave')
+			output('helpload')
+			output('helphelp')
+			output('helpexamine')
+			output('helpeat')
+			output('helpdrink')
+			output('helptake')
+			output('helpgo')
+			continue
+
+		# two-word commands
+		noun = cmnd.get('noun')
+		if not noun: continue
+
+		if cmnd['verb'] == m('gocmd'):
+			roomname = location.go(noun)
+			if not roomname: output('doormissing')
+			elif roomname == "locked": output('doorlocked')
+			elif roomname == "invalid": output('directionerror')
+			elif roomname == "Finish": quit('broken4')
+			else:
+				i = 0
+				for r in level.rooms:
+					if r.name == roomname: break
+					else: i += 1
+				location = level.rooms[i]
+		else:
+			# commands that require an item
+			item = location.findItem(noun)
+			if not item:
+				output('itemerror', addon=noun)
+			elif cmnd['verb'] == m('examinecmd') and hasattr(item, 'examine'): item.examine()
+			elif cmnd['verb'] == m('eatcmd') and hasattr(item, 'eat'): item.eat()
+			elif cmnd['verb'] == m('drinkcmd') and hasattr(item, 'drink'): item.drink()
+			elif cmnd['verb'] == m('takecmd') and hasattr(player, 'take'): player.take(item)
+			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open(player.inventory)
+			else: output('cmderror')

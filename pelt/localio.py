@@ -195,6 +195,12 @@ class guiInput():
 					else: waiting = False
 		if not response: return None
 		return response
+		
+	def notification():
+		if ios: pass
+		else:
+			if pc == "Darwin": pass
+			
 
 class TerminalInput():
 	def __init__(self):

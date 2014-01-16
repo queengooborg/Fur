@@ -3,24 +3,16 @@ author = 'Nightwave Studios'
 #Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios dark.tailed.wolf@gmail.com
 #Created May 10, 2013 at 15:14
 
+#Version numbers
 version = 416
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
-
-#Dependencies:
-#	For iPad:
-#		Pythonista
-#	For Mac/Windows/Linux:
-#		Colorama: https://pypi.python.org/pypi/colorama/
-#		EasyGUI: http://easygui.sourceforge.net/
-#		PyGame: http://www.pygame.org/
-#	For Mac:
-#		Terminal-Notifier: sudo gem install terminal-notifier
 
 #Import PELT
 from pelt import *
 from pelt.i18n import m
 
+#Name of the functions says it all
 def quit(msg, nosave=False):
 	global ios, devplayer
 	if nosave: pass
@@ -61,6 +53,7 @@ def load():
 		output('saveerror')
 		return False
 
+#Main menu
 def mainmenu():
 	global version, scrollspeed, scroll, loc, devplayer, annoy, pc, ios, msgs, player, friend
 	if ios: temp = m('cancel')
@@ -196,7 +189,7 @@ def start():
 	newline()
 	part1()
 
-#part 1 init
+#part 1
 def part1():
 	global gender,player_name,player_last,frnd_gender,frnd_nane,frnd_last,devplayer,player,friend
 	playing = True
@@ -265,77 +258,13 @@ def part1():
 	output('helpgo')
 	gameplay('part1')
 
-def gameplay(map):
-	global loc, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, ios
-	playing=True
-	#quit(output('broken4', r=1))
-	maploc = 'resources/levels/'+map+'.plf'
-	with open(maploc, 'rb') as mapfile: level = parselevel(mapfile)
-	color('blue')
-	output(level.name, dict=False, s=2)
-	color('reset')
-	output('gamestart')
-	playing=True
-	location = level.rooms[0]
-	while playing:
-		output("")
-		cmnd = getCommand(getInput.text(location.describe(r=True)+'\n'+m('gameaction')))
-
-		# single-word commands
-		if not cmnd or cmnd['verb'] == m('quitcmd'): quit(m('quitmsg'))
-		elif cmnd['verb'] == m('savecmd'):
-			save()
-			continue
-		elif cmnd['verb'] == m('loadcmd'):
-			load()
-			continue
-		elif cmnd['verb'] == m('helpcmd'):
-			output('helpquit')
-			output('helpsave')
-			output('helpload')
-			output('helphelp')
-			output('helpexamine')
-			output('helpeat')
-			output('helpdrink')
-			output('helptake')
-			output('helpgo')
-			continue
-
-		# two-word commands
-		noun = cmnd.get('noun')
-		if not noun: continue
-
-		if cmnd['verb'] == m('gocmd'):
-			roomname = location.go(noun)
-			if not roomname: output('doormissing')
-			elif roomname == "locked": output('doorlocked')
-			elif roomname == "invalid": output('directionerror')
-			elif roomname == "Finish": quit('broken4')
-			else:
-				i = 0
-				for r in level.rooms:
-					if r.name == roomname: break
-					else: i += 1
-				location = level.rooms[i]
-		else:
-			# commands that require an item
-			item = location.findItem(noun)
-			if not item:
-				output('itemerror', addon=noun)
-			elif cmnd['verb'] == m('examinecmd') and hasattr(item, 'examine'): item.examine()
-			elif cmnd['verb'] == m('eatcmd') and hasattr(item, 'eat'): item.eat()
-			elif cmnd['verb'] == m('drinkcmd') and hasattr(item, 'drink'): item.drink()
-			elif cmnd['verb'] == m('takecmd') and hasattr(player, 'take'): player.take(item)
-			elif cmnd['verb'] == m('opencmd') and hasattr(item, 'open'): item.open(player.inventory)
-			else: output('cmderror')
-
 def init(arglist = None):
 	global ios, pc, devmode, annoy, gui, species, loc, gender, player_name, player_last, player_species, frnd_gender, frnd_gndrpn, frnd_name, args
 	args = arglist
 	try: console.clear()
-	except: pass
-		#os.console('cls')
-		#os.console('clear')
+	except:
+		if pc == "Windows": os.console('cls')
+		else: os.console('clear')
 	try:
 		#Initialize config variables (obsolete)
 		devmode = True
