@@ -1,16 +1,18 @@
 title = 'Fur'
 author = 'Nightwave Studios'
-#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios dark.tailed.wolf@gmail.com
+#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios @ dark.tailed.wolf@gmail.com
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 416
+version = 417
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
 #Import PELT
 from pelt import *
 from pelt.i18n import m
+
+args = sys.argv[1:]
 
 #Name of the functions says it all
 def quit(msg, nosave=False):
@@ -258,13 +260,11 @@ def part1():
 	output('helpgo')
 	gameplay('part1')
 
-def init(arglist = None):
+def init():
 	global ios, pc, devmode, annoy, gui, species, loc, gender, player_name, player_last, player_species, frnd_gender, frnd_gndrpn, frnd_name, args
-	args = arglist
+	
 	try: console.clear()
-	except:
-		if pc == "Windows": os.console('cls')
-		else: os.console('clear')
+	except: os.system('cls' if pc == "Windows" else 'clear')
 	try:
 		#Initialize config variables (obsolete)
 		devmode = True
@@ -273,7 +273,7 @@ def init(arglist = None):
 
 		import custio
 
-		sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio])
+		sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio], args=args)
 
 		#initialize variables
 		loc=None
@@ -295,16 +295,7 @@ def init(arglist = None):
 			if choice == 'iPhone': pc = 'iPhone'
 			elif choice == 'iPad': pc = 'iPad'
 			else: quit(m('iosquit'), nosave=True)
-
-		if not args: args = sys.argv[1:]
-		if len(args) > 0:
-			if "nostory" in args:
-				loc = 'p1MainRoom'
-				gameplay()
-			elif "betatester" in args: config.devplayer = True
-			elif "annoy" in args: config.annoy = True
-			elif "nogui" in args: config.gui = False
-
+		
 		mainmenu()
 	except (SystemExit, KeyboardInterrupt): pass
 	except:

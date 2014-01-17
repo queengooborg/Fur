@@ -1,14 +1,27 @@
 #PELT Config
 #Created December 4, 2013 at 15:22
 
-import pickle, os.path
+import pickle, os.path, sys
 
 rootdir = os.path.dirname(os.path.dirname(__file__))
 resourcedir = os.path.join(rootdir, 'resources')
 langdir = os.path.join(resourcedir, 'langs')
 optionspath = os.path.join(resourcedir, 'options.pyp')
 
+args = sys.argv[1:]
+
+devplayer = False
+annoy = False
 gui = True
+
+if len(args) > 0:
+	if "nostory" in args:
+		loc = 'p1MainRoom'
+		gameplay()
+	elif "betatester" in args: devplayer = True
+	elif "annoy" in args: annoy = True
+	elif "nogui" in args: gui = False
+	elif "nocolor" in args: color = False
 
 try:
 	with open(optionspath, 'rb') as handle:
@@ -20,7 +33,6 @@ try:
 		elif scrollspeed == 'Slow': scroll = 0.05
 		annoy = handle[2]
 		devplayer = handle[3]
-		gui = True
 	if lang == "English": lang = 'en'
 except (pickle.UnpicklingError, IndexError, EOFError):
 	scrollspeed = 'Medium'
@@ -28,7 +40,6 @@ except (pickle.UnpicklingError, IndexError, EOFError):
 	lang = 'en'
 	annoy = False
 	devplayer = True
-	gui = True
 
 def saveopt():
 	with open(optionspath, 'wb') as handle: pickle.dump([lang, scrollspeed, annoy, devplayer], handle)

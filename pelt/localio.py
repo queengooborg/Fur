@@ -45,7 +45,7 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 				if c == "[": style = True
 				elif c == "]":
 					style = False
-					color(colour)
+					if config.color: color(colour)
 					colour = ''
 				elif style: colour += c
 			
@@ -291,6 +291,6 @@ def color(color):
 		try: console.set_font('Helvetica', 32.0)
 		except: pass
 	else: output('colorerror')
-	if styles:
+	if styles and config.color:
 		sys.stdout.write(styles)
 		sys.stdout.flush()
