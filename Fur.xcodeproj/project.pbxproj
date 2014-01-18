@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		4406952B1889FC5600779AC8 /* Level Hex File Format Guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Level Hex File Format Guide.txt"; sourceTree = "<group>"; };
 		443B851918890D6C00557517 /* battle.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = battle.py; sourceTree = "<group>"; };
 		443B851A18890D6C00557517 /* custio.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = custio.py; sourceTree = "<group>"; };
 		443B851B18890D6C00557517 /* debug-iOS.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "debug-iOS.py"; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 				443B857018890D6D00557517 /* Level Design.gdoc */,
 				443B857118890D6D00557517 /* Main Menu.psd */,
 				443B857218890D6D00557517 /* spanish.py */,
+				4406952B1889FC5600779AC8 /* Level Hex File Format Guide.txt */,
 			);
 			path = docs;
 			sourceTree = "<group>";
