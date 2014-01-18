@@ -4,7 +4,7 @@ author = 'Nightwave Studios'
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 417
+version = 418
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
@@ -299,8 +299,14 @@ def init():
 		mainmenu()
 	except (SystemExit, KeyboardInterrupt): pass
 	except:
+		if config.color:
+			temp1 = "[yellow]"
+			temp2 = "[red]"
+		else:
+			temp1 = ""
+			temp2 = ""
 		tbinfo = "Type: "+str(sys.exc_info()[0])+"\nTraceback: "+str(sys.exc_info()[2])
-		output("[yellow]"+"Type: "+str(sys.exc_info()[0])+"[red]", noscroll=True, dict=False, newline=False, noreset=True)
+		output(temp1+"Type: "+str(sys.exc_info()[0])+temp2, noscroll=True, dict=False, newline=False, noreset=True)
 		output("\n\n"+tb.format_exc(), noscroll=True, dict=False, ignorecolor=True, noreset=True)
 		#output(tbinfo, dict=False)
 
