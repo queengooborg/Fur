@@ -69,7 +69,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "nocolor"
+            argument = "nogui"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
