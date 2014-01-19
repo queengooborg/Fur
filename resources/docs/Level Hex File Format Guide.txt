@@ -42,20 +42,20 @@ Dictionary Entry Start-End:
 
 Dictionary-Specific Entry Attributes (code comes after the byte after 0C):
 	Chest Dictionary:
-		1C = Name
 		1D = Start Contents List (End with 0D)
 		2D = Next Item In Contents List
 		1E = Start Attributes List (End with 0D)
 		2E = Next Item In Attributes List
 	
 	Dialogue Dictionary:
-		[Will work on later]
+		[[Will work on later]]
 	
 	Enemy Dictionary:
 		1C = Name
 	
 	(Trap)Doors Dictionary:
-		1C = Locked With Key (Optional, only if door will be locked.  Key must be defined in a chest)
+		2C = Not Locked (Only use this without anything after)
+		1C = Locked With Key (Only if 2C does not exist.  Key must be defined in a chest)
 		1D = Start Attributes List (End with 0D)
 		1E = Next Item In Attributes List
 	
@@ -67,7 +67,7 @@ Dictionary-Specific Entry Attributes (code comes after the byte after 0C):
    0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 0 -- -- 02 03 04 -- -- 07 -- -- -- -- 0C 0D 0E --
 1 -- -- -- -- -- -- -- 17 -- -- -- -- 1C 1D 1E --
-2 -- -- -- -- -- -- -- -- -- -- -- -- -- 2D 2E --
+2 -- -- -- -- -- -- -- -- -- -- -- -- 2C 2D 2E --
 3 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 4 -- -- -- -- 44 -- -- -- -- -- -- -- 4C 4D -- --
 5 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -89,7 +89,7 @@ To start off the file, begin with the Magic Number, 71 39.  Then, begin the head
 Now we need the map content, so we type 07 4D, then the floor letter.  Inside the level, one tile is two bytes.  So, to place a floor tile, we would type 00 3D.  Each tile has it's own unique two-byte identifier.  00 to 0F on the first byte are reserved for the core tiles and the system.  The following are the tile codes for the core tiles, with ?? meaning whatever numbers you wish (will be useful later in this guide, during the dictionary):
 
 	00 0A = Next Row
-	00 2E = Floor
+	00 20-2F = Floor (Different types of floor)
 	00 3D = Wall
 	00 53 = Spawn Point (Place only one)
 	01 ?? = Chest
@@ -99,14 +99,13 @@ Now we need the map content, so we type 07 4D, then the floor letter.  Inside th
 	05 ?? = Trapdoor
 	0F FF = End Map Floor
 
-As shown above, to end the map floor content, type 0F FF.  You can also define custom blocks in the dictionary, which we'll talk about in the next paragraph.  To create the data for the next floor, repeat this step, with a different floor letter.
+As shown above, to end the map floor content, type 0F FF.  Place only one spawn point (00 53) to avoid problems with the map.    You can also define custom blocks in the dictionary, which we'll talk about in the next paragraph.  To create the data for the next floor, repeat this step, with a different floor letter.
 
-Dicts (dictionaries) hold all the metadata for tiles with a second byte defined by the map maker.  To start the dict, type 07 44.  Then, the each following paragraph will tel about each dict.
+Dictionaries hold all the metadata for tiles with a second byte defined by the map maker.  To start the dictionary, type 07 44.  Next, type one of the dictionary codes shown below.  To start a new entry inside of a dictionary, type 0C ??, where ?? is the numbers you picked for your tile above.  For the next part the entry, type 0D, and to end the entry, type 0E.  Then, the each following paragraph will tell about each dictionary.
 
 [[Will work on soon]]
 
-Chest Dict (17 63):
-	
+Chest Dict (17 63): First, type 1D, then the first item stored inside the chest.  To move onto the next item in the chest, type 2D to move onto the next item in the list.  Finish the list by typing 0D.
 
 Dialogue Dict (17 64):
 	
