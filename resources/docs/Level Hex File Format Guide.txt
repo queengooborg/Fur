@@ -15,7 +15,7 @@ Header Sub-Sections (comes after 17 inside 4C):
 
 Map Floor Content (comes inside 4D, listed below is the core blocks):
 	00 0A = Next Row
-	00 2E = Floor
+	00 20-2F = Floor (Different types of floor)
 	00 3D = Wall
 	00 53 = Spawn Point (Place only one)
 	01 ?? = Chest
@@ -36,17 +36,38 @@ Dictionaries:
 
 Dictionary Entry Start-End:
 	0C = New Entry
-	0D = End Entry
+	0D = Next Part of Entry
+	0E = End Entry
 	(the byte after 0C is the same byte used in the map floor content)
 
-Dictionary-Specific Entry Types (code comes after the byte after 0C):
+Dictionary-Specific Entry Attributes (code comes after the byte after 0C):
 	Chest Dictionary:
 		1C = Name
+		1D = Start Contents List (End with 0D)
+		2D = Next Item In Contents List
+		1E = Start Attributes List (End with 0D)
+		2E = Next Item In Attributes List
+	
+	Dialogue Dictionary:
+		[Will work on later]
+	
+	Enemy Dictionary:
+		1C = Name
+	
+	(Trap)Doors Dictionary:
+		1C = Locked With Key (Optional, only if door will be locked.  Key must be defined in a chest)
+		1D = Start Attributes List (End with 0D)
+		1E = Next Item In Attributes List
+	
+	Custom Tiles Dictionary:
+		1C = Group Name that Tile comes from
+		1D = Group Tile ID (Ex. if 1C were set to Glass Blocks, 1D as 13 would assign the block to the 13th element in the Glass Blocks group)
+
 
    0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
-0 -- -- 02 03 04 -- -- 07 -- -- -- -- 0C 0D -- --
-1 -- -- -- -- -- -- -- 17 -- -- -- -- -- -- -- --
-2 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+0 -- -- 02 03 04 -- -- 07 -- -- -- -- 0C 0D 0E --
+1 -- -- -- -- -- -- -- 17 -- -- -- -- 1C 1D 1E --
+2 -- -- -- -- -- -- -- -- -- -- -- -- -- 2D 2E --
 3 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 4 -- -- -- -- 44 -- -- -- -- -- -- -- 4C 4D -- --
 5 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
