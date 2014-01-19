@@ -103,22 +103,20 @@ As shown above, to end the map floor content, type 0F FF.  Place only one spawn 
 
 Dictionaries hold all the metadata for tiles with a second byte defined by the map maker.  To start the dictionary, type 07 44.  Next, type one of the dictionary codes shown below.  To start a new entry inside of a dictionary, type 0C ??, where ?? is the numbers you picked for your tile above.  For the next part the entry, type 0D, and to end the entry, type 0E.  Then, the each following paragraph will tell about each dictionary.
 
-[[Will work on soon]]
-
-Chest Dict (17 63): First, type 1D, then the first item stored inside the chest.  To move onto the next item in the chest, type 2D to move onto the next item in the list.  Finish the list by typing 0D.
+Chest Dict (17 63): First, type 1D, then the first item stored inside the chest.  Type 2D to move onto the next item in the list.  Finish the list by typing 0D.  Then, move onto the attributes list by typing 1E.  Separate the different attributes by 2E, and finish with 0D.  The attributes list is optional and can be not used by starting and ending the list right away.
 
 Dialogue Dict (17 64):
-	
+	[[Will work on later]]
 
 Enemy Dict (17 65):
-	
+	[[Will work on later]]
 
 Door Dict (17 6F):
-	
+	[[Will work on later]]
 
 Trapdoor Dict (17 72):
-	
+	[[Will work on later]]
 
 Custom Tiles Dict (17 74):
-	
+	[[Will work on later]]
 
