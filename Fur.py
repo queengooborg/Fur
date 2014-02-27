@@ -5,7 +5,7 @@ author = 'Nightwave Studios'
 
 #Version numbers
 version = 426
-officialversion = str(version)+" Omega"
+officialversion = str(version)+" Omega: Musical Dragon"
 langversneeded = 0.1
 
 #Import PELT
