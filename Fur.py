@@ -1,10 +1,10 @@
 title = 'Fur'
 author = 'Nightwave Studios'
-#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios @ dark.tailed.wolf@gmail.com
+#Text-based RPG by Kurai Atonitsuka, CEO of Nightwave Studios @ dark.tailed.wolf@gmail.com and Mike Glover @ mglover@pobox.com
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 418
+version = 426
 officialversion = str(version)+" Omega"
 langversneeded = 0.1
 
@@ -13,23 +13,27 @@ from pelt import *
 from pelt.i18n import m
 
 args = sys.argv[1:]
-
 #Name of the functions says it all
 def quit(msg, nosave=False):
 	global ios, devplayer
-	if nosave: pass
-	else: save()
+	if nosave:
+		pass
+	else:
+		save()
 	color('red')
 	#if ios and not devplayer: notification.schedule(m('mailto2'), 15, 'Beep', m('mailto1'))
-	if msg: sys.exit(msg)
-	else: sys.exit(0)
+	if msg:
+		sys.exit(msg)
+	else:
+		sys.exit(0)
 
 def save():
 	global loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer
 	#with open(reply+'-'+player_name, 'wb') as handle:
 	reply = saveload(True)
 	if reply:
-		with open(reply, 'wb') as handle: pickle.dump([loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer], handle)
+		with open(reply, 'wb') as handle:
+			pickle.dump([loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer], handle)
 
 def load():
 	global loc,gender,player_name,player_last,player_species,frnd_gender,frnd_gndrpn,frnd_nane,scrollspeed,scroll,devplayer
@@ -50,7 +54,8 @@ def load():
 				scroll = file[9]
 				devplayer = file[10]
 			return True
-		else: return False
+		else:
+			return False
 	except IOError:
 		output('saveerror')
 		return False
@@ -58,32 +63,41 @@ def load():
 #Main menu
 def mainmenu():
 	global version, scrollspeed, scroll, loc, devplayer, annoy, pc, ios, msgs, player, friend
-	if ios: temp = m('cancel')
-	else: temp = m('ok')
+	if ios:
+		temp = m('cancel')
+	else:
+		temp = m('ok')
 	getInput.alert(m('broken1') %temp)
-	#print available choices and wait for the user to pick a valid choice
+	#show available choices and wait for the user to pick a valid choice
 	while True:
 		newline()
 		choices = [m('start'), m('custom'), m('options'), m('quit')]
 		devchoices = ['Developer: Skip Dialogue']
 		if devmode:
-			for devchoice in devchoices: choices.append(devchoice)
-		choice = getInput.choice(title, choices)#, window=True)
+			for devchoice in devchoices:
+				choices.append(devchoice)
+		choice = getInput.choice(title, choices)
 		newline()
 		if choice==m('start'):
 			wait_sta = True
 			while wait_sta:
 				choice_sta = getInput.choice(m('start'), [m('new'), m('load'), m('back')])
-				if choice_sta == m('new'): start()
+				if choice_sta == m('new'):
+					start()
 				elif choice_sta == m('load'):
 					getInput.alert(m('broken3'))
 					continue
 					i = load()
-					if i and devplayer: gameplay()
-					elif not i: continue
-					elif not devplayer: quit(m('broken4'), nosave=True)
-				elif choice_sta == 0: wait_sta = False
-				else: output('inputerror')
+					if i and devplayer:
+						gameplay()
+					elif not i:
+						continue
+					elif not devplayer:
+						quit(m('broken4'), nosave=True)
+				elif choice_sta == 0:
+					wait_sta = False
+				else:
+					output('inputerror')
 		elif choice=='Developer: Skip Dialogue':
 			player = Ally(loc, player_name, player_last, species, gender, 1)
 			friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
@@ -93,7 +107,7 @@ def mainmenu():
 		elif choice==m('options'):
 			wait_opt = True
 			while wait_opt:
-				choice_opt = getInput.choice(m('title'), [m('scroll' %config.scrollspeed), m('annoy'), m('beta'), m('lang'), m('back')])
+				choice_opt = getInput.choice(m('title'), [m('scroll') %config.scrollspeed, m('annoy'), m('beta'), m('lang'), m('back')])
 				if choice_opt == m('scroll' %config.scrollspeed):
 					if scrollspeed == m('slow'):
 						scrollspeed = m('med')
@@ -120,14 +134,18 @@ def mainmenu():
 					else:
 						getInput.alert(m('betaoff'))
 						devplayer = False
-				elif choice_opt == m('lang'): language()
+				elif choice_opt == m('lang'):
+					language()
 				elif choice_opt == 0:
 					with open('options.pyp', 'wb') as handle:
 						pickle.dump([lang, scrollspeed, annoy, devplayer], handle)
 					wait_opt=False
-				else: output('inputerror')
-		elif choice==0: quit(m('quitmsg'), nosave=True)
-		else: output('inputerror')
+				else:
+					output('inputerror')
+		elif choice==0:
+			quit(m('quitmsg'), nosave=True)
+		else:
+			output('inputerror')
 
 #Menu for custom levels
 def custmenu():
@@ -135,12 +153,18 @@ def custmenu():
 	#custio.connect()
 	while True:
 		choice = getInput.choice(m('custtitle'), [m('custstart'), m('custdown'), m('custup'), m('custcreate'), m('back')])
-		if choice == m('custstart'): pass
-		elif choice == m('custdown'): pass
-		elif choice == m('custup'): pass
-		elif choice == m('custcreate'): custio.custcreate()
-		elif choice == 0: return False
-		else: output('inputerror')
+		if choice == m('custstart'):
+			pass
+		elif choice == m('custdown'):
+			pass
+		elif choice == m('custup'):
+			pass
+		elif choice == m('custcreate'):
+			custio.custcreate()
+		elif choice == 0:
+			return False
+		else:
+			output('inputerror')
 
 #When starting the game, program must ask if the player is a boy or girl.
 def start():
@@ -159,7 +183,8 @@ def start():
 		else: quit(m('quitmsg'), nosave=True)
 		waiting=False
 	player_species = getInput.choice(m('setuprace'), species)
-	if player_species == 1: quit(m('quitmsg'), nosave=True)
+	if player_species == 1:
+		quit(m('quitmsg'), nosave=True)
 	waiting = True
 	while waiting:
 		temp = getInput.text(m('setupname'))
@@ -178,8 +203,10 @@ def start():
 						player_name = temp
 						player_last = temp2
 						waiting = False
-					else: output('inputerror')
-			else: output('inputerror')
+					else:
+						output('inputerror')
+			else:
+				output('inputerror')
 	output('setupeyeclose', addon=(player_name, player_last), s=2)
 	i = 0
 	while i != 3:
@@ -202,10 +229,14 @@ def part1():
 	output('p1m5', s=2)
 	output('p1m6', addon=(frnd_gender, frnd_gender), s=4)
 	output('p1m7', s=3)
-	if frnd_gndrpn == output('he', r=1): temp = output('he', r=1, modifier='title')
-	else: temp = output('she', r=1, modifier='title')
-	if frnd_gender == output('girl', r=1, modifier='lower'): temp2 = output('her', r=1)
-	else: temp2 = output('him', r=1)
+	if frnd_gndrpn == m('he'):
+		temp = m('he').title()
+	else:
+		temp = m('she').title()
+	if frnd_gender == m('girl').lower():
+		temp2 = m('her')
+	else:
+		temp2 = m('him')
 	output('p1m8', addon=(frnd_gender, temp, temp2, temp2), s=0.5)
 	output('p1m9', s=0.5)
 	output('p1m10', s=2)
@@ -213,30 +244,42 @@ def part1():
 	waiting = True
 	while waiting:
 		frnd_name=getInput.text(m('setup9') %(frnd_gndrpn, frnd_gender))
-		if frnd_name == None or frnd_name == 0: quit(m('nofriendnameerror'))
+		if frnd_name == None or frnd_name == 0:
+			quit(m('nofriendnameerror'))
 		frnd_name = frnd_name.title()
 		i = False
-		if frnd_name: waiting = False
+		if frnd_name:
+			waiting = False
 		else: m('nofriendnameerror') %(frnd_gndrpn, frnd_gender)
 	player = Ally(loc, player_name, player_last, species, gender, 1)
 	friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
 	output('p1m12', addon=frnd_name, s=2)
 	output('p1m13', s=1)
 	output('p1m14', addon=player_name, s=2)
-	if player_species == output('fox', r=1): temp = m('meyou')
-	else: temp = m('you')
+	if player_species == m('fox'):
+		temp = m('meyou')
+	else:
+		temp = m('you')
 	output('p1m15', addon=(frnd_name, player_name, player_species, temp), s=2)
 	output('p1m16', s=1)
-	if player_species == m('fox'): temp = m('foxdesc') %frnd_name
-	elif player_species == m('dragon'): temp = m('dragondesc')
+	if player_species == m('fox'):
+		temp = m('foxdesc') %frnd_name
+	elif player_species == m('dragon'):
+		temp = m('dragondesc')
 	else:
 		temp = m('p1m18') %frnd_gender+'  '
-		if player_species == m('wolf'): temp += m('wolfdesc')
-		elif player_species == m('cat'): temp += m('catdesc')
-		elif player_species == m('bird'): temp += m('birddesc')
-		elif player_species == m('bear'): temp += m('beardesc')
-		elif player_species == m('mouse'): temp += m('mousedesc')
-		elif player_species == m('otter'): temp += m('otterdesc')
+		if player_species == m('wolf'):
+			temp += m('wolfdesc')
+		elif player_species == m('cat'):
+			temp += m('catdesc')
+		elif player_species == m('bird'):
+			temp += m('birddesc')
+		elif player_species == m('bear'):
+			temp += m('beardesc')
+		elif player_species == m('mouse'):
+			temp += m('mousedesc')
+		elif player_species == m('otter'):
+			temp += m('otterdesc')
 	output('p1m17', addon=temp, s=0.5)
 	output('p1m19', s=3)
 	output('p1m20', addon=frnd_name, s=1)
@@ -259,18 +302,22 @@ def part1():
 	output('helptake')
 	output('helpgo')
 	gameplay('part1')
+	part2()
+
+def part2():
+	output('Next part is in development.', dict=False)
 
 def init():
-	global ios, pc, devmode, annoy, gui, species, loc, gender, player_name, player_last, player_species, frnd_gender, frnd_gndrpn, frnd_name, args
+	global devmode, annoy, gui, species, loc, gender, player_name, player_last, player_species, frnd_gender, frnd_gndrpn, frnd_name, args
 	
-	try: console.clear()
-	except: os.system('cls' if pc == "Windows" else 'clear')
 	try:
-		#Initialize config variables (obsolete)
+		console.clear()
+	except:
+		os.system('cls' if config.pc == "Windows" else 'clear')
+	
+	try:
 		devmode = True
-		annoy = False
-		gui = True
-
+		
 		import custio
 
 		sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio], args=args)
@@ -292,22 +339,23 @@ def init():
 			
 		if ios:
 			choice = getInput.choice(m('iosask'), ['iPhone','iPad'])
-			if choice == 'iPhone': pc = 'iPhone'
-			elif choice == 'iPad': pc = 'iPad'
-			else: quit(m('iosquit'), nosave=True)
+			if choice == 0:
+				quit(m('iosquit'), nosave=True)
+			config.pc = choice
 		
 		mainmenu()
-	except (SystemExit, KeyboardInterrupt): pass
+	except (SystemExit, KeyboardInterrupt):
+		pass
 	except:
 		if config.color:
 			temp1 = "[yellow]"
 			temp2 = "[red]"
 		else:
-			temp1 = ""
-			temp2 = ""
+			temp1 = temp2 = ""
 		tbinfo = "Type: "+str(sys.exc_info()[0])+"\nTraceback: "+str(sys.exc_info()[2])
 		output(temp1+"Type: "+str(sys.exc_info()[0])+temp2, noscroll=True, dict=False, newline=False, noreset=True)
 		output("\n\n"+tb.format_exc(), noscroll=True, dict=False, ignorecolor=True, noreset=True)
 		#output(tbinfo, dict=False)
 
-if __name__ in '__main__': init()
+if __name__ in '__main__':
+	init()

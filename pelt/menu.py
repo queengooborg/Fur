@@ -1,181 +1,336 @@
-from math import sin, cos, pi
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-import pygame
+import pygame, sys
 
-displayWidth = 640
-displayHeight = 480
-fpsLimit = 90
+myfont = None
+update_widgets={}
 
-def sinInterpolation(start, end, steps=30):
-    values = [start]
-    delta = end - start
-    for i in range(1, steps):
-        n = (pi / 2.0) * (i / float(steps - 1))
-        values.append(start + delta * sin(n))
-    return values
+def update(screen, menuitems, selected=0, curcol=(255,0,0)):
+	global update_widgets, myfont
+	item = menuitems[selected]
 
-class RotatingMenu:
-    def __init__(self, x, y, radius, arc=pi*2, defaultAngle=0, wrap=False):
-        """
-        @param x:
-            The horizontal center of this menu in pixels.
-        
-        @param y:
-            The vertical center of this menu in pixels.
-        
-        @param radius:
-            The radius of this menu in pixels(note that this is the size of
-            the circular path in which the elements are placed, the actual
-            size of the menu may vary depending on item sizes.
-        @param arc:
-            The arc in radians which the menu covers. pi*2 is a full circle.
-        
-        @param defaultAngle:
-            The angle at which the selected item is found.
-        
-        @param wrap:
-            Whether the menu should select the first item after the last one
-            or stop.
-        """
-        self.x = x
-        self.y = y
-        self.radius = radius
-        self.arc = arc
-        self.defaultAngle = defaultAngle
-        self.wrap = wrap
-        
-        self.rotation = 0
-        self.rotationTarget = 0
-        self.rotationSteps = [] #Used for interpolation
-        
-        self.items = []
-        self.selectedItem = None
-        self.selectedItemNumber = 0
-    
-    def addItem(self, item):
-        self.items.append(item)
-        if len(self.items) == 1:
-            self.selectedItem = item
-    
-    def selectItem(self, itemNumber):
-        if self.wrap == True:
-            if itemNumber > len(self.items) - 1: itemNumber = 0
-            if itemNumber < 0: itemNumber = len(self.items) - 1
-        else:
-            itemNumber = min(itemNumber, len(self.items) - 1)
-            itemNumber = max(itemNumber, 0)
-        
-        self.selectedItem.deselect()
-        self.selectedItem = self.items[itemNumber]
-        self.selectedItem.select()
-        
-        self.selectedItemNumber = itemNumber
-        
-        self.rotationTarget = - self.arc * (itemNumber / float(len(self.items) - 1))
-        
-        self.rotationSteps = sinInterpolation(self.rotation,
-                                              self.rotationTarget, 45)
-    
-    def rotate(self, angle):
-        """@param angle: The angle in radians by which the menu is rotated.
-        """
-        for i in range(len(self.items)):
-            item = self.items[i]
-            n = i / float(len(self.items) - 1)
-            rot = self.defaultAngle + angle + self.arc * n
-            
-            item.x = self.x + cos(rot) * self.radius
-            item.y = self.y + sin(rot) * self.radius
-    
-    def update(self):
-        if len(self.rotationSteps) > 0:
-            self.rotation = self.rotationSteps.pop(0)
-            self.rotate(self.rotation)
-    
-    def draw(self, display):
-        """@param display: A pyGame display object
-        """
-        for item in self.items:
-            item.draw(display)
+	try:
+		cursor = update_widgets['cursor']
+		cursor2 = update_widgets['cursor2']
+	except KeyError:
+		update_widgets['cursor'] = myfont.render(">", True, curcol)
+		update_widgets['cursor2'] = myfont.render("<", True, curcol)
 
-class MenuItem:
-    def __init__(self, text="Spam"):
-        self.text = text
-        
-        self.defaultColor = (255,255,255)
-        self.selectedColor = (255,0,0)
-        self.color = self.defaultColor
-        
-        self.x = 0
-        self.y = 0 #The menu will edit these
-        
-        self.font = pygame.font.Font(None, 20)
-        self.image = self.font.render(self.text, True, self.color)
-        size = self.font.size(self.text)
-        self.xOffset = size[0] / 2
-        self.yOffset = size[1] / 2
-    
-    def select(self):
-        """Just visual stuff"""
-        self.color = self.selectedColor
-        self.redrawText()
-    
-    def deselect(self):
-        """Just visual stuff"""
-        self.color = self.defaultColor
-        self.redrawText()
-    
-    def redrawText(self):
-        self.font = pygame.font.Font(None, 20)
-        self.image = self.font.render(self.text, True, self.color)
-        size = self.font.size(self.text)
-        self.xOffset = size[0] / 2
-        self.yOffset = size[1] / 2
-    
-    def draw(self, display):
-        display.blit(self.image, (self.x-self.xOffset, self.y-self.yOffset))
+	crect  = update_widgets['cursor'].get_rect()
+	crect2 = update_widgets['cursor2'].get_rect()
 
-def main(items):
-    pygame.init()
-    
-    display = pygame.display.set_mode((displayWidth, displayHeight))
-    clock = pygame.time.Clock()
-    
-    menu = RotatingMenu(x=320, y=240, radius=220, arc=pi, defaultAngle=pi/2.0)
-    
-    for i in items:
-        menu.addItem(MenuItem(str(i)))
-    menu.selectItem(0)
-    
-    #Loop
-    while True:
-        #Handle events
-        events = pygame.event.get()
-        for event in events:
-            if event.type == pygame.QUIT:
-            	pygame.quit()
-                return False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    menu.selectItem(menu.selectedItemNumber + 1)
-                if event.key == pygame.K_RIGHT:
-                    menu.selectItem(menu.selectedItemNumber - 1)
-                if event.key == pygame.K_SPACE:
-                	pygame.quit()
-                	return items[menu.selectedItemNumber]
-        
-        #Update stuff
-        menu.update()
-        
-        #Draw stuff
-        display.fill((0,0,0))
-        menu.draw(display)
-        pygame.display.flip() #Show the updated scene
-        clock.tick(fpsLimit) #Wait a little
+	crect  =  crect.move(item.left  - 20, item.top)
+	crect2 = crect2.move(item.right + 20, item.top)
 
-if __name__ == "__main__":
-	items = []
-	for i in range(10):
-		items.append("Spam"+str(i))
-	item = main(items)
-	print(str(item))
+	screen.blit(update_widgets['cursor'],  crect )
+	screen.blit(update_widgets['cursor2'], crect2)
+
+	pygame.display.update(crect )
+	pygame.display.update(crect2)
+
+# **********************************************************************
+# Function "dumbmenu" **************************************************
+# **********************************************************************
+def dumbmenu(screen, menu, x_pos = 100, y_pos = 100, font = None,
+            size = 70, distance = 1.4, fgcolor = (255,255,255),
+            cursorcolor = (255,0,0), exitAllowed = True):
+	"""Draws a Menu using pygame.
+	
+	Parameters are: screen, menu, x_pos, y_pos, font,
+	                size, distance, fgcolor, cursor
+	                
+	PARAMETERS
+	==========
+	screen (Surface): The surface created with pygame.display.set_mode()
+	                
+	menu (List):      A List of every menupoint that should be visible
+	
+	x_pos (digit):   Start of x_position, in Pixels (Default: 100)
+	
+	y_pos (digit):   Start of y_position, in Pixels (Default: 100)
+	
+	size (digit):    Fontsize (Default: 70)
+	
+	distance (float):Y-Distance after every single menupoint
+	                 (Default: 1.4)
+	
+	fgcolor (Tupel): Foreground-Color, means the Font-Color
+	                 (Default: (255,255,255), means white)
+	                 
+	cursorcolor (Tupel): Cursor-Color, means that ">"-Charakter
+	                     (Default: (255,0,0), means red)
+	                     
+	exitAllowed (Bool): If True:
+	                    If User pressed the ESC-Key, the Cursor will
+	                    move to the last Menupoint. If Cursorposition
+	                    is already to the last Menupoint, a pressed
+	                    ESC-Key will return the latest Menupoint. Very
+	                    useful if the last Menupoint is something like
+	                    "Quit Game"...
+	                    If False:
+	                    A pressed ESC-Key will takes no effect.
+	                    (Default: True)
+	                    
+	EXAMPLE
+	=======
+	import pygame
+	from dumbmenu import *
+	pygame.init()
+
+	# Just a few static variables
+	red   = 255,  0,  0
+	green =   0,255,  0
+
+	size = width, height = 640,480	
+	screen = pygame.display.set_mode(size)
+	screen.fill(blue)
+	pygame.display.update()
+
+	print dumbmenu(screen, [
+	                        'Start Game',
+	                        'Options',
+	                        'Manual',
+	                        'Show Highscore',
+	                        'Quit Game'],
+	                        320, 250, "Courier", 32, 1.4, green, red)
+	
+	HOW TO INTERACT
+	===============
+	After called dumbmenu(), the User MUST choose an Menupoint. The
+	Script will be haltet until the User makes a decision or a event
+	called pygame.QUIT() will be raised.
+	
+	The User kann pressed directly a Key from 1 to 9 to take the choice.
+	Another Method is pressing the UP-/DOWN-Key and take the choice with
+	RETURN. Every single Menupoint will get a Number, beginning with 1.
+	
+	The return-value ist the Number of Menupoint decreased by 1. From
+	the above Example: If the User will choice "Manual", the return-
+	value will be 2.
+
+	If the number of Menupoints is greater than 9, the numeration will
+	continue from A to Z... the return-value is still a number,
+	continue from 9 to 34...
+	
+	If a pygame.QUIT()-Event will be raised, the return-value will be
+	-1.
+	
+	ACTUAL LIMITATIONS
+	==================
+	It's actually not possible to change the Font itself.
+	
+	Drawing Menu will be antialiased. If you want to change that, you'll
+	have to change the sourcecode directly.
+
+	OTHERS
+	======
+	Yes, I know, my english isn't that good (I'm not a naturally
+	speaker) and the sourcecode isn't that good too ;) . It's more or
+	less a "quick'n dirty"-Solution. My first intention was to make that
+	code for me, but I hope it could may useful for other people too...
+
+	Version: 0.40
+	Author: Manuel Kammermeier aka Astorek
+	License: MIT
+
+	CHANGES:
+	========
+	Version 0.35:
+	- First Version
+	
+	Version 0.40:
+	- "bgcolor" removed, now the Function saves the Background
+	- added "font", which allows to choose a Systemfont
+	"""
+
+	global myfont
+
+	# Draw the Menupoints
+	pygame.font.init()
+	if font == None:
+		myfont = pygame.font.Font(None, size)
+	else:
+		myfont = pygame.font.SysFont(font, size)
+	cursorpos = 0
+	renderWithChars = False
+	textrects = []
+	for i in menu:
+		if renderWithChars == False:
+			text =  myfont.render(str(cursorpos + 1)+".  " + i,
+				True, fgcolor)
+		else:
+			text =  myfont.render(chr(char)+".  " + i,
+				True, fgcolor)
+			char += 1
+		textrect = text.get_rect()
+		textrect = textrect.move((x_pos - (textrect.width  // 2)),
+		           (size // distance * cursorpos) + (y_pos - (textrect.height // 2)))
+		textrects.append((text, textrect))
+		screen.blit(text, textrect)
+		pygame.display.update(textrect)
+		cursorpos += 1
+		if cursorpos == 9:
+			renderWithChars = True
+			char = 65
+
+	# Draw the ">"and "<", the Cursor
+	cursorpos = 0
+#	trect = textrects[cursorpos][1]
+#
+#	cursor = myfont.render(">", True, cursorcolor)
+#	cursorrect = cursor.get_rect()
+#	cursorrect = cursorrect.move((trect.left - 30), trect.top)
+#	
+#	cursor2 = myfont.render("<", True, cursorcolor)
+#	cursorrect2 = cursor2.get_rect()
+#	cursorrect2 = cursorrect2.move((trect.right + 20), trect.top)
+
+	# The whole While-loop takes care to show the Cursor, move the
+	# Cursor and getting the Keys (1-9 and A-Z) to work...
+	ArrowPressed = True
+	exitMenu = False
+	clock = pygame.time.Clock()
+	filler = pygame.Surface.copy(screen)
+	fillerrect = filler.get_rect()
+	while True:
+		clock.tick(30)
+		if ArrowPressed == True:
+			screen.blit(filler, fillerrect)
+			update(screen, [m[1] for m in textrects], cursorpos, curcol=cursorcolor)
+#			pygame.display.update(cursorrect)
+#			pygame.display.update(cursorrect2)
+#			cursorrect = cursor.get_rect()
+#			cursorrect2 = cursor2.get_rect()
+
+			#what text rect are we selecting? how big is it?
+			
+#			trect = textrects[cursorpos][1]
+
+			#cursorrect = cursorrect.move((x_pos - (cursorrect.width  // 2) - 100) - (size // distance),
+			#            (size // distance * cursorpos) + (y_pos - (cursorrect.height // 2)))
+
+#			cursorrect = cursorrect.move((trect.left - 30), trect.top)
+#			cursorrect2 = cursorrect2.move((trect.right + 20), trect.top)
+#			screen.blit(cursor, cursorrect)
+#			screen.blit(cursor2, cursorrect2)
+#			pygame.display.update(cursorrect)
+#			pygame.display.update(cursorrect2)
+			ArrowPressed = False
+		if exitMenu == True:
+			break
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				return -1
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_ESCAPE and exitAllowed == True:
+					if cursorpos == len(menu) - 1:
+						exitMenu = True
+					else:
+						cursorpos = len(menu) - 1; ArrowPressed = True
+
+				# This Section is huge and ugly, I know... But I don't
+				# know a better method for this^^
+				if event.key == pygame.K_1:
+					cursorpos = 0; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_2 and len(menu) >= 2:
+					cursorpos = 1; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_3 and len(menu) >= 3:
+					cursorpos = 2; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_4 and len(menu) >= 4:
+					cursorpos = 3; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_5 and len(menu) >= 5:
+					cursorpos = 4; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_6 and len(menu) >= 6:
+					cursorpos = 5; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_7 and len(menu) >= 7:
+					cursorpos = 6; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_8 and len(menu) >= 8:
+					cursorpos = 7; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_9 and len(menu) >= 9:
+					cursorpos = 8; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_a and len(menu) >= 10:
+					cursorpos = 9; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_b and len(menu) >= 11:
+					cursorpos = 10; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_c and len(menu) >= 12:
+					cursorpos = 11; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_d and len(menu) >= 13:
+					cursorpos = 12; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_e and len(menu) >= 14:
+					cursorpos = 13; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_f and len(menu) >= 15:
+					cursorpos = 14; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_g and len(menu) >= 16:
+					cursorpos = 15; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_h and len(menu) >= 17:
+					cursorpos = 16; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_i and len(menu) >= 18:
+					cursorpos = 17; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_j and len(menu) >= 19:
+					cursorpos = 18; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_k and len(menu) >= 20:
+					cursorpos = 19; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_l and len(menu) >= 21:
+					cursorpos = 20; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_m and len(menu) >= 22:
+					cursorpos = 21; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_n and len(menu) >= 23:
+					cursorpos = 22; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_o and len(menu) >= 24:
+					cursorpos = 23; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_p and len(menu) >= 25:
+					cursorpos = 24; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_q and len(menu) >= 26:
+					cursorpos = 25; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_r and len(menu) >= 27:
+					cursorpos = 26; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_s and len(menu) >= 28:
+					cursorpos = 27; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_t and len(menu) >= 29:
+					cursorpos = 28; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_u and len(menu) >= 30:
+					cursorpos = 29; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_v and len(menu) >= 31:
+					cursorpos = 30; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_w and len(menu) >= 32:
+					cursorpos = 31; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_x and len(menu) >= 33:
+					cursorpos = 32; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_y and len(menu) >= 34:
+					cursorpos = 33; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_z and len(menu) >= 35:
+					cursorpos = 34; ArrowPressed = True; exitMenu = True
+				elif event.key == pygame.K_UP:
+					ArrowPressed = True
+					if cursorpos == 0:
+						cursorpos = len(menu) - 1
+					else:
+						cursorpos -= 1
+				elif event.key == pygame.K_DOWN:
+					ArrowPressed = True
+					if cursorpos == len(menu) - 1:
+						cursorpos = 0
+					else:
+						cursorpos += 1
+				elif event.key == pygame.K_KP_ENTER or \
+				     event.key == pygame.K_RETURN:
+							exitMenu = True
+	
+	return cursorpos
+
+if __name__ == '__main__':
+	sys.stderr.write("You should import me, not start me...")
+	sys.exit()
+
+copyright = """
+	Copyright (c) 2010 Manuel Kammermeier aka Astorek
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	This copy of the software has been modified by Kurai Atonitsuka, CEO of Nightwave Studios @ dark.tailed.wolf@gmail.com
+"""

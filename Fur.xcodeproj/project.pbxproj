@@ -15,7 +15,6 @@
 		44154180188B5A7500FAE219 /* english.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = english.py; sourceTree = "<group>"; };
 		44154181188B5A7500FAE219 /* enpelt.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = enpelt.py; sourceTree = "<group>"; };
 		44154182188B5A7500FAE219 /* espelt.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = espelt.py; sourceTree = "<group>"; };
-		44154183188B5A7500FAE219 /* Icon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Icon; sourceTree = "<group>"; };
 		44154184188B5A7500FAE219 /* spanish.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = spanish.py; sourceTree = "<group>"; };
 		44154185188B5A7500FAE219 /* xino.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = xino.py; sourceTree = "<group>"; };
 		44154186188B5A7500FAE219 /* xnpelt.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = xnpelt.py; sourceTree = "<group>"; };
@@ -32,11 +31,9 @@
 		44154195188B5A7500FAE219 /* winterm.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = winterm.py; sourceTree = "<group>"; };
 		44154196188B5A7500FAE219 /* config.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = config.py; sourceTree = "<group>"; };
 		44154197188B5A7500FAE219 /* easygui.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = easygui.py; sourceTree = "<group>"; };
-		44154198188B5A7500FAE219 /* graphics.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = graphics.py; sourceTree = "<group>"; };
 		44154199188B5A7500FAE219 /* i18n.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = i18n.py; sourceTree = "<group>"; };
 		4415419A188B5A7500FAE219 /* level.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = level.py; sourceTree = "<group>"; };
 		4415419B188B5A7500FAE219 /* localio.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = localio.py; sourceTree = "<group>"; };
-		4415419C188B5A7500FAE219 /* menu.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = menu.py; sourceTree = "<group>"; };
 		4415419D188B5A7500FAE219 /* netio.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = netio.py; sourceTree = "<group>"; };
 		4415419E188B5A7500FAE219 /* SysTrayIcon.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = SysTrayIcon.py; sourceTree = "<group>"; };
 		441541A0188B5A7500FAE219 /* Icon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Icon; sourceTree = "<group>"; };
@@ -82,6 +79,43 @@
 		441541D6188B5A7500FAE219 /* Run.bat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Run.bat; sourceTree = "<group>"; };
 		441541D7188B5A7500FAE219 /* Run.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Run.sh; sourceTree = "<group>"; };
 		441541D8188B5A7500FAE219 /* WinCompile.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = WinCompile.py; sourceTree = "<group>"; };
+		4418D45E18B6C2F300ACC522 /* netconnect.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = netconnect.py; sourceTree = "<group>"; };
+		441EF789188DDD0E000E6E59 /* Tile Attributes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tile Attributes.txt"; sourceTree = "<group>"; };
+		441EF78A188DE9D9000E6E59 /* Addon Creation Guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Addon Creation Guide.txt"; path = "resources/docs/Addon Creation Guide.txt"; sourceTree = SOURCE_ROOT; };
+		441EF78B188E1B4E000E6E59 /* entity.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = entity.py; sourceTree = "<group>"; };
+		44762DDE18B2CFF000AA7DDF /* rtmidi.so */ = {isa = PBXFileReference; lastKnownFileType = file; path = rtmidi.so; sourceTree = "<group>"; };
+		44762DE018B2CFF000AA7DDF /* rtmidi.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = rtmidi.so; sourceTree = "<group>"; };
+		44762DE218B2CFF000AA7DDF /* MidiMessage.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = MidiMessage.o; sourceTree = "<group>"; };
+		44762DE318B2CFF000AA7DDF /* PyMidiMessage.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = PyMidiMessage.o; sourceTree = "<group>"; };
+		44762DE418B2CFF000AA7DDF /* RtMidi.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = RtMidi.o; sourceTree = "<group>"; };
+		44762DE518B2CFF000AA7DDF /* rtmidimodule.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = rtmidimodule.o; sourceTree = "<group>"; };
+		44762DE618B2CFF000AA7DDF /* MidiMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MidiMessage.cpp; sourceTree = "<group>"; };
+		44762DE718B2CFF000AA7DDF /* MidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiMessage.h; sourceTree = "<group>"; };
+		44762DE918B2CFF000AA7DDF /* custom_names_patch.diff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = custom_names_patch.diff; sourceTree = "<group>"; };
+		44762DEA18B2CFF000AA7DDF /* pyrtmidi-APPLE_LINUX_WINDOWS.diff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pyrtmidi-APPLE_LINUX_WINDOWS.diff"; sourceTree = "<group>"; };
+		44762DEB18B2CFF000AA7DDF /* Readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
+		44762DEC18B2CFF000AA7DDF /* PyMidiMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PyMidiMessage.cpp; sourceTree = "<group>"; };
+		44762DED18B2CFF000AA7DDF /* PyMidiMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PyMidiMessage.h; sourceTree = "<group>"; };
+		44762DEE18B2CFF000AA7DDF /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		44762DEF18B2CFF000AA7DDF /* RtError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtError.h; sourceTree = "<group>"; };
+		44762DF018B2CFF000AA7DDF /* RtMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RtMidi.cpp; sourceTree = "<group>"; };
+		44762DF118B2CFF000AA7DDF /* RtMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtMidi.h; sourceTree = "<group>"; };
+		44762DF218B2CFF000AA7DDF /* rtmidimodule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rtmidimodule.cpp; sourceTree = "<group>"; };
+		44762DF318B2CFF000AA7DDF /* setup.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
+		44762DF518B2CFF000AA7DDF /* clock_output.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = clock_output.py; sourceTree = "<group>"; };
+		44762DF618B2CFF000AA7DDF /* rtmiditest.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = rtmiditest.py; sourceTree = "<group>"; };
+		44762DF718B2CFF000AA7DDF /* test_callback.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = test_callback.py; sourceTree = "<group>"; };
+		44762DF818B2CFF000AA7DDF /* test_rtmidi.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = test_rtmidi.py; sourceTree = "<group>"; };
+		4490869118A9A03A00AC20AE /* Copyright & Licence.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Copyright & Licence.txt"; sourceTree = "<group>"; };
+		4490869518A9A8A100AC20AE /* credit.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = credit.py; sourceTree = "<group>"; };
+		4490869618A9A8AB00AC20AE /* copyright.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = copyright.py; sourceTree = "<group>"; };
+		4492160518A3228800A43B50 /* color.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = color.py; sourceTree = "<group>"; };
+		4497CAC118A0583400794C90 /* menu.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = menu.py; sourceTree = "<group>"; };
+		4497CAC218A0585500794C90 /* dumbmenuLicense.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dumbmenuLicense.txt; sourceTree = "<group>"; };
+		44B5756E18BEEE31009FD87E /* item.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = item.py; sourceTree = "<group>"; };
+		44B801F018A04DBE003FD27C /* menutest.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = menutest.py; sourceTree = "<group>"; };
+		44D195C918BF07BA005A9CEE /* errors.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = errors.py; sourceTree = "<group>"; };
+		44E20C5318BFEC56006FD270 /* gameplay.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = gameplay.py; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -89,10 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				4415417F188B5A7500FAE219 /* compile-langs.py */,
-				44154180188B5A7500FAE219 /* english.py */,
 				44154181188B5A7500FAE219 /* enpelt.py */,
+				44154180188B5A7500FAE219 /* english.py */,
 				44154182188B5A7500FAE219 /* espelt.py */,
-				44154183188B5A7500FAE219 /* Icon */,
 				44154184188B5A7500FAE219 /* spanish.py */,
 				44154185188B5A7500FAE219 /* xino.py */,
 				44154186188B5A7500FAE219 /* xnpelt.py */,
@@ -121,17 +154,25 @@
 		4415418D188B5A7500FAE219 /* pelt */ = {
 			isa = PBXGroup;
 			children = (
+				44762DDB18B2CFF000AA7DDF /* PyRtMidi-master */,
 				4415418E188B5A7500FAE219 /* __init__.py */,
+				4492160518A3228800A43B50 /* color.py */,
 				4415418F188B5A7500FAE219 /* colorama */,
 				44154196188B5A7500FAE219 /* config.py */,
-				44154197188B5A7500FAE219 /* easygui.py */,
-				44154198188B5A7500FAE219 /* graphics.py */,
+				4490869518A9A8A100AC20AE /* credit.py */,
+				441EF78B188E1B4E000E6E59 /* entity.py */,
+				44D195C918BF07BA005A9CEE /* errors.py */,
+				44E20C5318BFEC56006FD270 /* gameplay.py */,
 				44154199188B5A7500FAE219 /* i18n.py */,
+				44B5756E18BEEE31009FD87E /* item.py */,
 				4415419A188B5A7500FAE219 /* level.py */,
 				4415419B188B5A7500FAE219 /* localio.py */,
-				4415419C188B5A7500FAE219 /* menu.py */,
 				4415419D188B5A7500FAE219 /* netio.py */,
+				4497CAC118A0583400794C90 /* menu.py */,
+				44B801F018A04DBE003FD27C /* menutest.py */,
+				44154197188B5A7500FAE219 /* easygui.py */,
 				4415419E188B5A7500FAE219 /* SysTrayIcon.py */,
+				4497CAC218A0585500794C90 /* dumbmenuLicense.txt */,
 				4415419F188B5A7500FAE219 /* test */,
 			);
 			path = pelt;
@@ -190,9 +231,12 @@
 				441541AB188B5A7500FAE219 /* How to Install.txt */,
 				441541AC188B5A7500FAE219 /* Level 2 */,
 				441541BF188B5A7500FAE219 /* Level Design.gdoc */,
+				441EF789188DDD0E000E6E59 /* Tile Attributes.txt */,
+				441EF78A188DE9D9000E6E59 /* Addon Creation Guide.txt */,
 				441541C0188B5A7500FAE219 /* Level Hex File Format Guide.txt */,
 				441541C1188B5A7500FAE219 /* Main Menu.psd */,
 				441541C2188B5A7500FAE219 /* spanish.py */,
+				4490869118A9A03A00AC20AE /* Copyright & Licence.txt */,
 			);
 			path = docs;
 			sourceTree = "<group>";
@@ -307,13 +351,93 @@
 			path = tiles;
 			sourceTree = "<group>";
 		};
+		44762DDB18B2CFF000AA7DDF /* PyRtMidi-master */ = {
+			isa = PBXGroup;
+			children = (
+				44762DDC18B2CFF000AA7DDF /* build */,
+				44762DE618B2CFF000AA7DDF /* MidiMessage.cpp */,
+				44762DE718B2CFF000AA7DDF /* MidiMessage.h */,
+				44762DE818B2CFF000AA7DDF /* patches */,
+				44762DEC18B2CFF000AA7DDF /* PyMidiMessage.cpp */,
+				44762DED18B2CFF000AA7DDF /* PyMidiMessage.h */,
+				44762DEE18B2CFF000AA7DDF /* README */,
+				44762DEF18B2CFF000AA7DDF /* RtError.h */,
+				44762DF018B2CFF000AA7DDF /* RtMidi.cpp */,
+				44762DF118B2CFF000AA7DDF /* RtMidi.h */,
+				44762DF218B2CFF000AA7DDF /* rtmidimodule.cpp */,
+				44762DF318B2CFF000AA7DDF /* setup.py */,
+				44762DF418B2CFF000AA7DDF /* tests */,
+			);
+			path = "PyRtMidi-master";
+			sourceTree = "<group>";
+		};
+		44762DDC18B2CFF000AA7DDF /* build */ = {
+			isa = PBXGroup;
+			children = (
+				44762DDD18B2CFF000AA7DDF /* lib.linux-x86_64-2.7 */,
+				44762DDF18B2CFF000AA7DDF /* lib.macosx-10.6-intel-2.7 */,
+				44762DE118B2CFF000AA7DDF /* temp.macosx-10.6-intel-2.7 */,
+			);
+			path = build;
+			sourceTree = "<group>";
+		};
+		44762DDD18B2CFF000AA7DDF /* lib.linux-x86_64-2.7 */ = {
+			isa = PBXGroup;
+			children = (
+				44762DDE18B2CFF000AA7DDF /* rtmidi.so */,
+			);
+			path = "lib.linux-x86_64-2.7";
+			sourceTree = "<group>";
+		};
+		44762DDF18B2CFF000AA7DDF /* lib.macosx-10.6-intel-2.7 */ = {
+			isa = PBXGroup;
+			children = (
+				44762DE018B2CFF000AA7DDF /* rtmidi.so */,
+			);
+			path = "lib.macosx-10.6-intel-2.7";
+			sourceTree = "<group>";
+		};
+		44762DE118B2CFF000AA7DDF /* temp.macosx-10.6-intel-2.7 */ = {
+			isa = PBXGroup;
+			children = (
+				44762DE218B2CFF000AA7DDF /* MidiMessage.o */,
+				44762DE318B2CFF000AA7DDF /* PyMidiMessage.o */,
+				44762DE418B2CFF000AA7DDF /* RtMidi.o */,
+				44762DE518B2CFF000AA7DDF /* rtmidimodule.o */,
+			);
+			path = "temp.macosx-10.6-intel-2.7";
+			sourceTree = "<group>";
+		};
+		44762DE818B2CFF000AA7DDF /* patches */ = {
+			isa = PBXGroup;
+			children = (
+				44762DE918B2CFF000AA7DDF /* custom_names_patch.diff */,
+				44762DEA18B2CFF000AA7DDF /* pyrtmidi-APPLE_LINUX_WINDOWS.diff */,
+				44762DEB18B2CFF000AA7DDF /* Readme */,
+			);
+			path = patches;
+			sourceTree = "<group>";
+		};
+		44762DF418B2CFF000AA7DDF /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				44762DF518B2CFF000AA7DDF /* clock_output.py */,
+				44762DF618B2CFF000AA7DDF /* rtmiditest.py */,
+				44762DF718B2CFF000AA7DDF /* test_callback.py */,
+				44762DF818B2CFF000AA7DDF /* test_rtmidi.py */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
 		44AAA2E1188B56E6004247D6 = {
 			isa = PBXGroup;
 			children = (
+				4490869618A9A8AB00AC20AE /* copyright.py */,
 				4415417A188B5A7500FAE219 /* battle.py */,
 				4415417B188B5A7500FAE219 /* custio.py */,
 				4415417C188B5A7500FAE219 /* debug-iOS.py */,
 				4415417D188B5A7500FAE219 /* Fur.py */,
+				4418D45E18B6C2F300ACC522 /* netconnect.py */,
 				4415417E188B5A7500FAE219 /* Language File Creators */,
 				44154187188B5A7500FAE219 /* modules */,
 				4415418C188B5A7500FAE219 /* Notepad++ Level Language.xml */,

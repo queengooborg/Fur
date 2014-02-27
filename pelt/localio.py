@@ -3,6 +3,7 @@
 
 from i18n import m
 import config, pelt
+from color import *
 import time, os, pickle, sys, random, locale, re
 #import menu
 
@@ -11,15 +12,14 @@ try:
 	from scene import *
 	config.pc = 'iphone'
 	config.ios = True
-except ImportError as error:
-	import colorama, easygui #, menu, pygame
+except ImportError:
+	import colorama, easygui, pygame
+	from menu import dumbmenu as dm
 	colorama.init()
-	#pygame.init()
-	config.pc = 'computer'
+	config.pc = pelt.pcinfo()
 	config.ios = False
-
-try: styles = colorama.Fore.WHITE #Set color to default...
-except: styles = '' #...and set to a blank string if on iOS
+ios = config.ios
+pc = config.pc
 
 #Function that prints the messages
 def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", ignorecolor=False, noreset=False, r=0, s=0):
@@ -77,19 +77,18 @@ class guiInput():
 		self.firstmsg = True
 	
 	def network(self):
-		try:
+		if config.ios:
 			if self.network:
 				console.hide_activity()
 				self.network = False
 			else:
 				console.show_activity()
 				self.network = True
-		except: pass
+		else: pass
 
 	def text(self, msg):
-		try: choice = console.input_alert(msg, '', '', 'Ok')
-		except:
-			choice = easygui.enterbox(msg=msg, title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version))
+		if config.ios: choice = console.input_alert(msg, '', '', 'Ok')
+		else: choice = easygui.enterbox(msg=msg, title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version))
 		return choice
 	
 	def choice(self, msg, choices, window=False):
@@ -132,15 +131,12 @@ class guiInput():
 				for c in strings:
 					if choice == c: number = i
 					else: i += 1
-			else:
-				choice = menu.main(strings)
-				time.sleep(0.1)
-				return choice
+			else: choice = dm(pelt.screen, strings, pelt.width // 2, pelt.height // 2, None, 32, 1.4, GREEN, PURPLE) + 1
 		temp = str(choice)
 		if temp == m('quit') or temp == m('back') or temp == m('cancel'): return 0
 		return choices[number-1]
 
-	def alert(self, data):
+	def alert(self, data, window = True):
 		nocolordata = ''
 		color=False
 		for c in data:
@@ -154,7 +150,12 @@ class guiInput():
 		if config.ios:
 			try: console.alert('',msg)
 			except KeyboardInterrupt: pass
-		else: easygui.msgbox(title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version), msg=msg)
+		else:
+			if not window: easygui.msgbox(title='PELT Engine - '+pelt.gametitle+' v'+str(pelt.version), msg=msg)
+			else:
+				rectwidth = 680
+				huRect = pygame.Rect()
+				alertRect = pygame.Rect()
 	
 	def multtext(self, msg, fields, optfields = None):
 		orgmsg = str(msg)
@@ -208,14 +209,14 @@ class TerminalInput():
 		self.firstmsg = True
 	
 	def network(self):
-		try:
+		if config.ios:
 			if self.network:
 				console.hide_activity()
 				self.network = False
 			else:
 				console.show_activity()
 				self.network = True
-		except: pass
+		else: pass
 
 	def text(self, msg): return raw_input(msg+"  ")
 	
@@ -252,45 +253,3 @@ class TerminalInput():
 
 if config.gui: getInput = guiInput()
 else: getInput = TerminalInput()
-
-def color(color):
-	global styles
-	try: #If styles is greater than 20, reset...
-		if len(styles) > 20: styles = colorama.Fore.WHITE
-		styles = colorama.Fore.WHITE
-	except: pass #...or pass if on iOS
-	if color == 'red':
-		try: console.set_color(1.0, 0.0, 0.0)
-		except: styles += colorama.Fore.RED
-	elif color == 'green':
-		try: console.set_color(0.2, 0.8, 0.2)
-		except: styles += colorama.Fore.GREEN
-	elif color == 'blue':
-		try: console.set_color(0.0, 0.0, 1.0)
-		except: styles += colorama.Fore.CYAN
-	elif color == 'yellow':
-		try: console.set_color(0.6, 0.6, 0.1)
-		except: styles += colorama.Fore.YELLOW
-	elif color == 'darkblue':
-		try: console.set_color(0.6, 0.6, 1.0)
-		except: styles += colorama.Fore.BLUE
-	elif color == 'magneta':
-		try: console.set_color(1.0, 0.2, 1.0)
-		except: styles += colorama.Fore.MAGENTA
-	elif color == 'reset':
-		try:
-			console.set_color(0.2, 0.2, 0.2)
-			console.set_font()
-		except: styles += colorama.Fore.WHITE
-	elif color == 'random':
-		try: console.set_color(random.random(),random.random(),random.random())
-		except:
-			list = [colorama.Fore.RED, colorama.Fore.GREEN, colorama.Fore.YELLOW, colorama.Fore.BLUE, colorama.Fore.MAGENTA, colorama.Fore.CYAN, colorama.Fore.WHITE]
-			styles += random.choice(list)
-	elif color == 'bold':
-		try: console.set_font('Helvetica', 32.0)
-		except: pass
-	else: output('colorerror')
-	if styles and config.color:
-		sys.stdout.write(styles)
-		sys.stdout.flush()

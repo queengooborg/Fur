@@ -1,4 +1,8 @@
-#PARSER
+#PELT Level Information
+#Created January 18, 2014 at 16:44
+
+from errors import *
+
 def getblocks(start, end, data, max):
 	i = 0
 	blocks = []
@@ -69,10 +73,11 @@ class Dialogue(object):
 	def __init__(self, dialogue):
 		self.raw = dialogue
 		for line in self.raw:
-			# XXX get what's between the % symbols
-			if thing == 'Choice':
+			definersearch = re.match("%([^%]+)%([.]+)", line)
+			code = definersearch.group(1)
+			if code == 'Choice':
 				"""this is complicated"""
-			elif thing == 'Action':
+			elif code == 'Action':
 				DialogueAction(other)
 			else:
 				DialogueSpeech(thing, other)
@@ -245,4 +250,3 @@ class Room(object):
 				if not d.locked: return d.room
 				else: return "locked"
 		return None
-#PARSER

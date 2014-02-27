@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>981A4479-2CC7-4ABF-8889-D716F97D63A2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Fur</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>25BC5E63-3CD6-4CEE-8DE9-B87E4DA5B959</key>
+		<string>https://github.com/lobenmai/Fur.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Fur.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>25BC5E63-3CD6-4CEE-8DE9-B87E4DA5B959</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lobenmai/Fur.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>25BC5E63-3CD6-4CEE-8DE9-B87E4DA5B959</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>25BC5E63-3CD6-4CEE-8DE9-B87E4DA5B959</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Fur</string>
+		</dict>
+	</array>
+</dict>
+</plist>

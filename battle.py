@@ -1,4 +1,4 @@
-#PELT Battle Sequence
+#PELT Battle Sequence Test
 #Created September 3, 2013 at 13:20
 
 # Attack
@@ -8,7 +8,6 @@
 # Flee
 
 import pelt
-pelt.sync(313, True, 'Fur')
 
 class Battle(object):
 	def __init__(self, players, enemies):
@@ -24,7 +23,8 @@ class Battle(object):
 			for c in self.getPlayers():
 				if type(c) == pelt.Ally:
 					action = pelt.getInput.choice('What to do?',['Attack','Er...','Um...'])
-					if action == 'Attack': self.attack(c)
+					if action == 'Attack':
+						self.attack(c)
 				elif type(c) == pelt.Enemy:
 					pass
 

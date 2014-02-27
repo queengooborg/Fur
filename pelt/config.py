@@ -3,9 +3,13 @@
 
 import pickle, os.path, sys
 
+join = os.path.join
+
 rootdir = os.path.dirname(os.path.dirname(__file__))
-resourcedir = os.path.join(rootdir, 'resources')
-langdir = os.path.join(resourcedir, 'langs')
+resourcedir = join(rootdir, 'resources')
+langdir = join(resourcedir, 'langs')
+fontdir = join(resourcedir, 'fonts')
+mapdir = join(resourcedir, 'levels')
 optionspath = os.path.join(resourcedir, 'options.pyp')
 
 args = sys.argv[1:]
@@ -13,6 +17,7 @@ args = sys.argv[1:]
 devplayer = False
 annoy = False
 gui = True
+color = True
 
 if len(args) > 0:
 	if "nostory" in args:

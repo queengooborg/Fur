@@ -6,14 +6,16 @@
 import webbrowser, urllib2, sys, json
 from pelt import localio
 
-def output(msg, *args, **kwargs): print msg
+def output(msg, *args, **kwargs):
+	print msg
 
 def connect(url='', browser=False):
 	try:
 		if browser:
 			webbrowser.open(site+url)
 			localio.getInput.alert('Click Ok/Cancel...')
-		else: return urllib2.urlopen(site+url, None, 10).read()
+		else:
+			return urllib2.urlopen(site+url, None, 10).read()
 	except (urllib2.URLError, urllib2.HTTPError) as error:
 		output('Sorry, cannot connect to KageASHI.')
 		print error
@@ -25,7 +27,8 @@ def poutput(msg, newline=True, noscroll=False):
 		if not noscroll:
 			sys.stdout.flush()
 			sleep(0.03)
-	if newline: sys.stdout.write('\n')
+	if newline:
+		sys.stdout.write('\n')
 	sys.stdout.flush()
 
 domain = "kageashi.no-ip.biz"
@@ -36,7 +39,8 @@ def levellist():
 	levelraw = connect('levels/popular')
 	levels = json.loads(str(levelraw))
 	print "There are", len(levels), 'levels'
-	for level in levels: print level
+	for level in levels:
+		print level
 
 def custcreate():
 	#Level Metadata
@@ -47,15 +51,18 @@ def custcreate():
 	
 	while True:
 		metadata = localio.getInput.multtext("Enter the name and size (in tiles) of the level.", op)
-		if metadata: break
+		if metadata:
+			break
 	
 	level.append("Level is "+metadata[op[0]]+" sized "+metadata[op[1]]+"x"+metadata[op[2]])
 	
 	#Dialogue
 	
 	dialexists = localio.getInput.choice("Would you like to add dialogue to the level?", ['Yes', 'No'])
-	if dialexists == "Yes": dialexists = True
-	else: dialexists = False
+	if dialexists == "Yes":
+		dialexists = True
+	else:
+		dialexists = False
 	
 	dialogue = []
 	
@@ -67,19 +74,25 @@ def custcreate():
 			type = localio.getInput.choice("Dialogue Creation Interface", options)
 			if type == options[0]:
 				sectionname = localio.getInput.text("What is the name of the section?  (Leave blank to cancel)")
-				if sectionname: dialogue.append("&"+sectionname)
+				if sectionname:
+					dialogue.append("&"+sectionname)
 			elif type == options[1]:
 				op = ["Character", "Dialogue"]
 				speech = localio.getInput.multtext("Speech (Use %Player%, %Friend1%, %Friend2%, etc. to get that character's name in the dialogue (ex. if Friend1 is named Vulpis, 'Hello %Friend1%' would say 'Hello Vulpis'))", op)
-				if speech: dialogue.append("%"+speech[op[0]]+"% "+speech[op[1]])
+				if speech:
+					dialogue.append("%"+speech[op[0]]+"% "+speech[op[1]])
 			elif type == options[2]:
 				action = localio.getInput.text("Action (Use %Player%, %Friend1%, %Friend2%, etc. to get that character's name in the dialogue (ex. if Friend1 is named Vulpis, 'Hello %Friend1%' would say 'Hello Vulpis'))")
-				if action: dialogue.append("%Action% "+action)
+				if action:
+					dialogue.append("%Action% "+action)
 			elif type == options[3]:
 				choiceques = localio.getInput.text("Choice: What do you want to ask the player?")
-				if choiceques: choicedial = ["%Choice% "+choiceques]
-				else: choicedial = None
-				if choicedial: output("Choice creation is not ready yet.", dict=False)
+				if choiceques:
+					choicedial = ["%Choice% "+choiceques]
+				else:
+					choicedial = None
+				if choicedial:
+					output("Choice creation is not ready yet.", dict=False)
 				# XXX create choice interface
 			elif type == option[4]:
 				op = ["Stat", "Item"]
@@ -94,11 +107,13 @@ def custcreate():
 						if stat:
 							msg = orgmsg
 							amount = str_to_int(stat[opt[2]])
-							if amount < 0: msg = "Amount is not a valid number.  "+msg
+							if amount < 0:
+								msg = "Amount is not a valid number.  "+msg
 							else:
 								dialogue.append("*Stat "+stat[opt[0]]+" "+stat[opt[1]]+" "+stat[opt[2]])
 								waiting = False
-						else: waiting = False
+						else:
+							waiting = False
 				elif statitem == op[1]:
 					opt = ["Name", "Amount (any number above 0)"]
 					orgmsg = "Give Item"
@@ -110,14 +125,17 @@ def custcreate():
 							msg = orgmsg
 							invalid = -1000
 							amount = str_to_int(stat[opt[2]], default=invalid)
-							if amount != invalid: msg = "Amount is not a valid number.  "+msg
+							if amount != invalid:
+								msg = "Amount is not a valid number.  "+msg
 							else:
 								dialogue.append("*Item "+item[opt[0]]+" "+stat[opt[1]])
 								waiting = False
-						else: waiting = False
+						else:
+							waiting = False
 			elif type == option[5]:
 				waiting = False
-			else: localio.output("inputerror")
+			else:
+				localio.output("inputerror")
 	
 	level.append("Dialogue is:")
 	if dialogue != []:
@@ -144,10 +162,13 @@ def custcreate():
 				if -1 not in [h, w, x, y] and len(me["Floor Letter"]) < 1:
 					roomdata.append("Called "+me['Room Name']+" sized "+me['Height']+"x"+me['Width']+" placed "+me['Floor Letter']+me['X Placement']+"x"+me['Y Placement'])
 					wait = False
-				else: msg = "Invalid input.  "+msg
+				else:
+					msg = "Invalid input.  "+msg
 			else:
-				if roomexists: wait = False
-				else: msg = "You need to add at least one room.  "+msg
+				if roomexists:
+					wait = False
+				else:
+					msg = "You need to add at least one room.  "+msg
 		
 		waitin = True
 		while waitin:
@@ -160,8 +181,10 @@ def custcreate():
 					door = "Door to "+data['To Room']+" on "+data['On Wall']+" "+data['Blocks From Wall']+" from "+data['From Wall']
 					if data['Locked With Key']:
 						door += " locked with "+data['Locked With Key']
-						if data['Properties']: door += " ("+data['Properties']+")"
-				else: print "Blocks From Wall is an invalid choice"
+						if data['Properties']:
+							door += " ("+data['Properties']+")"
+				else:
+					print "Blocks From Wall is an invalid choice"
 			elif choice == opt[1]:
 				data = localio.getInput.multtext(opt[0], ["To Room", "From First Wall", "Blocks From First Wall", "From Second Wall", "Blocks From Second Wall"], ["Locked With Key", "Properties"])
 				placemen1 = str_to_int(data['Blocks From First Wall'])
@@ -170,8 +193,10 @@ def custcreate():
 					door = "Door to "+data['To Room']+" on "+data['Blocks From First Wall']+" from "+data['On First Wall']+" and "+data['Blocks From Second Wall']+" from "+data['From Second Wall']
 					if data['Locked With Key']:
 						door += " locked with "+data['Locked With Key']
-						if data['Properties']: door += " ("+data['Properties']+")"
-				else: print "Blocks From Wall is an invalid choice"
+						if data['Properties']:
+							door += " ("+data['Properties']+")"
+				else:
+					print "Blocks From Wall is an invalid choice"
 			elif choice == opt[2]:
 				data = localio.getInput.choice("Create Chest", ["X Placement", "Y Placement", "Items"])
 		
