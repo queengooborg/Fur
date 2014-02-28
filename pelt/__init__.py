@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 154
+peltvers = 178
 
 dependencies = {
 	'iOS': [
@@ -54,6 +54,8 @@ import config, level
 from i18n import m, setlang
 from errors import *
 from item import *
+from entity import *
+
 
 try:
 	import console, notification

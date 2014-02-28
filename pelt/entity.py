@@ -1,6 +1,9 @@
 #PELT Entity Classes
 #Created January 20, 2014 at 19:04
 
+from i18n import m
+from localio import output
+
 class Entity(object):
 	def __init__(self, name, level, life, attk=25, dfns=25, attacks=[]):
 		self.name = name
@@ -23,10 +26,10 @@ class Entity(object):
 
 	def rem_attack(): pass
 
-class Character(Entity)):
+class Character(Entity):
 	def __init__(self, name, level, life, attk=25, dfns=25, type='Normal', attacks=[]):
 		self.type = type
-		self.attacks = [Attack(output('attack1', r=1), output('attack1desc', r=1), 20, 0, output('type1', r=1))]
+		self.attacks = [Attack(m('attack1'), m('attack1desc'), 20, 0, m('type1'))]
 		for attack in attacks: self.attacks.append(attack)
 		Entity.__init__(self, name, level, life, attk, dfns)
 	
@@ -44,7 +47,7 @@ class Ally(Character):
 		self.gender = gender
 	
 	def get_var(var):
-		if var == 'all': return output('playerdesc', r=1, addon=[self.name, self.last, self.gender, self.species, self.inventory, self.location, self.level, self.attacks])
+		if var == 'all': return m('playerdesc') %(self.name, self.last, self.gender, self.species, self.inventory, self.location, self.level, self.attacks)
 		else:
 			try: return self.__getattribute__(var)
 			except AttributeError: return None

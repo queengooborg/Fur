@@ -136,7 +136,7 @@ class guiInput():
 		if temp == m('quit') or temp == m('back') or temp == m('cancel'): return 0
 		return choices[number-1]
 
-	def alert(self, data, window = True):
+	def alert(self, data, window = False):
 		nocolordata = ''
 		color=False
 		for c in data:
@@ -218,7 +218,10 @@ class TerminalInput():
 				self.network = True
 		else: pass
 
-	def text(self, msg): return raw_input(msg+"  ")
+	def text(self, msg):
+		response = raw_input(msg+"  ")
+		print "In-Function " + response
+		return response
 	
 	def choice(self, msg, choices, window=False):
 		choicerange = range(len(choices))

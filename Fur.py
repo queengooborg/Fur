@@ -4,7 +4,7 @@ author = 'Nightwave Studios'
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 426
+version = 434
 officialversion = str(version)+" Omega: Musical Dragon"
 langversneeded = 0.1
 
@@ -62,8 +62,8 @@ def load():
 
 #Main menu
 def mainmenu():
-	global version, scrollspeed, scroll, loc, devplayer, annoy, pc, ios, msgs, player, friend
-	if ios:
+	global version, scrollspeed, scroll, loc, devplayer, annoy, msgs, player, friend
+	if config.ios:
 		temp = m('cancel')
 	else:
 		temp = m('ok')
@@ -243,11 +243,11 @@ def part1():
 	output('p1m11', newline=False, s=1)
 	waiting = True
 	while waiting:
-		frnd_name=getInput.text(m('setup9') %(frnd_gndrpn, frnd_gender))
+		frnd_nane = getInput.text(m('setup9') %(frnd_gndrpn, frnd_gender))
+		print frnd_nane
 		if frnd_name == None or frnd_name == 0:
 			quit(m('nofriendnameerror'))
 		frnd_name = frnd_name.title()
-		i = False
 		if frnd_name:
 			waiting = False
 		else: m('nofriendnameerror') %(frnd_gndrpn, frnd_gender)
@@ -337,7 +337,7 @@ def init():
 			temp = species[i].lower()
 			species[i] = m(temp)
 			
-		if ios:
+		if config.ios:
 			choice = getInput.choice(m('iosask'), ['iPhone','iPad'])
 			if choice == 0:
 				quit(m('iosquit'), nosave=True)
