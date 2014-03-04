@@ -26,6 +26,8 @@ class Entity(object):
 
 	def rem_attack(): pass
 
+	def speak(): pass # XXX add dialogue code
+
 class Character(Entity):
 	def __init__(self, name, level, life, attk=25, dfns=25, type='Normal', attacks=[]):
 		self.type = type

@@ -1,6 +1,9 @@
 #PELT Gameplay
 #Created Febuary 27, 2014 at 13:57
 
+import os
+import config
+
 def getCommand(sentence):
 	''' Read a command from the user and parse it.
 		This parser understands some simple sentences:
@@ -32,11 +35,10 @@ def getCommand(sentence):
 
 #Gameplay, text edition
 def textplay(level):
-	global loc, devplayer, player, gender, friend, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species, frnd_nane, config.ios
 	playing = True
-	color('blue')
+	makeColor('blue')
 	output(level.name, dict=False, s=2)
-	color('reset')
+	makeColor('reset')
 	output('gamestart')
 	playing=True
 	location = level.rooms[0]
@@ -101,4 +103,3 @@ def gameplay(map):
 	mapfile = os.path.join(config.mapdir, map+'.plf')
 	with open(mapfile, 'rb') as mapdata: level = parselevel(mapdata)
 	textplay(level)
-	continue

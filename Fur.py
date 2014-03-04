@@ -4,8 +4,8 @@ author = 'Nightwave Studios'
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 434
-officialversion = str(version)+" Omega: Musical Dragon"
+version = 441
+officialversion = str(version)+" Omega: Furious Dragon"
 langversneeded = 0.1
 
 #Import PELT
@@ -107,7 +107,7 @@ def mainmenu():
 		elif choice==m('options'):
 			wait_opt = True
 			while wait_opt:
-				choice_opt = getInput.choice(m('title'), [m('scroll') %config.scrollspeed, m('annoy'), m('beta'), m('lang'), m('back')])
+				choice_opt = getInput.choice(m('options'), [m('scroll') %config.scrollspeed, m('annoy'), m('beta'), m('lang'), m('back')])
 				if choice_opt == m('scroll' %config.scrollspeed):
 					if scrollspeed == m('slow'):
 						scrollspeed = m('med')
@@ -173,12 +173,12 @@ def start():
 	while waiting:
 		temp = getInput.choice(m('setupgndr'), [m('boy'), m('girl')])
 		if temp == m('boy'):
-			gender=output('boy', r=1, modifier="lower")
-			frnd_gender=output('girl', r=1, modifier="lower")
+			gender=m('boy').lower()
+			frnd_gender=m('girl').lower()
 			frnd_gndrpn=m('she')
 		elif temp == m('girl'):
-			gender=output('girl', r=1, modifier="lower")
-			frnd_gender=output('boy', r=1, modifier="lower")
+			gender=m('girl').lower()
+			frnd_gender=m('boy').lower()
 			frnd_gndrpn=m('he')
 		else: quit(m('quitmsg'), nosave=True)
 		waiting=False
@@ -216,11 +216,12 @@ def start():
 	newline()
 	output('setupeyeopen', addon=(player_species), s=4)
 	newline()
+	player = Ally(loc, player_name, player_last, species, gender, 1)
 	part1()
 
 #part 1
 def part1():
-	global gender,player_name,player_last,frnd_gender,frnd_nane,frnd_last,devplayer,player,friend
+	global gender,player_name,player_last,devplayer,player,friend
 	playing = True
 	output('p1m1', s=2)
 	output('p1m2', s=2)
@@ -242,17 +243,14 @@ def part1():
 	output('p1m10', s=2)
 	output('p1m11', newline=False, s=1)
 	waiting = True
+	msg = m('setup9') %(frnd_gndrpn, frnd_gender)
 	while waiting:
-		frnd_nane = getInput.text(m('setup9') %(frnd_gndrpn, frnd_gender))
-		print frnd_nane
+		frnd_name = getInput.text(msg)
 		if frnd_name == None or frnd_name == 0:
-			quit(m('nofriendnameerror'))
-		frnd_name = frnd_name.title()
-		if frnd_name:
+			msg = m('nofriendnameerror') %(frnd_gndrpn, frnd_gender)
+		else:
 			waiting = False
-		else: m('nofriendnameerror') %(frnd_gndrpn, frnd_gender)
-	player = Ally(loc, player_name, player_last, species, gender, 1)
-	friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
+	friend = Ally(loc, frnd_name.title(), player_last, 'Fox', frnd_gender, 1)
 	output('p1m12', addon=frnd_name, s=2)
 	output('p1m13', s=1)
 	output('p1m14', addon=player_name, s=2)

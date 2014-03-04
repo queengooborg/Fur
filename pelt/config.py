@@ -18,15 +18,17 @@ devplayer = False
 annoy = False
 gui = True
 color = True
+instmsg = False
 
 if len(args) > 0:
 	if "nostory" in args:
 		loc = 'p1MainRoom'
 		gameplay()
-	elif "betatester" in args: devplayer = True
-	elif "annoy" in args: annoy = True
-	elif "nogui" in args: gui = False
-	elif "nocolor" in args: color = False
+	if "betatester" in args: devplayer = True
+	if "annoy" in args: annoy = True
+	if "nogui" in args: gui = False
+	if "nocolor" in args: color = False
+	if "instmsg" in args: instmsg = True
 
 try:
 	with open(optionspath, 'rb') as handle:

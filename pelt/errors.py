@@ -3,3 +3,4 @@
 
 class ParseError(ValueError): pass
 class NoFacingError(ParseError): pass
+class OutputReturnError(SyntaxError): pass

@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 178
+peltvers = 182
 
 dependencies = {
 	'iOS': [
@@ -55,6 +55,7 @@ from i18n import m, setlang
 from errors import *
 from item import *
 from entity import *
+from gameplay import *
 
 
 try:
@@ -93,7 +94,7 @@ def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], a
 	#from localio import output, newline, getInput, color
 	
 	#Print the title, author, and version
-	color('reset')
+	makeColor('reset')
 	output('author', addon=author)
 	output('version', addon=(officialversion, peltvers), s=2)
 	newline()

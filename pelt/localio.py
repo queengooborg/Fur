@@ -3,8 +3,9 @@
 
 from i18n import m
 import config, pelt
-from color import *
+from color import makeColor
 import time, os, pickle, sys, random, locale, re
+from errors import OutputReturnError
 #import menu
 
 try:
@@ -21,10 +22,16 @@ except ImportError:
 ios = config.ios
 pc = config.pc
 
+#output if config.instmsg == True
+def instOutput(*args, **kwargs):
+	kwargs['noscroll'] = True
+	kwargs['s'] = 0
+	normOutput(*args, **kwargs)
+
 #Function that prints the messages
-def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", ignorecolor=False, noreset=False, r=0, s=0):
+def normOutput(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", ignorecolor=False, noreset=False, r=0, s=0):
 	#s = 0 # TEMPORARY LINE
-	if not noreset: color('reset')
+	if not noreset: makeColor('reset')
 	# modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
 		if dict: msg = m(msg, color=True)
@@ -45,7 +52,7 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 				if c == "[": style = True
 				elif c == "]":
 					style = False
-					if config.color: color(colour)
+					if config.color: makeColor(colour)
 					colour = ''
 				elif style: colour += c
 			
@@ -62,10 +69,14 @@ def output(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdi
 					time.sleep(config.scroll)
 		
 		if newline: sys.stdout.write('\n')
-		if not noreset: color('reset')
+		if not noreset: makeColor('reset')
 		sys.stdout.flush()
 		time.sleep(s)
-	elif r == 1: return msg
+	elif r == 1:
+		raise OutputReturnError("ERROR: You are still using output(..., r=1) in your code.  Please use m(<type 'str'>) in its place.")
+
+if config.instmsg: output = instOutput
+else: output = normOutput
 
 def newline():
 	sys.stdout.write('\n')
@@ -220,7 +231,6 @@ class TerminalInput():
 
 	def text(self, msg):
 		response = raw_input(msg+"  ")
-		print "In-Function " + response
 		return response
 	
 	def choice(self, msg, choices, window=False):

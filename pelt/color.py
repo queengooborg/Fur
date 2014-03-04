@@ -33,7 +33,7 @@ LpYellow = 127
 try: styles = colorama.Fore.WHITE #Set color to default...
 except: styles = '' #...and set to a blank string if on iOS
 
-def color(color):
+def makeColor(color):
 	global styles
 	try: #If styles is greater than 20, reset...
 		if len(styles) > 20: styles = colorama.Fore.WHITE
@@ -70,7 +70,7 @@ def color(color):
 	elif color == 'bold':
 		try: console.set_font('Helvetica', 32.0)
 		except: pass
-	else: output('colorerror')
+	else: print('Color input was invalid: %s.' %color)
 	if styles and config.color:
 		sys.stdout.write(styles)
 		sys.stdout.flush()
