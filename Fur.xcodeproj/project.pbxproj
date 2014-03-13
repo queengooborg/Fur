@@ -112,6 +112,8 @@
 		4492160518A3228800A43B50 /* color.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = color.py; sourceTree = "<group>"; };
 		4497CAC118A0583400794C90 /* menu.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = menu.py; sourceTree = "<group>"; };
 		4497CAC218A0585500794C90 /* dumbmenuLicense.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dumbmenuLicense.txt; sourceTree = "<group>"; };
+		449EC42018CD86D200C59799 /* Default Controls.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Default Controls.txt"; sourceTree = "<group>"; };
+		449EC42118CD86DD00C59799 /* Level Format Guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Level Format Guide.txt"; path = "resources/Level Format Guide.txt"; sourceTree = SOURCE_ROOT; };
 		44B5756E18BEEE31009FD87E /* item.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = item.py; sourceTree = "<group>"; };
 		44B801F018A04DBE003FD27C /* menutest.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = menutest.py; sourceTree = "<group>"; };
 		44D195C918BF07BA005A9CEE /* errors.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = errors.py; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		441541A3188B5A7500FAE219 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				449EC42118CD86DD00C59799 /* Level Format Guide.txt */,
 				441541A4188B5A7500FAE219 /* characters */,
 				441541A9188B5A7500FAE219 /* docs */,
 				441541C3188B5A7500FAE219 /* langs */,
@@ -227,6 +230,7 @@
 		441541A9188B5A7500FAE219 /* docs */ = {
 			isa = PBXGroup;
 			children = (
+				449EC42018CD86D200C59799 /* Default Controls.txt */,
 				441541AA188B5A7500FAE219 /* finish.bat.lnk */,
 				441541AB188B5A7500FAE219 /* How to Install.txt */,
 				441541AC188B5A7500FAE219 /* Level 2 */,

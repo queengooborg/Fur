@@ -1,11 +1,10 @@
 Able to walk through: Ghost
 Destructible (Float Variable)
-Liquid
-Density (Float Variable)
-Viscosity: Flow
+Liquid 
+Flow (Float Variable)
 Opacity (Float)
 Creates other tiles and entities: Creator (Entity Name)
-Supports player weight, player can stand on top of it: Stool
+Supports player weight, player can stand on top of it: Stool 
 Portability
 Image
 Damaging
@@ -15,7 +14,7 @@ Lockable
 Contains
 ImpactSound
 Polymorphic
-Radiation (Distance)
+Radiation (Distance) 
 Temperature
 Stickiness
 Volume

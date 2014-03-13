@@ -34,7 +34,7 @@ def normOutput(msg, dict=True, newline=True, noscroll=False, addon=None, addonfr
 	if not noreset: makeColor('reset')
 	# modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
-		if dict: msg = m(msg, color=True)
+		if dict: msg = m(msg, color=not ignorecolor)
 	except KeyError:
 		if msg == '': pass
 		else: msg = "WARNING: "+msg+" is not a valid keyword."

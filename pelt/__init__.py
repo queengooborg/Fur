@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 182
+peltvers = 191
 
 dependencies = {
 	'iOS': [
@@ -57,25 +57,26 @@ from item import *
 from entity import *
 from gameplay import *
 
-
 try:
 	import console, notification
 	from scene import *
 	config.pc = 'iphone'
 	config.ios = True
 except ImportError:
-	import colorama, easygui, pygame
+	import colorama
 	from menu import dumbmenu as dm
 	colorama.init()
-	#pygame.init()
 	
-	size = width, height = 720, 680 #Initialize the size
-	screen = pygame.display.set_mode(size)
-	#size = width, height = screen.get_size() #Get the screen size, for reasons that may come back
-	pygame.font.init()
-	myfont = pygame.font.Font(None, 32)
-	
-	screen.fill(BLACK)
+	if not "nogui" in sys.argv:
+		import pygame
+		
+		size = width, height = 720, 680 #Initialize the size
+		screen = pygame.display.set_mode(size)
+		#size = width, height = screen.get_size() #Get the screen size, for reasons that may come back
+		pygame.font.init()
+		myfont = pygame.font.Font(None, 32)
+		
+		screen.fill(BLACK)
 	
 	config.pc = pcinfo()
 	config.ios = False
@@ -152,3 +153,5 @@ def str_to_int(text, default=-1):
 	except ValueError: return default
 	return response
 
+def action(msg, addon=None, s=0):
+	output('[red]'+m(msg, color=True), dict=False, addon=None, s=s)

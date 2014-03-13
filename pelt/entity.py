@@ -5,7 +5,7 @@ from i18n import m
 from localio import output
 
 class Entity(object):
-	def __init__(self, name, level, life, attk=25, dfns=25, attacks=[]):
+	def __init__(self, name, level, life, attk=25, dfns=25, attacks=[], color='white'):
 		self.name = name
 		self.level = level
 		self.life = life
@@ -13,6 +13,7 @@ class Entity(object):
 		self.attk = attk
 		self.dfns = dfns
 		self.attacks = attacks
+		self.color = color
 	
 	def __str__(self):
 		return self.name
@@ -24,24 +25,25 @@ class Entity(object):
 		if type(attack) == Attack: pass
 		else: output('attackerror')
 
-	def rem_attack(): pass
+	def rem_attack(self): pass
 
-	def speak(): pass # XXX add dialogue code
+	def speak(self, msg, addon=None, s=0):
+		output(self.name+': '+'['+self.color+']'+m(msg, color=True), dict=False, addon=addon, s=s)
 
 class Character(Entity):
-	def __init__(self, name, level, life, attk=25, dfns=25, type='Normal', attacks=[]):
+	def __init__(self, name, level, life, attk=25, dfns=25, type='Normal', attacks=[], color='yellow'):
 		self.type = type
 		self.attacks = [Attack(m('attack1'), m('attack1desc'), 20, 0, m('type1'))]
 		for attack in attacks: self.attacks.append(attack)
-		Entity.__init__(self, name, level, life, attk, dfns)
+		Entity.__init__(self, name, level, life, attk, dfns, color=color)
 	
 	def take(self, item_name):
 		item = self.location.getItem(item_name)
 		self.inventory.append(item)
 
 class Ally(Character):
-	def __init__(self, location, name, last, species, gender, level, life=100, attk=25, dfns=25):
-		Character.__init__(self, name, level, life, attk, dfns)
+	def __init__(self, location, name, last, species, gender, level, life=100, attk=25, dfns=25, color='green'):
+		Character.__init__(self, name, level, life, attk, dfns, color=color)
 		self.inventory = []
 		self.location = location
 		self.last = last
@@ -80,3 +82,6 @@ class Attack(object):
 		crit += 5
 		if crit == 0.5: print('The attack was not very effective.')
 		elif crit == 1.5: print('The attack landed a critical hit!')
+
+def action(msg, s=0):
+	output('[red]'+m(msg), dict=False, s=s)

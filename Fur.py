@@ -4,8 +4,8 @@ author = 'Nightwave Studios'
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 441
-officialversion = str(version)+" Omega: Furious Dragon"
+version = 449
+officialversion = str(version)+" Omega: Speechless Wolf"
 langversneeded = 0.1
 
 #Import PELT
@@ -20,7 +20,7 @@ def quit(msg, nosave=False):
 		pass
 	else:
 		save()
-	color('red')
+	makeColor('red')
 	#if ios and not devplayer: notification.schedule(m('mailto2'), 15, 'Beep', m('mailto1'))
 	if msg:
 		sys.exit(msg)
@@ -168,7 +168,7 @@ def custmenu():
 
 #When starting the game, program must ask if the player is a boy or girl.
 def start():
-	global gender, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species
+	global gender, player, frnd_gender, player_name, player_last, player_species, frnd_gndrpn, species
 	waiting=True
 	while waiting:
 		temp = getInput.choice(m('setupgndr'), [m('boy'), m('girl')])
@@ -183,7 +183,7 @@ def start():
 		else: quit(m('quitmsg'), nosave=True)
 		waiting=False
 	player_species = getInput.choice(m('setuprace'), species)
-	if player_species == 1:
+	if player_species == 0:
 		quit(m('quitmsg'), nosave=True)
 	waiting = True
 	while waiting:
@@ -212,36 +212,33 @@ def start():
 	while i != 3:
 		i += 1
 		output(str(i)+"...", dict=False, newline=False)
-		time.sleep(1)
+		if not config.instmsg:time.sleep(1)
 	newline()
 	output('setupeyeopen', addon=(player_species), s=4)
 	newline()
-	player = Ally(loc, player_name, player_last, species, gender, 1)
+	player = Ally(loc, player_name, player_last, player_species, gender, level=1, color='yellow')
 	part1()
 
 #part 1
 def part1():
 	global gender,player_name,player_last,devplayer,player,friend
 	playing = True
-	output('p1m1', s=2)
-	output('p1m2', s=2)
-	output('p1m3', s=3)
-	output('p1m4', addon=player_species, s=2)
-	output('p1m5', s=2)
-	output('p1m6', addon=(frnd_gender, frnd_gender), s=4)
-	output('p1m7', s=3)
-	if frnd_gndrpn == m('he'):
-		temp = m('he').title()
-	else:
-		temp = m('she').title()
+	friend = Ally(loc, '???', player_last, species[4], frnd_gender, level=1, color='blue')
+	friend.speak('p1m1', s=2)
+	friend.speak('p1m2', s=2)
+	friend.speak('p1m3', s=3)
+	friend.speak('p1m4', addon=player_species, s=2)
+	friend.speak('p1m5', s=2)
+	action('p1m6', addon=(frnd_gender, frnd_gender), s=4)
+	friend.speak('p1m7', s=3)
 	if frnd_gender == m('girl').lower():
 		temp2 = m('her')
 	else:
 		temp2 = m('him')
-	output('p1m8', addon=(frnd_gender, temp, temp2, temp2), s=0.5)
-	output('p1m9', s=0.5)
-	output('p1m10', s=2)
-	output('p1m11', newline=False, s=1)
+	action('p1m8', addon=(frnd_gender, frnd_gndrpn.title(), temp2, temp2), s=0.5)
+	action('p1m9', s=0.5)
+	player.speak('p1m10', s=2)
+	friend.speak('p1m11', newline=False, s=1)
 	waiting = True
 	msg = m('setup9') %(frnd_gndrpn, frnd_gender)
 	while waiting:
@@ -250,16 +247,17 @@ def part1():
 			msg = m('nofriendnameerror') %(frnd_gndrpn, frnd_gender)
 		else:
 			waiting = False
-	friend = Ally(loc, frnd_name.title(), player_last, 'Fox', frnd_gender, 1)
-	output('p1m12', addon=frnd_name, s=2)
-	output('p1m13', s=1)
-	output('p1m14', addon=player_name, s=2)
+	frnd_name = frnd_name.title()
+	friend.speak('p1m12', s=2)
+	friend.name = frnd_name
+	player.speak('p1m13', s=1)
+	friend.speak('p1m14', s=2)
 	if player_species == m('fox'):
 		temp = m('meyou')
 	else:
 		temp = m('you')
-	output('p1m15', addon=(frnd_name, player_name, player_species, temp), s=2)
-	output('p1m16', s=1)
+	friend.speak('p1m15', addon=(player_name, player_species, temp), s=2)
+	player.speak('p1m16', s=1)
 	if player_species == m('fox'):
 		temp = m('foxdesc') %frnd_name
 	elif player_species == m('dragon'):
@@ -278,17 +276,17 @@ def part1():
 			temp += m('mousedesc')
 		elif player_species == m('otter'):
 			temp += m('otterdesc')
-	output('p1m17', addon=temp, s=0.5)
-	output('p1m19', s=3)
-	output('p1m20', addon=frnd_name, s=1)
-	output('p1m21', addon=player_species, s=2)
-	output('p1m22', s=2)
-	output('p1m23', s=1)
-	output('p1m24', addon=(frnd_name, player_species, frnd_gndrpn), s=3)
-	output('p1m25', s=2)
-	output('p1m26', addon=frnd_name, s=1)
-	output('p1m27', addon=frnd_name, s=2)
-	output('p1m28', addon=player_species, s=5)
+	action('p1m17', addon=temp, s=0.5)
+	action('p1m19', s=3)
+	friend.speak('p1m20', s=1)
+	action('p1m21', addon=player_species, s=2)
+	player.speak('p1m22', s=2)
+	action('p1m23', s=1)
+	friend.speak('p1m24', addon=(player_species, frnd_gndrpn), s=3)
+	player.speak('p1m25', s=2)
+	friend.speak('p1m26', s=1)
+	action('p1m27', addon=frnd_name, s=2)
+	player.speak('p1m28', addon=player_species, s=5)
 	newline()
 	output('helpquit')
 	output('helpsave')
