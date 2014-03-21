@@ -4,6 +4,7 @@
 import sys
 import colorama
 import config
+import localio
 
 #Color Name			R,    G,    B
 BLACK =				0,    0,    0
@@ -72,5 +73,5 @@ def makeColor(color):
 		except: pass
 	else: print('Color input was invalid: %s.' %color)
 	if styles and config.color:
-		sys.stdout.write(styles)
-		sys.stdout.flush()
+		localio.outputfd.write(styles)
+		localio.outputfd.flush()

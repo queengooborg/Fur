@@ -27,8 +27,8 @@ class Entity(object):
 
 	def rem_attack(self): pass
 
-	def speak(self, msg, addon=None, s=0):
-		output(self.name+': '+'['+self.color+']'+m(msg, color=True), dict=False, addon=addon, s=s)
+	def speak(self, msg, addon=None, s=0, newline=True):
+		output(self.name+': '+'['+self.color+']'+m(msg, color=True), dict=False, addon=addon, newline=newline, s=s)
 
 class Character(Entity):
 	def __init__(self, name, level, life, attk=25, dfns=25, type='Normal', attacks=[], color='yellow'):
@@ -78,10 +78,10 @@ class Attack(object):
 		damage = ((((((self.pwr + attacker.attk)*2)*temp)-(attacked.dfns/1.1))/3)*crit)+(random.randint(0,20)-10)
 		damage = int(damage)
 		attacked.take_damage(damage)
-		print(str(attacked)+' took '+str(damage)+' damage')
+		output('entityhurt', addon=(str(attacked),str(damage)))
 		crit += 5
-		if crit == 0.5: print('The attack was not very effective.')
-		elif crit == 1.5: print('The attack landed a critical hit!')
+		if crit == 0.5: output('ineffective')
+		elif crit == 1.5: output('critical')
 
-def action(msg, s=0):
-	output('[red]'+m(msg), dict=False, s=s)
+def action(msg, addon=None, s=0):
+	output('[red]'+m(msg, color=True), dict=False, addon=None, s=s)

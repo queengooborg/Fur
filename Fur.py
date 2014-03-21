@@ -4,8 +4,8 @@ author = 'Nightwave Studios'
 #Created May 10, 2013 at 15:14
 
 #Version numbers
-version = 449
-officialversion = str(version)+" Omega: Speechless Wolf"
+version = 455
+officialversion = str(version)+" Omega: Tricky Fox"
 langversneeded = 0.1
 
 #Import PELT
@@ -62,7 +62,7 @@ def load():
 
 #Main menu
 def mainmenu():
-	global version, scrollspeed, scroll, loc, devplayer, annoy, msgs, player, friend
+	global version, scrollspeed, scroll, loc, annoy, msgs, player, friend
 	if config.ios:
 		temp = m('cancel')
 	else:
@@ -73,7 +73,7 @@ def mainmenu():
 		newline()
 		choices = [m('start'), m('custom'), m('options'), m('quit')]
 		devchoices = ['Developer: Skip Dialogue']
-		if devmode:
+		if config.devplayer:
 			for devchoice in devchoices:
 				choices.append(devchoice)
 		choice = getInput.choice(title, choices)
@@ -99,9 +99,10 @@ def mainmenu():
 				else:
 					output('inputerror')
 		elif choice=='Developer: Skip Dialogue':
-			player = Ally(loc, player_name, player_last, species, gender, 1)
-			friend = Ally(loc, frnd_nane, player_last, 'Fox', frnd_gender, 1)
-			gameplay('part1')
+			
+			player = Ally("", "Moon", "Mist", "Wolf", "Boy", 1)
+			friend = Ally("", "Vulpis", "Mist", "Fox", "Girl", 1)
+			gameplay('part1', player, [friend])
 		elif choice==m('custom'):
 			custmenu()
 		elif choice==m('options'):
@@ -216,14 +217,14 @@ def start():
 	newline()
 	output('setupeyeopen', addon=(player_species), s=4)
 	newline()
-	player = Ally(loc, player_name, player_last, player_species, gender, level=1, color='yellow')
+	player = Ally(player_name, player_last, player_species, gender, level=1, color='yellow')
 	part1()
 
 #part 1
 def part1():
-	global gender,player_name,player_last,devplayer,player,friend
+	global gender, player_name, player_last, devplayer, player, friend
 	playing = True
-	friend = Ally(loc, '???', player_last, species[4], frnd_gender, level=1, color='blue')
+	friend = Ally('???', player_last, species[4], frnd_gender, level=1, color='blue')
 	friend.speak('p1m1', s=2)
 	friend.speak('p1m2', s=2)
 	friend.speak('p1m3', s=3)
@@ -231,10 +232,8 @@ def part1():
 	friend.speak('p1m5', s=2)
 	action('p1m6', addon=(frnd_gender, frnd_gender), s=4)
 	friend.speak('p1m7', s=3)
-	if frnd_gender == m('girl').lower():
-		temp2 = m('her')
-	else:
-		temp2 = m('him')
+	if frnd_gender == m('girl').lower(): temp2 = m('her')
+	else: temp2 = m('him')
 	action('p1m8', addon=(frnd_gender, frnd_gndrpn.title(), temp2, temp2), s=0.5)
 	action('p1m9', s=0.5)
 	player.speak('p1m10', s=2)
@@ -264,18 +263,12 @@ def part1():
 		temp = m('dragondesc')
 	else:
 		temp = m('p1m18') %frnd_gender+'  '
-		if player_species == m('wolf'):
-			temp += m('wolfdesc')
-		elif player_species == m('cat'):
-			temp += m('catdesc')
-		elif player_species == m('bird'):
-			temp += m('birddesc')
-		elif player_species == m('bear'):
-			temp += m('beardesc')
-		elif player_species == m('mouse'):
-			temp += m('mousedesc')
-		elif player_species == m('otter'):
-			temp += m('otterdesc')
+		if player_species == m('wolf'): temp += m('wolfdesc')
+		elif player_species == m('cat'): temp += m('catdesc')
+		elif player_species == m('bird'): temp += m('birddesc')
+		elif player_species == m('bear'): temp += m('beardesc')
+		elif player_species == m('mouse'): temp += m('mousedesc')
+		elif player_species == m('otter'): temp += m('otterdesc')
 	action('p1m17', addon=temp, s=0.5)
 	action('p1m19', s=3)
 	friend.speak('p1m20', s=1)
@@ -297,7 +290,7 @@ def part1():
 	output('helpdrink')
 	output('helptake')
 	output('helpgo')
-	gameplay('part1')
+	gameplay('part1', player, [friend])
 	part2()
 
 def part2():
@@ -306,27 +299,13 @@ def part2():
 def init():
 	global devmode, annoy, gui, species, loc, gender, player_name, player_last, player_species, frnd_gender, frnd_gndrpn, frnd_name, args
 	
-	try:
-		console.clear()
-	except:
-		os.system('cls' if config.pc == "Windows" else 'clear')
+	try: console.clear() #iOS way to clear the console...
+	except: os.system('cls' if config.pc == "Windows" else 'clear')#...but the computer way if not on iOS
 	
 	try:
-		devmode = True
-		
 		import custio
-
-		sync(version, officialversion, langversneeded, devmode, title, author, modules=[localio], args=args)
-
-		#initialize variables
-		loc=None
-		gender=None
-		player_name=None
-		player_last=None
-		player_species=None
-		frnd_gender=None
-		frnd_gndrpn=None
-		frnd_nane=None
+		
+		sync(version, officialversion, langversneeded, title, author, modules=[localio], args=args)
 
 		species = ["Wolf","Cat","Dragon","Bear","Fox","Mouse","Bird","Otter"]
 		for i in range(len(species)):
@@ -340,18 +319,16 @@ def init():
 			config.pc = choice
 		
 		mainmenu()
-	except (SystemExit, KeyboardInterrupt):
-		pass
+	except (SystemExit, KeyboardInterrupt): pass
 	except:
+		output('problem', noscroll=True)
 		if config.color:
 			temp1 = "[yellow]"
 			temp2 = "[red]"
-		else:
-			temp1 = temp2 = ""
+		else: temp1 = temp2 = ""
 		tbinfo = "Type: "+str(sys.exc_info()[0])+"\nTraceback: "+str(sys.exc_info()[2])
 		output(temp1+"Type: "+str(sys.exc_info()[0])+temp2, noscroll=True, dict=False, newline=False, noreset=True)
 		output("\n\n"+tb.format_exc(), noscroll=True, dict=False, ignorecolor=True, noreset=True)
 		#output(tbinfo, dict=False)
 
-if __name__ in '__main__':
-	init()
+if __name__ in '__main__': init()

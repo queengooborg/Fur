@@ -68,18 +68,19 @@ msgs = {'title':"%s",
 'helpcmd':"help",
 'helphelp':"help - Displays this message",
 'examinecmd':"examine",
-'helpexamine':"examine [item] - shows description of item",
+'helpexamine':"examine <item> - shows description of item",
 'eatcmd':"eat",
-'helpeat':"eat [item] - If item is food, will eat item",
+'helpeat':"eat <item> - If item is food, will eat item",
 'drinkcmd':"drink",
-'helpdrink':"drink [item] - if item is a drink, will drink item",
+'helpdrink':"drink <item> - if item is a drink, will drink item",
 'takecmd':"take",
-'helptake':"take [item] - if item is movable, will take item",
+'helptake':"take <item> - if item is movable, will take item",
 'gocmd':"go",
-'helpgo':"go [direction] - Go through the door in the defined direction",
+'helpgo':"go <direction> - Go through the door in the defined direction",
 'opencmd':"open",
 'describecmd':"describe",
-'helpdescribe':"describe - Tells what you see around you"
+'helpdescribe':"describe - Tells what you see around you",
+'problem':"Uh oh!  There seems to be a problem with the game."
 }
 
 import pickle, os.path

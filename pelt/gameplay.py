@@ -2,7 +2,10 @@
 #Created Febuary 27, 2014 at 13:57
 
 import os
-import config
+import config, level
+from color import makeColor
+from localio import output, getInput
+from i18n import m
 
 def getCommand(sentence):
 	''' Read a command from the user and parse it.
@@ -101,5 +104,5 @@ def textplay(level):
 
 def gameplay(map):
 	mapfile = os.path.join(config.mapdir, map+'.plf')
-	with open(mapfile, 'rb') as mapdata: level = parselevel(mapdata)
-	textplay(level)
+	with open(mapfile, 'rb') as mapdata: l = level.parselevel(mapdata)
+	textplay(l)

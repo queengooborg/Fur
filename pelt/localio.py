@@ -22,6 +22,9 @@ except ImportError:
 ios = config.ios
 pc = config.pc
 
+inputfd  = sys.stdin
+outputfd = sys.stdout
+
 #output if config.instmsg == True
 def instOutput(*args, **kwargs):
 	kwargs['noscroll'] = True
@@ -30,7 +33,6 @@ def instOutput(*args, **kwargs):
 
 #Function that prints the messages
 def normOutput(msg, dict=True, newline=True, noscroll=False, addon=None, addonfromdict=False, modifier="normal", ignorecolor=False, noreset=False, r=0, s=0):
-	#s = 0 # TEMPORARY LINE
 	if not noreset: makeColor('reset')
 	# modifier = caps, title, lower, normal (when modifier isn't present)
 	try:
@@ -57,20 +59,20 @@ def normOutput(msg, dict=True, newline=True, noscroll=False, addon=None, addonfr
 				elif style: colour += c
 			
 				else:#if not style and c != "]":
-					sys.stdout.write(c)
+					outputfd.write(c)
 					if not noscroll:
-						sys.stdout.flush()
+						outputfd.flush()
 						time.sleep(config.scroll)
 			
 			else:
-				sys.stdout.write(c)
+				outputfd.write(c)
 				if not noscroll:
-					sys.stdout.flush()
+					outputfd.flush()
 					time.sleep(config.scroll)
 		
-		if newline: sys.stdout.write('\n')
+		if newline: outputfd.write('\n')
 		if not noreset: makeColor('reset')
-		sys.stdout.flush()
+		outputfd.flush()
 		time.sleep(s)
 	elif r == 1:
 		raise OutputReturnError("ERROR: You are still using output(..., r=1) in your code.  Please use m(<type 'str'>) in its place.")
@@ -78,9 +80,7 @@ def normOutput(msg, dict=True, newline=True, noscroll=False, addon=None, addonfr
 if config.instmsg: output = instOutput
 else: output = normOutput
 
-def newline():
-	sys.stdout.write('\n')
-	sys.stdout.flush()
+def newline(): output('')
 
 class guiInput():
 	def __init__(self):
@@ -230,7 +230,8 @@ class TerminalInput():
 		else: pass
 
 	def text(self, msg):
-		response = raw_input(msg+"  ")
+		output(msg+"  ", dict=False)
+		response = inputfd.read()
 		return response
 	
 	def choice(self, msg, choices, window=False):
@@ -238,7 +239,8 @@ class TerminalInput():
 		for i in choicerange:
 			output("[yellow]%d: [reset]%s" %(i+1, choices[i]), dict=False)
 		while True:
-			choic = pelt.str_to_int(raw_input("%s  " %msg), default=0)
+			output(msg+"  ", dict=False)
+			choic = pelt.str_to_int(inputfd.read(), default=0)
 			if choic-1 not in choicerange: continue
 			if choices[choic-1] == m('quit') or choices[choic-1] == m('back') or choices[choic-1] == m('cancel'): return 0
 			return choices[choic-1]

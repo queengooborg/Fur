@@ -1,7 +1,11 @@
 #PELT Level Information
 #Created January 18, 2014 at 16:44
 
+import time
+import config
 from errors import *
+from item import *
+from localio import output
 
 def getblocks(start, end, data, max):
 	i = 0
@@ -230,18 +234,16 @@ class Room(object):
 		return None
 
 	def describe(self, r=False):
-		if r: x = output(self.name, dict=False, r=1) + '\n'
+		if r: x = self.name + '\n'
 		else: output(self.name, dict=False)
 		for i in self.items:
 			if r: x += output('itemhere', addon=i, r=1)
 			else: output('itemhere', addon=i)
-			time.sleep(0.1)
-			if r: x += '\n'
+			if not config.instmsg: time.sleep(0.1)
 		for d in self.doors:
 			if r: x += output('doorhere', addon=d.direction, r=1)
 			else: output('doorhere', addon=d.direction)
-			time.sleep(0.1)
-			if r: x += '\n'
+			if not config.instmsg: time.sleep(0.1)
 		if r == 1: return x
 
 	def go(self, direction):

@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 191
+peltvers = 198
 
 dependencies = {
 	'iOS': [
@@ -81,13 +81,12 @@ except ImportError:
 	config.pc = pcinfo()
 	config.ios = False
 
-def sync(vers, officialvers, langversneed, debugmode, title, auth, modules=[], args=[]):
-	global version, officialversion, langversneeded, debug, gametitle, author, peltvers, size, width, height, screen, myfont
+def sync(vers, officialvers, langversneed, title, auth, modules=[], args=[]):
+	global version, officialversion, langversneeded, gametitle, author, peltvers, size, width, height, screen, myfont
 
 	version = config.version = vers
 	officialversion = config.officialversion = officialvers
 	langversneeded = langversneed
-	debug = debugmode
 	gametitle = config.gametitle = title
 	author = config.author = auth
 	config.args = args
@@ -152,6 +151,3 @@ def str_to_int(text, default=-1):
 	try: response = int(text)
 	except ValueError: return default
 	return response
-
-def action(msg, addon=None, s=0):
-	output('[red]'+m(msg, color=True), dict=False, addon=None, s=s)

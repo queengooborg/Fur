@@ -52,7 +52,7 @@ msgs = {'title':"%s",
 'attack1':"Punch",
 'attack1desc':"A simple punch",
 'type1':"Normal",
-'lang':"Language",
+'lang':"Language (Translations are not 100% accurate)",
 'quitmsg':"Quit on user's demand.",
 'iosask':"Are you on an iPhone or iPad?  This is important for gameplay.",
 'iosquit':"User did not choose iPhone or iPad.",
@@ -79,7 +79,11 @@ msgs = {'title':"%s",
 'helpgo':"go <direction> - Go through the door in the defined direction",
 'opencmd':"open",
 'describecmd':"describe",
-'helpdescribe':"describe - Tells what you see around you"
+'helpdescribe':"describe - Tells what you see around you",
+'problem':"Uh oh!  There seems to be a problem with the game.",
+'entityhurt':"%s took %s damage.",
+'ineffective':"The attack wasn't very effective...",
+'critical':"The attack landed a critical hit!"
 }
 
 import pickle, os.path
