@@ -27,8 +27,9 @@ class Entity(object):
 
 	def rem_attack(self): pass
 
-	def speak(self, msg, addon=None, s=0, newline=True):
-		output(self.name+': '+'['+self.color+']'+m(msg, color=True), dict=False, addon=addon, newline=newline, s=s)
+	def speak(self, msg, dict=True, addon=None, s=0, newline=True):
+		if dict: msg = m(msg, color=True)
+		output(self.name+': '+'['+self.color+']'+msg, dict=False, addon=addon, newline=newline, s=s)
 
 class Character(Entity):
 	def __init__(self, name, level, life, attk=25, dfns=25, type='Normal', attacks=[], color='yellow'):

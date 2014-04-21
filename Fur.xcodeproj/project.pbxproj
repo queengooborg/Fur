@@ -79,6 +79,7 @@
 		441EF789188DDD0E000E6E59 /* Tile Attributes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tile Attributes.txt"; sourceTree = "<group>"; };
 		441EF78A188DE9D9000E6E59 /* Addon Creation Guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Addon Creation Guide.txt"; path = "resources/docs/Addon Creation Guide.txt"; sourceTree = SOURCE_ROOT; };
 		441EF78B188E1B4E000E6E59 /* entity.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = entity.py; sourceTree = "<group>"; };
+		4452207518EA2A3E0076F84C /* graphics_gameplay.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = graphics_gameplay.py; sourceTree = "<group>"; };
 		44762DDE18B2CFF000AA7DDF /* rtmidi.so */ = {isa = PBXFileReference; lastKnownFileType = file; path = rtmidi.so; sourceTree = "<group>"; };
 		44762DE018B2CFF000AA7DDF /* rtmidi.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = rtmidi.so; sourceTree = "<group>"; };
 		44762DE218B2CFF000AA7DDF /* MidiMessage.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = MidiMessage.o; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 				441EF78B188E1B4E000E6E59 /* entity.py */,
 				44D195C918BF07BA005A9CEE /* errors.py */,
 				44E20C5318BFEC56006FD270 /* gameplay.py */,
+				4452207518EA2A3E0076F84C /* graphics_gameplay.py */,
 				44154199188B5A7500FAE219 /* i18n.py */,
 				44B5756E18BEEE31009FD87E /* item.py */,
 				4415419A188B5A7500FAE219 /* level.py */,

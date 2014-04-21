@@ -158,13 +158,6 @@ class Room(object):
 	
 	@classmethod
 	def fromText(cls, text):
-		'''Room is:
-			Called "Main Room" sized 17x10 placed A20x27
-			Door to "Balcony" on Top 1 from Left
-			Door to "Hallway" on Top 2 from Right locked with "Rusty Key"
-			Door to "Play Room" on Bottom 4 from Right locked with "Silver Key"
-			Trapdoor to "Chest Room" 1 from Left 2 from Bottom locked with "Fire Circle" (Hidden)
-		Finish Room'''
 		
 		if type(text) == str: lines = text.split('\n')
 		elif type(text) == list: lines = text
@@ -217,14 +210,6 @@ class Room(object):
 					doors.append(door)
 			
 			elif element[0:5] == "Chest": items.append(Chest.fromText(element))
-			
-			#elif element[0:5] == 'Enemy':
-			#	"""Enemy 2 from Top 0 from Left Type 1"""
-			#	match = re.search('Enemy (\d+) from ([a-zA-Z]+) (\d+) from ([a-zA-Z]+) Type (\d+)', element)
-			#	if match != None:
-			#		placed = match.group(1, 2, 3, 4)
-			#		etype = match.group(5)
-			#		pass
 		
 		return cls(name, size, place, items, doors)
 	

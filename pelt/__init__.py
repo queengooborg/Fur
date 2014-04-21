@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 198
+peltvers = 204
 
 dependencies = {
 	'iOS': [
@@ -46,10 +46,8 @@ dependencies = {
 import time, os, pickle, sys, random, locale, re, argparse
 from platform import system as pcinfo
 import traceback as tb
-from color import *
-from credit import credit
 
-from localio import output, newline, getInput
+from localio import output, newline, getInput, makeColor
 import config, level
 from i18n import m, setlang
 from errors import *
@@ -64,11 +62,11 @@ try:
 	config.ios = True
 except ImportError:
 	import colorama
-	from menu import dumbmenu as dm
 	colorama.init()
 	
 	if not "nogui" in sys.argv:
 		import pygame
+		from menu import dumbmenu as dm
 		
 		size = width, height = 720, 680 #Initialize the size
 		screen = pygame.display.set_mode(size)
@@ -77,6 +75,8 @@ except ImportError:
 		myfont = pygame.font.Font(None, 32)
 		
 		screen.fill(BLACK)
+		
+		from credit import credit
 	
 	config.pc = pcinfo()
 	config.ios = False

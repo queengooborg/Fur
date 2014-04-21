@@ -1,10 +1,10 @@
 #Pelt Colors
 #Created Febuary 5, 2014 at 17:53
 
+import config
 import sys
 import colorama
-import config
-import localio
+from localio import outputfd
 
 #Color Name			R,    G,    B
 BLACK =				0,    0,    0
@@ -55,7 +55,7 @@ def makeColor(color):
 	elif color == 'darkblue':
 		try: console.set_color(0.6, 0.6, 1.0)
 		except: styles += colorama.Fore.BLUE
-	elif color == 'magneta':
+	elif color == 'magenta':
 		try: console.set_color(1.0, 0.2, 1.0)
 		except: styles += colorama.Fore.MAGENTA
 	elif color == 'reset':
@@ -73,5 +73,5 @@ def makeColor(color):
 		except: pass
 	else: print('Color input was invalid: %s.' %color)
 	if styles and config.color:
-		localio.outputfd.write(styles)
-		localio.outputfd.flush()
+		outputfd.write(styles)
+		outputfd.flush()

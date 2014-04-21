@@ -329,6 +329,5 @@ def init():
 		tbinfo = "Type: "+str(sys.exc_info()[0])+"\nTraceback: "+str(sys.exc_info()[2])
 		output(temp1+"Type: "+str(sys.exc_info()[0])+temp2, noscroll=True, dict=False, newline=False, noreset=True)
 		output("\n\n"+tb.format_exc(), noscroll=True, dict=False, ignorecolor=True, noreset=True)
-		#output(tbinfo, dict=False)
 
 if __name__ in '__main__': init()

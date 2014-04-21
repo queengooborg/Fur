@@ -1,6 +1,16 @@
 Level named "Demo Level" by "Nightwave Studios"
 
-#! To start the level, write Level named "{Level Name}" by "{Author Name}"
+#! To start the level, write Level named "{Level Name}" by "{Author Name}" !#
+
+#! <<< Use this to start a comment, and this to end one >>> !#
+#! Comments can span over
+multiple
+lines
+
+The code just looks for 
+the end comment tag !#
+
+#! To start a floor, write Floor {Floor Number} is ({Floor Content}) !#
 
 Floor A is (
 == == == == == == == == == == == == == == ==
@@ -13,4 +23,15 @@ Floor A is (
 == C0 .. .. .. .. .. == .. .. .. .. .. .. .. .. .. ==
 == .. .. .. .. .. .. == .. .. .. .. .. .. == == == ==
 == == == == == == == == == == == == == == ==
+)
+
+#! You can define custom properties in the dictionary 
+To start the dictionary, write Dictionary is ({Dictionary Content}) !#
+
+Dictionary is (
+
+For Floor A (
+
+)
+
 )
