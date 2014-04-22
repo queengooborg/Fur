@@ -21,7 +21,7 @@ def update(screen, menuitems, selected=0, curcol=(255,0,0)):
 	crect2 = update_widgets['cursor2'].get_rect()
 
 	crect  =  crect.move(item.left  - 20, item.top)
-	crect2 = crect2.move(item.right + 20, item.top)
+	crect2 = crect2.move(item.right + 10, item.top)
 
 	screen.blit(update_widgets['cursor'],  crect )
 	screen.blit(update_widgets['cursor2'], crect2)

@@ -3,8 +3,7 @@
 
 import os
 import config, level
-from color import makeColor
-from localio import output, getInput
+from localio import output, getInput, makeColor
 from i18n import m
 
 def getCommand(sentence):

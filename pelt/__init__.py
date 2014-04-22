@@ -1,7 +1,7 @@
 #PELT Engine
 #Created September 12, 2013 at 17:17
 
-peltvers = 204
+peltvers = 206
 
 dependencies = {
 	'iOS': [
@@ -48,6 +48,7 @@ from platform import system as pcinfo
 import traceback as tb
 
 from localio import output, newline, getInput, makeColor
+from color import *
 import config, level
 from i18n import m, setlang
 from errors import *

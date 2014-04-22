@@ -2,10 +2,12 @@
 #Created October 19, 2013 at 23:37
 
 from i18n import m
-import config, pelt
+import config
+from errors import OutputReturnError
+
 import colorama
 import time, os, pickle, sys, random, locale, re
-from errors import OutputReturnError
+from platform import system as pcinfo
 
 try:
 	import console, notification
@@ -18,38 +20,13 @@ except ImportError:
 		import pygame
 		from menu import dumbmenu as dm
 	colorama.init()
-	config.pc = pelt.pcinfo()
+	config.pc = pcinfo()
 	config.ios = False
 ios = config.ios
 pc = config.pc
 
 inputfd  = sys.stdin
 outputfd = sys.stdout
-
-#Color Name			R,    G,    B
-BLACK =				0,    0,    0
-GRAY = GREY =		149,  149,  149
-WHITE =				255,  255,  255
-RED =				255,  0,    0
-GREEN =				0,    255,  0
-BLUE =				0,    0,    255
-ORANGE =			255,  112,  0
-YELLOW =			255,  255,  0
-AQUA =				0,    191,  243
-PURPLE =			101,  39,   170
-LIME =				138,  211,  60
-SILVER =			161,  161,  161
-FUCHSIA =			255,  0,    255
-NAVY =				0,    0,    128
-OLIVE =				128,  128,  0
-TEAL =				0,    128,  128
-SHADOW =			78,   30,   132
-
-#Launchpad Colors
-LpRed = 7
-LpOrange = 83
-LpGreen = 124
-LpYellow = 127
 
 try: styles = colorama.Fore.WHITE #Set color to default...
 except: styles = '' #...and set to a blank string if on iOS
